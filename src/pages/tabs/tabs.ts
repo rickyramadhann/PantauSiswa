@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams,MenuController} from 'ionic-angular';
+import { PesanPage } from '../pesan/pesan';
+import { BeritaPage } from '../berita/berita';
+import { Pengumuman } from '../pengumuman/pengumuman';
+import { HomePage } from '../home/home';
+
+@Component({
+  templateUrl: 'tabs.html'
+})
+export class TabsPage {
+
+  tab1Root = HomePage;
+  tab2Root = PesanPage;
+  tab3Root = BeritaPage;
+  tab4Root = Pengumuman;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu:MenuController) {
+
+  }
+
+
+  ionViewDidEnter(){
+  this.menu.swipeEnable(true,'menu1');
+  }
+}

@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>
+      Notifikasi
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="notif">
+      <ion-segment-button value="nilai">
+        Nilai
+      </ion-segment-button>
+      <ion-segment-button value="absensi">
+        Absensi
+      </ion-segment-button>
+      <ion-segment-button value="tugas">
+        Tugas
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div [ngSwitch]="notif">
+  <ion-list *ngSwitchCase="'nilai'">
+   <ion-item *ngFor= "let data of datanilai">
+        <ion-avatar item-left>
+            <img src="../assets/img/guru.jpg">
+        </ion-avatar>
+        <h2>{{data.kategori}}</h2>
+        <p>{{data.matpel}}</p>
+        <p>Guru: <span>{{data.guru}}</span></p>
+        <p>Materi: <span>{{data.materi}}</span></p>
+        <div class="nilai" item-right>
+            <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>
+        </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'absensi'">
+   <ion-item *ngFor= "let data of dataabsensi">
+        <ion-avatar item-left>
+            <img src="../assets/img/guru.jpg">
+        </ion-avatar>
+        <p>{{data.matpel}}</p>
+        <p>Guru: <span>{{data.guru}}</span></p>
+        <p>Materi: <span>{{data.materi}}</span></p>
+        <p>waktu: <span>{{data.waktu}}</span></p>
+        <div class="status" item-right>
+            <h1>{{data.status}}</h1>
+        </div>
+    </ion-item>
+  </ion-list>
+
+   <ion-list *ngSwitchCase="'tugas'">
+    <ion-item *ngFor= "let data of datatugas">
+        <ion-avatar item-left>
+            <img src="../assets/img/guru.jpg">
+        </ion-avatar>
+        <p>{{data.matpel}}</p>
+        <p>Guru: <span>{{data.guru}}</span></p>
+        <p>Materi: <span>{{data.materi}}</span></p>
+        <p>Keterangan: <span>{{data.keterangan}}</span></p>
+        <p>Deadline: <span>{{data.deadline}}</span></p>
+        
+    </ion-item>
+  </ion-list>
+ </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-menu [content]="content" class="menu" id="menu1">
+	<ion-header>
+		<ion-toolbar color="primary">
+			<ion-title>Menu</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<ion-content>
+		<ion-item class="headernav">
+			<div class="circular--landscape" item-center>
+  				<img src="../assets/img/siswa.jpg" />
+			</div>
+			<p>Si Boy Anak Jalanan </p>
+		</ion-item>
+		<ion-list>
+			<button menuClose ion-item *ngFor= "let p of pages" (click)="openPage(p)">
+				{{p.title}}
+			</button>
+		</ion-list>
+	</ion-content>
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

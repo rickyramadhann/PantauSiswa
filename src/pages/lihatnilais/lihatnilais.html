@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>lihat nilai Sikap</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor= "let data of data">
+            <ion-avatar item-left>
+                <img src="../assets/img/guru.jpg">
+            </ion-avatar>
+            <h2>{{data.kategori}}</h2>
+            <p>{{data.matpel}}</p>
+            <p>Guru: <span>{{data.guru}}</span></p>
+            <p>{{data.nilai}}
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>
+      Tulis Pesan
+    </ion-title>
+    <ion-buttons right>
+        <button ion-button icon-only (click)="kirim()"><ion-icon name="send"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+ </ion-header>
+
+
+<ion-content>
+	<ion-card>
+		<ion-item>
+			<ion-avatar item-left>
+			<img src="../assets/img/siswa.jpg">
+			</ion-avatar>
+			<h2>Wali Kelas <span>Drs. Wali Kelas</span></h2>
+			<p>Email: <span>walikelas@gmail.com</span></p>
+  		</ion-item>
+	</ion-card>
+</ion-content>
+
+<ion-footer>
+    <ion-textarea type="text" placeholder="Message...">
+       	<button ion-button icon-only (click)="kirim()"><ion-icon name="send"></ion-icon></button>	
+    </ion-textarea>
+</ion-footer>
