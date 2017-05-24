@@ -8,8 +8,19 @@ import { Notifikasi } from '../notifikasi/notifikasi';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public app:App, public menu:MenuController) {
+  data:Array<{guru:string, matpel:string}>;
 
+  constructor(public navCtrl: NavController, public app:App, public menu:MenuController) {
+    this.data=[
+      {guru:'Drs. Guru 1', matpel:'Matematika'},
+      {guru:'Drs. Guru 2', matpel:'Bahasa Indonesia'},
+      {guru:'Drs. Guru 3', matpel:'Bahasa Inggris'},
+      {guru:'Drs. Guru 4', matpel:'Fisika'},
+      {guru:'Drs. Guru 5', matpel:'Kimia'},
+      {guru:'Drs. Guru 6', matpel:'Biologi'},
+      {guru:'Drs. Guru 7', matpel:'Pendidikan Kewarganegraan'},
+      {guru:'Drs. Guru 8', matpel:'Agama'}
+    ]
   }
 
   keisimapel(){

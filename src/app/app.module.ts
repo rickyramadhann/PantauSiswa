@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
 import { PesanPage } from '../pages/pesan/pesan';
 import { BeritaPage } from '../pages/berita/berita';
@@ -48,6 +49,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp,{tabsPlacement: 'top'})
   ],
   bootstrap: [IonicApp],

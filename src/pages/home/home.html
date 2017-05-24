@@ -11,13 +11,13 @@
 </ion-header>
 
 <ion-content>
-    <ion-card (click)="keisimapel()">
+    <ion-card (click)="keisimapel()" *ngFor= "let data of data">
         <ion-item>
             <ion-avatar item-left>
                 <img src="../assets/img/guru.jpg">
             </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
+            <h2>{{data.matpel}}</h2>
+            <p>{{data.guru}}</p>
             <ion-buttons item-right>
                 <ion-icon name="ios-arrow-dropright" color="primary">
                 </ion-icon>
@@ -26,82 +26,5 @@
         </ion-item>
     </ion-card>
 
-    <ion-card>
-
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
-            </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
-            <ion-buttons item-right>
-                <ion-icon name="ios-arrow-dropright" color="primary">
-                </ion-icon>
-            </ion-buttons>
-
-        </ion-item>
-
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
-            </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
-            <ion-buttons item-right>
-                <ion-icon name="ios-arrow-dropright" color="primary">
-                </ion-icon>
-            </ion-buttons>
-
-        </ion-item>
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
-            </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
-            <ion-buttons item-right>
-                <ion-icon name="ios-arrow-dropright" color="primary">
-                </ion-icon>
-            </ion-buttons>
-
-        </ion-item>
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
-            </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
-            <ion-buttons item-right>
-                <ion-icon name="ios-arrow-dropright" color="primary">
-                </ion-icon>
-            </ion-buttons>
-
-        </ion-item>
-    </ion-card>
-
-    <ion-card>
-
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
-            </ion-avatar>
-            <h2>Matematika</h2>
-            <p>Drs. Sitompul SPd.</p>
-            <ion-buttons item-right>
-                <ion-icon name="ios-arrow-dropright" color="primary">
-                </ion-icon>
-            </ion-buttons>
-
-        </ion-item>
-
-    </ion-card>
+   
 </ion-content>
