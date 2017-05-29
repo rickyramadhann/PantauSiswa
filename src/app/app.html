@@ -8,14 +8,18 @@
 	<ion-content>
 		<ion-item class="headernav">
 			<div class="circular--landscape" item-center>
-  				<img src="../assets/img/siswa.jpg" />
+				<img src="../assets/img/siswa.jpg" />
 			</div>
-			<p>Si Boy Anak Jalanan </p>
+			<p>{{user.email}}</p>
 		</ion-item>
 		<ion-list>
 			<button menuClose ion-item *ngFor= "let p of pages" (click)="openPage(p)">
 				{{p.title}}
 			</button>
+			<button menuClose ion-item (click)="logout()">
+				Logout
+			</button>
+			
 		</ion-list>
 	</ion-content>
 </ion-menu>

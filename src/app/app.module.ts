@@ -3,13 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
+//providers
+//import {Localstorage} from '../providers/localstorage';
+import { NativeStorage } from '@ionic-native/native-storage';
 
+//tabs
 import { PesanPage } from '../pages/pesan/pesan';
 import { BeritaPage } from '../pages/berita/berita';
-import { HomePage } from '../pages/home/home';
+import { Historybk } from '../pages/historybk/historybk';
+
+//sidenav
+import { Profil } from '../pages/profil/profil';
+import { Matpel } from '../pages/matpel/matpel';
+
 import { Pengumuman } from '../pages/pengumuman/pengumuman';
 import { Login } from '../pages/login/login';
-import { Profil } from '../pages/profil/profil';
 import { Isimapel } from '../pages/isimapel/isimapel';
 import { Lihatnilaip } from '../pages/lihatnilaip/lihatnilaip';
 import { Lihatnilaik } from '../pages/lihatnilaik/lihatnilaik';
@@ -32,8 +41,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     PesanPage,
     BeritaPage,
-    HomePage,
+    Historybk,
     Pengumuman,
+    Matpel,
     Profil,
     Login,
     Isimapel,
@@ -50,15 +60,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp,{tabsPlacement: 'top'})
+    IonicModule.forRoot(MyApp,{tabsPlacement: 'top'}),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     PesanPage,
     BeritaPage,
-    HomePage,
+    Historybk,
     Pengumuman,
+    Matpel,
     Profil,
     Login,
     Isimapel,
@@ -75,7 +87,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},NativeStorage
   ]
 })
 export class AppModule {}

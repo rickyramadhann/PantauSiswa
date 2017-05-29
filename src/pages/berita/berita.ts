@@ -8,9 +8,13 @@ import { Bacaberita } from '../bacaberita/bacaberita';
 })
 export class BeritaPage {
 
+  databerita:any;
   constructor(public navCtrl: NavController,public app:App, public menu:MenuController) {
 
   }
+
+  
+  
    kenotifikasi(){
     this.app.getRootNav().push(Notifikasi);
   
