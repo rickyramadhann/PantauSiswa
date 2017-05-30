@@ -66,7 +66,7 @@ export class Login {
         },error=> {
             let alert = this.alert.create({
               title: 'warning',
-              subTitle: 'salah password dan username',
+              subTitle: 'Server Error',
               buttons: ['ok']
           });
           alert.present();
