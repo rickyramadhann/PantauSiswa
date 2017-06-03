@@ -3,7 +3,7 @@
   page-login {
  
       .scroll-content {
-        background-color: map-get($colors, secondary);
+        background-color: map-get($colors, primary);
         display: flex;
         flex-direction: column;
       }

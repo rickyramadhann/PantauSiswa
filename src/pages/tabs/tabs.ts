@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,MenuController} from 'ionic-angular';
-import { PesanPage } from '../pesan/pesan';
+//import { PesanPage } from '../pesan/pesan';
 import { BeritaPage } from '../berita/berita';
 import { Pengumuman } from '../pengumuman/pengumuman';
 import { Historybk } from '../historybk/historybk';

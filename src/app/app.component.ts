@@ -18,50 +18,56 @@ export class MyApp {
 
     @ViewChild(Nav) nav:Nav;
     rootPage : any;
-    user={
-        email:""
-    }
+    email: any;
+    
 
     pages:Array<{title: string, component:any}>;
-    constructor(platform: Platform, statusBar: StatusBar, 
-        splashScreen: SplashScreen, public storage:Storage, public http:Http) {
-        platform.ready().then(() => {
-            statusBar.styleDefault();
-            splashScreen.hide();
-
-
-            storage.get("email").then((email)=>{
-                if(email == null){
-                    window.localStorage.clear();
-                    this.rootPage = Login;
-                }
-                else{
-                    this.user.email = email;
-                    this.rootPage = TabsPage;
-                    console.log(this.user.email);
-
-                }
-            })
-        });
+    constructor(public platform: Platform, statusBar: StatusBar, 
+        public splashScreen: SplashScreen, public storage:Storage, public http:Http) {
+        
+        
+        
+        this.platformReady();
 
         this.pages=[
         {title: 'Beranda', component:TabsPage},
         {title:'Profil', component:Profil},
         {title:'Mata Pelajaran', component:Matpel}
         ];
+
     }
 
     
+    
+
     openPage(page){
+
         this.nav.setRoot(page.component);
     }
 
     logout()
     {
-        window.localStorage.clear();
-        this.storage.remove("email");
-        console.log("storage dihapus "+ this.user.email);
+        this.storage.remove('token');
+        this.storage.remove('email');
         this.nav.setRoot(Login);
+    }
+
+    platformReady() {
+        // Call any initial plugins when ready
+        this.platform.ready().then(() => {
+            this.splashScreen.hide();
+            this.storage.get("email").then((email)=>{
+                if(email){
+                    this.email = email;
+                    console.log('email dari component ='+this.email);
+                    this.rootPage = TabsPage;
+
+                }
+                else{                
+                    this.rootPage = Login;
+                }
+            })
+        });
     }
 
 }

@@ -24,11 +24,10 @@ export class Login {
     
   };
 
-  e:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, public menu:MenuController,
     public http:Http, public loading: LoadingController,
-    public alert:AlertController, public storage: Storage,
+    public alert:AlertController, public storage: Storage
     ) {
   }
 
@@ -46,30 +45,32 @@ export class Login {
       }
       else{
         let loader = this.loading.create({
-          content: "Mohon Tunggu..!!",
-          duration: 3000
+        content: 'Mohon tunggu..!!',
+        //duration: 1000
         });
-        loader.present();
-        this.http.post('http://pantausiswa.xyz/api/login',this.user)
-        .toPromise().then((response)=>{
-           window.localStorage['token'] = response.json().token;
+        loader.present().then(()=>{
+          this.http.post('http://pantausiswa.xyz/api/login',this.user)
+          .toPromise().then((response)=>{
            
+           this.storage.remove('email');
+           this.storage.set('token', response.json().token) ; 
+           this.storage.set('email', this.user.email);
            console.log(response.json().token);
-           console.log(this.user.email);
-
-           this.storage.clear();
-           
-           this.storage.set('email', this.user.email).then(()=> {console.log('Stored in localStorage '+ this.user.email)});
+           //this.storage.set('email', this.user.email).then(()=> {console.log('Stored in localStorage '+ this.user.email)});
+           console.log('email dari login ='+this.user.email);
 
            
-           this.navCtrl.setRoot(TabsPage);
+           this.navCtrl.setRoot(TabsPage, this.user.email);
+           loader.dismiss();
         },error=> {
             let alert = this.alert.create({
               title: 'warning',
               subTitle: 'Server Error',
               buttons: ['ok']
           });
-          alert.present();
+              alert.present();
+              loader.dismiss();
+          });
       });
   
     }

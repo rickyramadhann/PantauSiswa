@@ -13,8 +13,16 @@ import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angula
   templateUrl: 'bacaberita.html',
 })
 export class Bacaberita {
+  public title:any;
+  public content:any;
+  public image:any;
+  public created_at:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu:MenuController) {
+    this.title = navParams.get('title');
+    this.content = navParams.get('content');
+    this.image = navParams.get('image');
+    this.created_at = navParams.get('created_at');
   }
 
   ionViewDidLoad() {

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController,MenuController,App,LoadingController,AlertController } from 'ionic-angular';
 import { Notifikasi } from '../notifikasi/notifikasi';
 import { Bacaberita } from '../bacaberita/bacaberita';
-
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -26,8 +25,9 @@ export class BeritaPage {
   
   }
 
-  kebacaberita(){
-    this.app.getRootNav().push(Bacaberita);
+  kebacaberita(data){
+    console.log(data);
+    this.app.getRootNav().push(Bacaberita,data);
   
   }
 
@@ -45,11 +45,12 @@ export class BeritaPage {
       this.http.get('http://pantausiswa.xyz/api/berita').map(res => res.json()).subscribe(datas =>{
            if(datas){
               this.databerita = datas.data;
-//              this.gambarku = "http://pantausiswa.xyz/uploads/"+datas.data[0].image;
+//            this.gambarku = "http://pantausiswa.xyz/uploads/"+datas.data[0].image;
+
 
               loader.dismiss();
             }
-            console.log(this.databerita.data);
+            //console.log(this.databerita.data);
           }, error=> {
             let alert = this.alert.create({
               title: 'Error',

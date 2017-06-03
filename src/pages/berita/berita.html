@@ -18,7 +18,7 @@
 			<img src="../assets/img/siswa.jpg">
 			</ion-avatar>
 			<h2>{{ data.title }}</h2>
-			<p>{{data.created_at}}</p>
+			<p>{{data.created_at | moment}}</p>
 		</ion-item>
 
   		<img src="http://pantausiswa.xyz/uploads/{{data.image}}"/>
@@ -26,7 +26,7 @@
 		<ion-card-content>
 			<p>{{data.content}}</p>
 		</ion-card-content>
-		<button ion-button full primary padding (click)="kebacaberita()">Baca Berita</button>
+		<button ion-button full primary padding (click)="kebacaberita(data)">Baca Berita</button>
   
 	</ion-card>
 

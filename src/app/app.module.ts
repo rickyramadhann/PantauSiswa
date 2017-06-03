@@ -4,12 +4,16 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+//import { SortBy } from '../pipes/sort-by';
+
 //providers
-//import {Localstorage} from '../providers/localstorage';
-import { NativeStorage } from '@ionic-native/native-storage';
+
+//pipes
+import { Moment } from '../pipes/moment';
+
 
 //tabs
-import { PesanPage } from '../pages/pesan/pesan';
+//import { PesanPage } from '../pages/pesan/pesan';
 import { BeritaPage } from '../pages/berita/berita';
 import { Historybk } from '../pages/historybk/historybk';
 
@@ -39,7 +43,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    PesanPage,
+  //  PesanPage,
     BeritaPage,
     Historybk,
     Pengumuman,
@@ -55,7 +59,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Notifikasi,
     Bacaberita,
     Tulispesan,
-    TabsPage
+    TabsPage,
+    Moment,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    PesanPage,
+    //PesanPage,
     BeritaPage,
     Historybk,
     Pengumuman,
@@ -82,12 +87,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Notifikasi,
     Bacaberita,
     Tulispesan,
-    TabsPage
+    TabsPage,
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},NativeStorage
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
