@@ -11,10 +11,11 @@
     <ion-card (click)="keisimapel()" *ngFor= "let data of data">
         <ion-item>
             <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
+                <img src="img/guru.jpg">
             </ion-avatar>
             <h2>{{data.matpel}}</h2>
             <p>{{data.guru}}</p>
+            <p>{{data.jadwal}}</p>
             <ion-buttons item-right>
                 <ion-icon name="ios-arrow-dropright" color="primary">
                 </ion-icon>

@@ -16,7 +16,7 @@ export class Moment implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value,args) {
-    let moments = moment(value).startOf('day').fromNow();
+    let moments = moment(value).locale('id').startOf('minute').fromNow();
     return moments
   }
 }

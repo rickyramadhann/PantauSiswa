@@ -1,20 +1,18 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <ion-title>Baca Berita</ion-title>
-    </ion-navbar>
+	<ion-navbar color="primary">
+		<ion-title>Baca Berita</ion-title>
+	</ion-navbar>
 </ion-header>
 <ion-content padding>
+	<ion-list>
+		<ion-item>
+			<h2>{{title}}</h2>
+			<p>{{created_at | date:fulldate}}</p>
+		</ion-item>		
+	</ion-list>
 	
-	<ion-item>
-		<ion-avatar item-left>
-		<img src="../assets/img/siswa.jpg">
-		</ion-avatar>
-		<h2>{{title}}</h2>
-		<p>{{created_at}}</p>
-	</ion-item>
-
 	<img src="http://pantausiswa.xyz/uploads/{{image}}">
 
-	<p>{{content}}</p>
-		
+	<p class="content-berita">{{content}}</p>
+
 </ion-content>

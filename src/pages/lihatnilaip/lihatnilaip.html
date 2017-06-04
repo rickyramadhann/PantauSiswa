@@ -2,20 +2,22 @@
 
   <ion-navbar color="primary">
     <ion-title>lihat nilai pengetahuan</ion-title>
-  </ion-navbar>
+</ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor= "let data of data">
+        <ion-list-header>
             <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
+                <img src="img/guru.jpg">
             </ion-avatar>
+            <p>Guru: <span>Drs. Hasiolan</span></p>
+        </ion-list-header>
+        <ion-item *ngFor= "let data of data">
             <h2>{{data.kategori}}</h2>
             <p>{{data.matpel}}</p>
-            <p>Guru: <span>{{data.guru}}</span></p>
             <p>Materi: <span>{{data.materi}}</span></p>
             <div class="nilai" item-right>
                 <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>

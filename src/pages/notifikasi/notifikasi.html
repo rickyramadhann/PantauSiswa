@@ -24,13 +24,10 @@
 <div [ngSwitch]="notif">
   <ion-list *ngSwitchCase="'nilai'">
    <ion-item *ngFor= "let data of datanilai">
-        <ion-avatar item-left>
-            <img src="../assets/img/guru.jpg">
-        </ion-avatar>
         <h2>{{data.kategori}}</h2>
         <p>{{data.matpel}}</p>
-        <p>Guru: <span>{{data.guru}}</span></p>
         <p>Materi: <span>{{data.materi}}</span></p>
+        <p>waktu: <span>{{data.waktu}}</span></p>
         <div class="nilai" item-right>
             <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>
         </div>
@@ -39,11 +36,7 @@
 
   <ion-list *ngSwitchCase="'absensi'">
    <ion-item *ngFor= "let data of dataabsensi">
-        <ion-avatar item-left>
-            <img src="../assets/img/guru.jpg">
-        </ion-avatar>
         <p>{{data.matpel}}</p>
-        <p>Guru: <span>{{data.guru}}</span></p>
         <p>Materi: <span>{{data.materi}}</span></p>
         <p>waktu: <span>{{data.waktu}}</span></p>
         <div class="status" item-right>
@@ -54,11 +47,7 @@
 
    <ion-list *ngSwitchCase="'tugas'">
     <ion-item *ngFor= "let data of datatugas">
-        <ion-avatar item-left>
-            <img src="../assets/img/guru.jpg">
-        </ion-avatar>
         <p>{{data.matpel}}</p>
-        <p>Guru: <span>{{data.guru}}</span></p>
         <p>Materi: <span>{{data.materi}}</span></p>
         <p>Keterangan: <span>{{data.keterangan}}</span></p>
         <p>Deadline: <span>{{data.deadline}}</span></p>

@@ -4,13 +4,13 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { TruncatePipe } from 'angular2-truncate';
 //import { SortBy } from '../pipes/sort-by';
 
 //providers
 
 //pipes
 import { Moment } from '../pipes/moment';
-
 
 //tabs
 //import { PesanPage } from '../pages/pesan/pesan';
@@ -61,6 +61,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Tulispesan,
     TabsPage,
     Moment,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

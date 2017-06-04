@@ -2,19 +2,21 @@
 
   <ion-navbar color="primary">
     <ion-title>lihat Absensi</ion-title>
-  </ion-navbar>
+</ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor= "let data of data">
+        <ion-list-header>
             <ion-avatar item-left>
-                <img src="../assets/img/guru.jpg">
+                <img src="img/guru.jpg">
             </ion-avatar>
+            <p>Guru: <span>Drs. Hasiolan</span></p>
+        </ion-list-header>
+        <ion-item *ngFor= "let data of data">
             <p>{{data.matpel}}</p>
-            <p>Guru: <span>{{data.guru}}</span></p>
             <p>Materi: <span>{{data.materi}}</span></p>
             <p>waktu: <span>{{data.waktu}}</span></p>
             <div class="status" item-right>

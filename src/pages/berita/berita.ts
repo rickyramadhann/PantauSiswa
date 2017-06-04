@@ -11,56 +11,56 @@ import 'rxjs/add/operator/toPromise';
 })
 export class BeritaPage {
 
-  databerita:any;
+  databerita = [];
   constructor(public navCtrl: NavController,public app:App,
-   public menu:MenuController, public http:Http, public alert:AlertController,
-   public loader:LoadingController) {
+    public menu:MenuController, public http:Http, public alert:AlertController,
+    public loader:LoadingController) {
+
 
   }
 
 
 
-   kenotifikasi(){
+  kenotifikasi(){
     this.app.getRootNav().push(Notifikasi);
-  
+
   }
 
   kebacaberita(data){
     console.log(data);
     this.app.getRootNav().push(Bacaberita,data);
-  
+
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.ionViewDidLoad();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
   ionViewDidEnter(){
-  this.menu.swipeEnable(true,'menu1');
+    this.menu.swipeEnable(true,'menu1');
   }
 
   public gambarku:any;
   ionViewDidLoad(){
-    let loader = this.loader.create({
-        content: 'Memuat Berita!!',
-        //duration: 1000
-      });
-      loader.present().then(()=>{
-      this.http.get('http://pantausiswa.xyz/api/berita').map(res => res.json()).subscribe(datas =>{
-           if(datas){
-              this.databerita = datas.data;
-//            this.gambarku = "http://pantausiswa.xyz/uploads/"+datas.data[0].image;
-
-
-              loader.dismiss();
-            }
-            //console.log(this.databerita.data);
-          }, error=> {
-            let alert = this.alert.create({
-              title: 'Error',
-              subTitle: 'Server Error',
-              buttons: ['OK']
-            });
-            alert.present();
-            loader.dismiss();
+        this.http.get('http://pantausiswa.xyz/api/berita').map(res => res.json()).subscribe(datas =>{
+          if(datas){
+            this.databerita = datas.data;
+          }
+        }, error=> {
+          let alert = this.alert.create({
+            title: 'Error',
+            subTitle: 'Server Error',
+            buttons: ['OK']
           });
-      });
-  }
+          alert.present();
+        });
 
-}
+      }
+
+    }

@@ -26,8 +26,21 @@ export class MyApp {
         public splashScreen: SplashScreen, public storage:Storage, public http:Http) {
         
         
-        
-        this.platformReady();
+        this.platform.ready().then(() => {
+            this.splashScreen.hide();
+            this.storage.get("email").then((email)=>{
+                if(email){
+                    this.email = email;
+                    console.log('email dari component ='+this.email);
+                    this.rootPage = TabsPage;
+
+                }
+                else{                
+                    this.rootPage = Login;
+                }
+            })
+        });
+
 
         this.pages=[
         {title: 'Beranda', component:TabsPage},
@@ -52,22 +65,5 @@ export class MyApp {
         this.nav.setRoot(Login);
     }
 
-    platformReady() {
-        // Call any initial plugins when ready
-        this.platform.ready().then(() => {
-            this.splashScreen.hide();
-            this.storage.get("email").then((email)=>{
-                if(email){
-                    this.email = email;
-                    console.log('email dari component ='+this.email);
-                    this.rootPage = TabsPage;
-
-                }
-                else{                
-                    this.rootPage = Login;
-                }
-            })
-        });
-    }
-
+    
 }
