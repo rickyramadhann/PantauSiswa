@@ -66,7 +66,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp,{tabsPlacement: 'top'}),
+    IonicModule.forRoot(MyApp,{tabsPlacement: 'bottom'}),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

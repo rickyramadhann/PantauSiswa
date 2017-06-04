@@ -6,53 +6,62 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="notif">
-      <ion-segment-button value="nilai">
+    <ion-segment color="primary" [(ngModel)]="notif" >
+      <ion-segment-button value="0" (click)="selectTab(0)">
         Nilai
       </ion-segment-button>
-      <ion-segment-button value="absensi">
+      <ion-segment-button value="1" (click)="selectTab(1)">
         Absensi
       </ion-segment-button>
-      <ion-segment-button value="tugas">
+      <ion-segment-button value="2" (click)="selectTab(2)">
         Tugas
       </ion-segment-button>
+      <div id="slide" class="slide"></div>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div [ngSwitch]="notif">
-  <ion-list *ngSwitchCase="'nilai'">
-   <ion-item *ngFor= "let data of datanilai">
+  <div [ngSwitch]="notif">
+    <ion-slides #pageSlider
+    (ionSlideWillChange)="changeWillSlide($event)">
+    <ion-slide>
+      <ion-list>
+       <ion-item *ngFor= "let data of datanilai">
         <h2>{{data.kategori}}</h2>
         <p>{{data.matpel}}</p>
         <p>Materi: <span>{{data.materi}}</span></p>
         <p>waktu: <span>{{data.waktu}}</span></p>
         <div class="nilai" item-right>
-            <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>
+          <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>
         </div>
+      </ion-item>
+    </ion-list>      
+  </ion-slide>
+
+  <ion-slide>
+   <ion-list >
+     <ion-item *ngFor= "let data of dataabsensi">
+      <p>{{data.matpel}}</p>
+      <p>Materi: <span>{{data.materi}}</span></p>
+      <p>waktu: <span>{{data.waktu}}</span></p>
+      <div class="status" item-right>
+        <h1>{{data.status}}</h1>
+      </div>
     </ion-item>
   </ion-list>
+</ion-slide>
 
-  <ion-list *ngSwitchCase="'absensi'">
-   <ion-item *ngFor= "let data of dataabsensi">
-        <p>{{data.matpel}}</p>
-        <p>Materi: <span>{{data.materi}}</span></p>
-        <p>waktu: <span>{{data.waktu}}</span></p>
-        <div class="status" item-right>
-            <h1>{{data.status}}</h1>
-        </div>
-    </ion-item>
-  </ion-list>
-
-   <ion-list *ngSwitchCase="'tugas'">
+<ion-slide>
+  <ion-list> 
     <ion-item *ngFor= "let data of datatugas">
-        <p>{{data.matpel}}</p>
-        <p>Materi: <span>{{data.materi}}</span></p>
-        <p>Keterangan: <span>{{data.keterangan}}</span></p>
-        <p>Deadline: <span>{{data.deadline}}</span></p>
-        
+      <p>{{data.matpel}}</p>
+      <p>Materi: <span>{{data.materi}}</span></p>
+      <p>Keterangan: <span>{{data.keterangan}}</span></p>
+      <p>Deadline: <span>{{data.deadline}}</span></p>
     </ion-item>
   </ion-list>
- </div>
+</ion-slide>
+</ion-slides>
+</div>
 </ion-content>
