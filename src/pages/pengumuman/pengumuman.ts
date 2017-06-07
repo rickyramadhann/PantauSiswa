@@ -15,7 +15,19 @@ import { Notifikasi } from '../notifikasi/notifikasi';
 })
 export class Pengumuman {
 
+  data:Array<{judul:string, content:string, waktu:string}>;
   constructor(public navCtrl: NavController,public app:App,  public navParams: NavParams, public menu:MenuController) {
+    this.data=[
+      {judul:'Judul 1', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 2', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 3', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 4', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 5', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 6', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 7', content:'Content pengumuman',waktu:'03.20pm'},
+      {judul:'Judul 8', content:'Content pengumuman',waktu:'03.20pm'}
+    ]
+  
   }
 
   ionViewDidLoad() {

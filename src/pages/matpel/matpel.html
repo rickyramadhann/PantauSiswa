@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-card (click)="keisimapel()" *ngFor= "let data of data">
-        <ion-item>
+    <ion-list>
+        <ion-item (click)="keisimapel()" *ngFor= "let data of data">
             <ion-avatar item-left>
                 <img src="img/guru.jpg">
             </ion-avatar>
@@ -22,7 +22,7 @@
             </ion-buttons>
 
         </ion-item>
-    </ion-card>
+    </ion-list>
 
    
 </ion-content>

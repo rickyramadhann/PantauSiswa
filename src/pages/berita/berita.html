@@ -16,10 +16,10 @@
 	      pullingIcon="arrow-dropdown"
 	      pullingText="Pull to refresh"
 	      refreshingSpinner="circles"
-	      refreshingText="Refreshing...">
+	      refreshingText="Memuat...">
 	    </ion-refresher-content>
 	</ion-refresher>
-	<ion-card *ngFor="let data of databerita">
+	<ion-card *ngFor="let data of databerita" no-padding>
 		<img src="http://pantausiswa.xyz/uploads/{{data.image}}"/>
 		<ion-card-content>
 			<ion-card-title>
@@ -27,7 +27,7 @@
 			</ion-card-title>
 			<p>{{data.created_at | moment}}</p>
 			<p>{{data.content | truncate : 100 }}</p>
-			<button ion-button padding full (click)="kebacaberita(data)" color="secondary">Baca Berita</button>
+			<button ion-button padding block (click)="kebacaberita(data)" color="hijau">Baca Berita</button>
 		</ion-card-content>
 	</ion-card>
 <!-- 

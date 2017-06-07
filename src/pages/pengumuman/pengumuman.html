@@ -11,78 +11,14 @@
 </ion-header>
 
 <ion-content>
-	<ion-card>
-        <ion-item>
+	<ion-list>
+        <ion-item *ngFor="let data of data">
             <ion-avatar item-start>
                 <img src="img/megaphone.png">
             </ion-avatar>
-            <h2>Judul Pengumuman</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-              voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <ion-note item-end>3:43 pm</ion-note>
+            <h2>{{data.judul}}</h2>
+            <p>{{data.content}}</p>
+              <ion-note item-end>{{data.waktu}}</ion-note>
         </ion-item>
-
-
-    </ion-card>
-
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="img/megaphone.png">
-            </ion-avatar>
-            <h2>Judul Pengumuman</h2>
-            <p>lorem</p>
-            <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
-
-
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="img/megaphone.png">
-            </ion-avatar>
-            <h2>Judul Pengumuman</h2>
-            <p>lorem</p>
-            <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
-
-
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="img/megaphone.png">
-            </ion-avatar>
-            <h2>Judul Pengumuman</h2>
-            <p>lorem</p>
-            <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
-
-
-    </ion-card>
-
-    <ion-card>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="img/megaphone.png">
-            </ion-avatar>
-            <h2>Judul Pengumuman</h2>
-            <p>lorem</p>
-            <ion-note item-end>3:43 pm</ion-note>
-        </ion-item>
-
-
-    </ion-card>
-
-
-
-
-</ion-content>
+    </ion-list>
+  </ion-content>

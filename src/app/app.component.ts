@@ -22,11 +22,13 @@ export class MyApp {
     
 
     pages:Array<{title: string, component:any}>;
-    constructor(public platform: Platform, statusBar: StatusBar, 
+    constructor(public platform: Platform, private statusBar: StatusBar, 
         public splashScreen: SplashScreen, public storage:Storage, public http:Http) {
-        
-        
+
+
         this.platform.ready().then(() => {
+            this.statusBar.overlaysWebView(true);
+            this.statusBar.backgroundColorByHexString('#3b99b5');
             this.splashScreen.hide();
             this.storage.get("email").then((email)=>{
                 if(email){
