@@ -27,4 +27,13 @@ page-notifikasi {
 		top: calc(100% - 4px);
 		transition: left 0.3s ease-out;
 	}
+
+	ion-note{
+		color: #fff !important;
+		padding: 5px;
+		width: 50px;
+		text-align: center;
+	}
+
+
 }

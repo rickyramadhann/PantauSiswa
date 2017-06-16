@@ -17,12 +17,12 @@ export class Lihatabsensi {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   	this.data=[
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'12 Maret 2017',status: 'H'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', waktu:'13 Maret 2017',status: 'I'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor',waktu:'13 Maret 2017',status: 'S'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'13 Maret 2017',status: 'H'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', waktu:'13 Maret 2017',status: 'I'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh waktu', waktu:'13 Maret 2017',status: 'A'}
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'12 Maret 2017',status: 'Hadir'},
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', waktu:'13 Maret 2017',status: 'Izin'},
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor',waktu:'13 Maret 2017',status: 'Sakit'},
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'13 Maret 2017',status: 'Hadir'},
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', waktu:'13 Maret 2017',status: 'Izin'},
+			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh waktu', waktu:'13 Maret 2017',status: 'Absen'}
 		]
   }
 
