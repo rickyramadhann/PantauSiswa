@@ -8,8 +8,8 @@ import { TruncatePipe } from 'angular2-truncate';
 //import { SortBy } from '../pipes/sort-by';
 
 //providers
-
-//pipes
+import { Loginservice }from '../providers/loginservice';
+//pipes-
 import { Moment } from '../pipes/moment';
 
 //tabs
@@ -32,6 +32,7 @@ import { Lihatabsensi } from '../pages/lihatabsensi/lihatabsensi';
 import { Notifikasi } from '../pages/notifikasi/notifikasi';
 import { Bacaberita } from '../pages/bacaberita/bacaberita';
 import { Tulispesan } from '../pages/tulispesan/tulispesan';
+import { Bacapengumuman } from '../pages/bacapengumuman/bacapengumuman';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -62,6 +63,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     Moment,
     TruncatePipe,
+    Bacapengumuman
   ],
   imports: [
     BrowserModule,
@@ -89,12 +91,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Bacaberita,
     Tulispesan,
     TabsPage,
+    Bacapengumuman
     
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice
   ]
 })
 export class AppModule {}

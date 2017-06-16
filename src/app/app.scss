@@ -18,8 +18,8 @@
 
 
 .headernav{
-	height: 170px;
-	background: #58b1cc;
+	height: 180px;
+	background-color: map-get($colors, primary);
 	text-align: center;
 }
 .headernav p{

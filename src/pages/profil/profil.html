@@ -16,30 +16,18 @@
 			</div>
 			<p>Boy Anak Jalanan</p>
 		</ion-item>
+	</ion-list>
 
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
-		</ion-item>
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
-		</ion-item>
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
-		</ion-item>
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
-		</ion-item>
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
-		</ion-item>
-		<ion-item>
-			<ion-icon name="contact" item left></ion-icon>
-			Si boy anak jalanan
+	<ion-list>
+		<ion-item *ngFor="let data of key">
+			<ion-icon name="ios-contact" item-start></ion-icon>
+			<p>{{datasiswa[data].name}}</p>
+
+			<ion-icon name="ios-contact" item-start></ion-icon>
+			<p>{{datasiswa[data].nis}}</p>
+
+			<ion-icon name="ios-contact" item-start></ion-icon>
+			<p>{{datasiswa[data].name}}</p>
 		</ion-item>
 	</ion-list>
 </ion-content>

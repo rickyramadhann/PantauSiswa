@@ -1,3 +1,10 @@
 page-pengumuman {
-
+	.cardpengumuman h2
+	{
+		font-size: 16px !important;
+		font-weight: bold;
+		background-color: map-get($colors, primary);
+		color:#fff !important;
+		padding: 10px;
+	}
 }

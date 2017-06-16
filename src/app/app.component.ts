@@ -3,7 +3,7 @@ import { Platform, Nav} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Profil } from '../pages/profil/profil';
@@ -19,7 +19,10 @@ export class MyApp {
     @ViewChild(Nav) nav:Nav;
     rootPage : any;
     email: any;
-    
+    token : any;
+    datasiswa = [];
+    url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
+    key=[];
 
     pages:Array<{title: string, component:any}>;
     constructor(public platform: Platform, private statusBar: StatusBar, 
@@ -28,19 +31,10 @@ export class MyApp {
 
         this.platform.ready().then(() => {
             this.statusBar.overlaysWebView(true);
-            this.statusBar.backgroundColorByHexString('#3b99b5');
+            this.statusBar.backgroundColorByHexString('#02a669');
             this.splashScreen.hide();
-            this.storage.get("email").then((email)=>{
-                if(email){
-                    this.email = email;
-                    console.log('email dari component ='+this.email);
-                    this.rootPage = TabsPage;
-
-                }
-                else{                
-                    this.rootPage = Login;
-                }
-            })
+            this.check();
+            
         });
 
 
@@ -53,7 +47,27 @@ export class MyApp {
     }
 
     
-    
+    check(){
+        this.storage.get("token").then((token)=>{
+            if(token){
+                this.token=token;
+                let header = new Headers();
+                header.append('Content-Type', 'application/json');
+                header.append('Accept','Application/json');
+                header.append('Authorization', 'Bearer '+ this.token);
+                this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+                    this.datasiswa = datas;
+
+
+                })
+                this.rootPage = TabsPage;
+
+            }
+            else{                
+                this.rootPage = Login;
+            }
+        })
+    }
 
     openPage(page){
 
@@ -66,6 +80,7 @@ export class MyApp {
         this.storage.remove('email');
         this.nav.setRoot(Login);
     }
+    
 
     
 }

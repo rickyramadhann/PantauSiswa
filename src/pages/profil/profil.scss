@@ -1,7 +1,7 @@
 page-profil {
 	.headernav{
 		height: 180px;
-		background: #00796b;
+		background-color: map-get($colors, primary);
 		text-align: center;
 	}
 	.headernav p{

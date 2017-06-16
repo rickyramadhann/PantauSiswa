@@ -1,45 +1,65 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController,App} from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 import { Notifikasi } from '../notifikasi/notifikasi';
+import { Bacapengumuman } from '../bacapengumuman/bacapengumuman';
 /**
  * Generated class for the Pengumuman page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
-@Component({
-  selector: 'page-pengumuman',
-  templateUrl: 'pengumuman.html',
-})
-export class Pengumuman {
+ @IonicPage()
+ @Component({
+   selector: 'page-pengumuman',
+   templateUrl: 'pengumuman.html',
+ })
+ export class Pengumuman {
 
-  data:Array<{judul:string, content:string, waktu:string}>;
-  constructor(public navCtrl: NavController,public app:App,  public navParams: NavParams, public menu:MenuController) {
-    this.data=[
-      {judul:'Judul 1', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 2', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 3', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 4', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 5', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 6', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 7', content:'Content pengumuman',waktu:'03.20pm'},
-      {judul:'Judul 8', content:'Content pengumuman',waktu:'03.20pm'}
-    ]
-  
-  }
+   token : any;
+   datapengumuman:any;
+   url:any='http://pantausiswa.xyz/api/ambilsiswa/pengumuman';
+   page:number=1;
+   key=[];
+   constructor(public navCtrl: NavController,public app:App,  public navParams: NavParams, public menu:MenuController, public storage:Storage,public http:Http) {
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Pengumuman');
-  }
-  
+
+   }
+
+   ionViewDidLoad() {
+     console.log('ionViewDidLoad Pengumuman');
+   }
+
    kenotifikasi(){
-    this.app.getRootNav().push(Notifikasi);
-  
+     this.app.getRootNav().push(Notifikasi);
+
+   }
+
+   kebacapengumuman(datapengumuman){
+    console.log(datapengumuman);
+    this.app.getRootNav().push(Bacapengumuman,datapengumuman);
+
   }
 
-  ionViewDidEnter(){
-  this.menu.swipeEnable(true,'menu1');
-  }
-}
+   ionViewDidEnter(page){
+     this.menu.swipeEnable(true,'menu1');
+     this.storage.get('token').then(token=>{
+       this.token=token;
+       let header = new Headers();
+       header.append('Content-Type', 'application/json');
+       header.append('Accept','Application/json');
+       header.append('Authorization', 'Bearer '+ this.token);
+
+       this.http.get(this.url + '?page='+ this.page, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+         this.datapengumuman = datas.data;
+         this.key = Object.keys(this.datapengumuman);
+         console.log(this.key);
+
+       })
+
+     })
+   }
+ }

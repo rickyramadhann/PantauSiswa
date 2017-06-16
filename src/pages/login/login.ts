@@ -21,10 +21,10 @@ export class Login {
   public user = {
     email: '',
     password: '',
-    
+
   };
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams, public menu:MenuController,
     public http:Http, public loading: LoadingController,
     public alert:AlertController, public storage: Storage
@@ -34,7 +34,6 @@ export class Login {
 
 
   login(){
-
       if(this.user.email ===''||this.user.password===''){
         let alert = this.alert.create({
           title: 'warning',
@@ -51,16 +50,17 @@ export class Login {
         loader.present().then(()=>{
           this.http.post('http://pantausiswa.xyz/api/login',this.user)
           .toPromise().then((response)=>{
-           
+          
+
            this.storage.remove('email');
-           this.storage.set('token', response.json().token) ; 
+           this.storage.set('token', response.json().token) ;
            this.storage.set('email', this.user.email);
            console.log(response.json().token);
            //this.storage.set('email', this.user.email).then(()=> {console.log('Stored in localStorage '+ this.user.email)});
            console.log('email dari login ='+this.user.email);
 
-           
-           this.navCtrl.setRoot(TabsPage, this.user.email);
+
+           this.navCtrl.setRoot(TabsPage);
            loader.dismiss();
         },error=> {
             let alert = this.alert.create({
@@ -72,9 +72,7 @@ export class Login {
               loader.dismiss();
           });
       });
-  
     }
-
   }
 
 

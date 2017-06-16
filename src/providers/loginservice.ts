@@ -14,21 +14,10 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class Loginservice {
 
-	public local : Storage;
-	mydata: any;
+	public token: any;
   constructor(public http: Http, public storage:Storage) {
-    this.local = storage;
-  }
+		
+	}
 
-  postlogin(data){
-  	let link  = "http://pantausiswa.xyz/api/login";
-  	return this.http.post(link,data).map(data=>{
-  		this.mydata = data;
-  		console.log('data');
-
-  	},error=>{
-  		console.log(error);
-  	})
-  }
-  
+ 
 }
