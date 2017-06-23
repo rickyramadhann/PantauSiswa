@@ -20,6 +20,7 @@ import { Historybk } from '../pages/historybk/historybk';
 //sidenav
 import { Profil } from '../pages/profil/profil';
 import { Matpel } from '../pages/matpel/matpel';
+import { Jadwal } from '../pages/jadwal/jadwal';
 
 import { Pengumuman } from '../pages/pengumuman/pengumuman';
 import { Login } from '../pages/login/login';
@@ -49,6 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Historybk,
     Pengumuman,
     Matpel,
+    Jadwal,
     Profil,
     Login,
     Isimapel,
@@ -79,6 +81,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Historybk,
     Pengumuman,
     Matpel,
+    Jadwal,
     Profil,
     Login,
     Isimapel,

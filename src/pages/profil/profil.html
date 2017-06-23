@@ -3,31 +3,55 @@
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-		<ion-title>Profil</ion-title>
+		<ion-title>Mata Pelajaran</ion-title>
 	</ion-navbar>
 </ion-header>
 
 
 <ion-content>
-	<ion-list>
-		<ion-item class="headernav">
-			<div class="circular--landscape" item-center>
-				<img src="img/siswa.png" />
-			</div>
-			<p>Boy Anak Jalanan</p>
-		</ion-item>
-	</ion-list>
+	<ion-item class="headernav">
+		<div class="circular--landscape" item-center>
+			<img src="http://pantausiswa.xyz/uploads/{{datasiswa.photo}}" />
+		</div>
+		<p>{{datasiswa.name}}</p>
+		<p>{{datakelas.nama}}</p>
+	</ion-item>
+	<ion-item>
+		<ion-icon name="information-circle" item-start></ion-icon>
+		<p>NIS: <span>{{datasiswa.nis}}</span></p>
+	</ion-item>
 
-	<ion-list>
-		<ion-item *ngFor="let data of key">
-			<ion-icon name="ios-contact" item-start></ion-icon>
-			<p>{{datasiswa[data].name}}</p>
+	<ion-item>
+		<ion-icon name="information-circle" item-start></ion-icon>
+		<p>NISN: <span>{{datasiswa.nisn}}</span></p>
+	</ion-item>
 
-			<ion-icon name="ios-contact" item-start></ion-icon>
-			<p>{{datasiswa[data].nis}}</p>
+	<ion-item>
+		<ion-icon name="at" item-start></ion-icon>
+		<p>Email: <span>{{datasiswa.email}}</span></p>
+	</ion-item>
+	<ion-item>
+		<ion-icon name="pin" item-start></ion-icon>
+		<p>Alamat: <span>{{datasiswa.alamat}}</span></p>
+	</ion-item>
 
-			<ion-icon name="ios-contact" item-start></ion-icon>
-			<p>{{datasiswa[data].name}}</p>
-		</ion-item>
-	</ion-list>
+	<ion-item>
+		<ion-icon name="ios-calendar" item-start></ion-icon>
+		<p>Tanggal lahir: <span>{{datasiswa.tgl_lahir}}</span></p>
+	</ion-item>
+
+	<ion-item>
+		<ion-icon name="man" item-start></ion-icon>
+		<p>Nama Ayah: <span>{{datasiswa.nm_ayah}}</span></p>
+	</ion-item>
+
+	<ion-item>
+		<ion-icon name="woman" item-start></ion-icon>
+		<p>Nama Ibu: <span>{{datasiswa.nm_ibu}}</span></p>
+	</ion-item>
+
+	<ion-item>
+		<ion-icon name="call" item-start></ion-icon>
+		<p>Telepon Ortu: <span>{{datasiswa.telp_ortu}}</span></p>
+	</ion-item>
 </ion-content>

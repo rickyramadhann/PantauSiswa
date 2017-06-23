@@ -16,34 +16,41 @@ import 'rxjs/add/operator/toPromise';
  	templateUrl: 'profil.html',
  })
  export class Profil {
- 	token : any;
- 	datasiswa:any;
- 	url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
- 	key=[];
- 	constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:Http) {
- 		this.loadProfil();
- 	}
+   token : any;
+   datasiswa = [];
+   datakelas =[];
+   url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
+   url2:any='http://pantausiswa.xyz/api/ambilsiswa/datakelas';
+   key=[];
+   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:Http) {
+     this.check();
+   }
 
 
 
 
- 	ionViewDidLoad() {
- 		console.log('ionViewDidLoad Profil');
- 	}
+   ionViewDidLoad() {
+     console.log('ionViewDidLoad Profil');
+   }
 
- 	loadProfil(){
-    this.storage.get('token').then(token=>{
-      this.token=token;
-       let header = new Headers();
-       header.append('Content-Type', 'application/json');
-       header.append('Accept','Application/json');
-       header.append('Authorization', 'Bearer '+ this.token);
-      this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
-        this.datasiswa = datas;
-        this.key = Object.keys(this.datasiswa);
-        
-        console.log(this.key);
-      })
-    })
-  }
+   check(){
+     this.storage.get("token").then((token)=>{
+       if(token){
+         this.token=token;
+         let header = new Headers();
+         header.append('Content-Type', 'application/json');
+         header.append('Accept','Application/json');
+         header.append('Authorization', 'Bearer '+ this.token);
+         this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+           this.datasiswa = datas.data;
+         });
+
+         this.http.get(this.url2, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+           this.datakelas = datas
+         })
+
+       }
+     });
+     
+   }
  }

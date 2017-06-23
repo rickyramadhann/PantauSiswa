@@ -12,56 +12,66 @@ import 'rxjs/add/operator/toPromise';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@Component({
-  selector: 'page-matpel',
-  templateUrl: 'matpel.html',
-})
-export class Matpel {
+ @Component({
+   selector: 'page-matpel',
+   templateUrl: 'matpel.html',
+ })
+ export class Matpel {
 
-  token:any;
-  url ="http://pantausiswa.xyz/api/ambilsiswa/datajadwal";
-  datajadwal :any;
-  key:any;
-  hari: string ="Senin";
-  constructor(public navCtrl: NavController, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
+   token:any;
+   url ="http://pantausiswa.xyz/api/ambilsiswa/datajadwal";
+   datamatpel:any[]=[];
+   key:any;
+   namamatpel:any[]=[];
+   constructor(public navCtrl: NavController, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
      this.loadMatpel();
-  }
+   }
 
 
 
 
-  loadMatpel(){
-    this.storage.get('token').then(token=>{
-      this.token=token;
+   loadMatpel(){
+     this.storage.get('token').then(token=>{
+       this.token=token;
        let header = new Headers();
        header.append('Content-Type', 'application/json');
        header.append('Accept','Application/json');
        header.append('Authorization', 'Bearer '+ this.token);
-      this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
-        this.datajadwal = datas;
-        this.key = Object.keys(this.datajadwal);
-        console.log(this.key);
-      })
-    })
-  }
+       this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+         this.datamatpel = datas.matpel;
+         this.key = Object.keys(this.datamatpel);
+         console.log(this.key);
 
-  keisimapel(){
-    this.app.getRootNav().push(Isimapel);
+         for(let i =0; i<this.datamatpel.length;i++){
+           this.namamatpel.push(this.datamatpel[i].nama);
+           console.log(this.namamatpel);
+         }
+         this.storage.set("matpel", this.namamatpel);
+         console.log("data disimpan");
 
-  }
+        
+       })
+     })
+   }
 
 
-  kenotifikasi(){
-    this.app.getRootNav().push(Notifikasi);
-  
-  }
+   keisimapel(){
+     this.app.getRootNav().push(Isimapel);
 
-  ionViewDidEnter(){
-  this.menu.swipeEnable(true,'menu1');
-  }
+   }
 
-  filter(){
-    
-  }
 
-}
+   kenotifikasi(){
+     this.app.getRootNav().push(Notifikasi);
+
+   }
+
+   ionViewDidEnter(){
+     this.menu.swipeEnable(true,'menu1');
+   }
+
+   filter(){
+
+   }
+
+ }

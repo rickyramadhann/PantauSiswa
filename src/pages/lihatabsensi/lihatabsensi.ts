@@ -1,33 +1,47 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController,App,MenuController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
-/**
- * Generated class for the Lihatabsensi page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-@IonicPage()
 @Component({
-  selector: 'page-lihatabsensi',
-  templateUrl: 'lihatabsensi.html',
+	selector: 'page-lihatabsensi',
+	templateUrl: 'lihatabsensi.html',
 })
 export class Lihatabsensi {
-	data:Array<{matpel:string, guru: string, materi:string, waktu:string, status:string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	token:any;
+	url ="http://pantausiswa.xyz/api/ambilsiswa/absensi";
+	dataabsensi :any;
+	key:any;
+	matpel:any;
+	constructor(public navCtrl: NavController, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
+		this.loadAbsensi();
+	}
 
-  	this.data=[
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'12 Maret 2017',status: 'Hadir'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', waktu:'13 Maret 2017',status: 'Izin'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor',waktu:'13 Maret 2017',status: 'Sakit'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', waktu:'13 Maret 2017',status: 'Hadir'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', waktu:'13 Maret 2017',status: 'Izin'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh waktu', waktu:'13 Maret 2017',status: 'Absen'}
-		]
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Lihatabsensi');
-  }
+
+
+	loadAbsensi(){
+		this.storage.get('token').then(token=>{
+			this.token=token;
+			let header = new Headers();
+			header.append('Content-Type', 'application/json');
+			header.append('Accept','Application/json');
+			header.append('Authorization', 'Bearer '+ this.token);
+			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+				this.dataabsensi = datas;
+				this.key = Object.keys(this.dataabsensi);
+				console.log(this.key);
+				console.log(this.dataabsensi);
+			})
+		})
+	}
+
+	
+	ionViewDidEnter(){
+		this.menu.swipeEnable(true,'menu1');
+	}
+
+	
 
 }

@@ -8,22 +8,14 @@
 
 
 <ion-content>
-    <ion-list>
-        <ion-list-header>
-            <ion-avatar item-left>
-                <img src="img/guru.jpg">
-            </ion-avatar>
-            <p>Guru: <span>Drs. Hasiolan</span></p>
-        </ion-list-header>
-        <ion-item *ngFor= "let data of data">
-            <p>{{data.matpel}}</p>
-            <p>Materi: <span>{{data.materi}}</span></p>
-            <p>waktu: <span>{{data.waktu}}</span></p>
-            <ion-note>
-                {{data.status}}
-            </ion-note>
-        </ion-item>
-    </ion-list>
-
-
+  <ion-list >
+     <ion-item *ngFor= "let data of key">
+      <h3>{{dataabsensi[data].matpel}}</h3>
+      <p>Tanggal: <span>{{dataabsensi[data].created_at |date: "yyyy/MM/dd"}}</span></p>
+      <p>Pukul: <span>{{dataabsensi[data].created_at |date: "shortTime"}}</span></p>
+      <ion-note item-right [ngStyle]="{'background-color': dataabsensi[data].keterangan === 'hadir' ? 'green' : dataabsensi[data].keterangan === 'sakit' ? 'orange': dataabsensi[data].keterangan === 'izin' ? 'blue': 'red'}">
+        {{dataabsensi[data].keterangan}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>

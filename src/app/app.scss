@@ -16,6 +16,25 @@
 // automatically applied to the <body> element in the app.
 
 
+@font-face {
+  font-family: 'Vidaloka', serif;
+  src: url('fonts/Vidaloka.woff2');
+}
+
+body, span, button, h1,h2,h3,h4,h5,h6,p, ion-title, ion-item, .card-title{
+  font-family: 'Vidaloka', serif !important;
+
+}
+
+p{
+  font-size: 16px !important;
+}
+
+.item-md h2{
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
 
 .headernav{
 	height: 180px;

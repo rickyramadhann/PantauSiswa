@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import { Profil } from '../pages/profil/profil';
 import { Login } from '../pages/login/login';
 import { Matpel } from '../pages/matpel/matpel';
+import { Jadwal } from '../pages/jadwal/jadwal';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -41,7 +42,8 @@ export class MyApp {
         this.pages=[
         {title: 'Beranda', component:TabsPage},
         {title:'Profil', component:Profil},
-        {title:'Mata Pelajaran', component:Matpel}
+        {title:'Mata Pelajaran', component:Matpel},
+        {title:'Jadwal Mata Pelajaran', component:Jadwal}
         ];
 
     }
@@ -56,7 +58,7 @@ export class MyApp {
                 header.append('Accept','Application/json');
                 header.append('Authorization', 'Bearer '+ this.token);
                 this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
-                    this.datasiswa = datas;
+                    this.datasiswa = datas.data;
 
 
                 })

@@ -15,11 +15,11 @@
             </ion-avatar>
             <p>Guru: <span>Drs. Hasiolan</span></p>
         </ion-list-header>
-        <ion-item *ngFor= "let data of data">
-            <p>{{data.matpel}}</p>
-            <p>Materi: <span>{{data.materi}}</span></p>
-            <p>Keterangan: <span>{{data.keterangan}}</span></p>
-            <p>Deadline: <span>{{data.deadline}}</span></p>
+        <ion-item *ngFor= "let data of key">
+            <p>{{datatugas[data].nama}}</p>
+            <p>Materi: <span>{{datatugas[data].materi}}</span></p>
+            <p>Keterangan: <span>{{datatugas[data].keterangan}}</span></p>
+            <p>Deadline: <span>{{datatugas[data].tanggal}}</span><span>{{datatugas[data].jam}}</span></p>
             
         </ion-item>
     </ion-list>

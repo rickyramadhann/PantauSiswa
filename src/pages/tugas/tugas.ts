@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController,App,MenuController,NavParams} from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 /**
  * Generated class for the Tugas page.
@@ -7,27 +10,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
-@Component({
-  selector: 'page-tugas',
-  templateUrl: 'tugas.html',
-})
-export class Tugas {
-  data:Array<{matpel:string, guru: string, materi:string,keterangan:string, deadline:string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+ @Component({
+ 	selector: 'page-tugas',
+ 	templateUrl: 'tugas.html',
+ })
+ export class Tugas {
+ 	token:any;
+ 	url ="http://pantausiswa.xyz/api/ambilsiswa/tugas";
+ 	datatugas :any;
+ 	key:any;
+ 	constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http,public storage:Storage) {
 
-	this.data=[
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', keterangan:'Kerjakan halaman 10-11',deadline:'12 Maret 2017'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', keterangan:'Kerjakan halaman 10-11',deadline:'13 Maret 2017'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor',keterangan:'Kerjakan halaman 10-11',deadline:'13 Maret 2017'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar',keterangan:'Kerjakan halaman 10-11', deadline:'13 Maret 2017'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', keterangan:'Kerjakan halaman 10-11',deadline:'13 Maret 2017'},
-			{ matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh deadline', keterangan:'Kerjakan halaman 10-11',deadline:'13 Maret 2017'}
-		]
-  }
+ 		this.loadTugas();
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Tugas');
-  }
+ 	}
 
-}
+
+ 	loadTugas(){
+ 		this.storage.get('token').then(token=>{
+ 			this.token=token;
+ 			let header = new Headers();
+ 			header.append('Content-Type', 'application/json');
+ 			header.append('Accept','Application/json');
+ 			header.append('Authorization', 'Bearer '+ this.token);
+ 			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 				this.datatugas = datas.tugas;
+ 				this.key = Object.keys(this.datatugas);
+ 				console.log(this.key);
+ 				console.log(this.datatugas);
+ 			})
+ 		})
+ 	}
+
+ 	ionViewDidLoad() {
+ 		console.log('ionViewDidLoad Tugas');
+ 	}
+
+ }

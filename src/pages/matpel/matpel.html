@@ -8,35 +8,17 @@
 </ion-header>
 
 <ion-content>
-
     <ion-list>
-        <ion-item>
-            <ion-label>Pilih hari</ion-label>
-            <ion-select [(ngModel)]="hari">
-                <ion-option value="Senin" checked="true">Senin</ion-option>
-                <ion-option value="Selasa">Selasa</ion-option>
-                <ion-option value="Rabu">Rabu</ion-option>
-                <ion-option value="Kamis">Kamis</ion-option>
-                <ion-option value="Jum'at">Jum'at</ion-option>
-                <ion-option value="Sabtu">Sabut</ion-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
-    <ion-list *ngFor= "let data of key">
-        <ion-item *ngIf="(hari ==''|| hari ==datajadwal[data].hari )">
+        <ion-item *ngFor= "let data of key" (click)="keisimapel()">
             <ion-avatar item-left>
-                <img src="http://pantausiswa.xyz/uploads/{{datajadwal[data].guru.photo}}">
+                <img src="http://pantausiswa.xyz/uploads/{{datamatpel[data].photo}}">
             </ion-avatar>
-            <h2>{{datajadwal[data].matpel.nama}}</h2>
-            <p>{{datajadwal[data].guru.name}}</p>
-            <p>{{datajadwal[data].hari}}</p>
-            <ion-buttons item-right>
+            <h2>{{datamatpel[data].nama}}</h2>
+            <p>{{datamatpel[data].name}}</p>
+             <ion-buttons item-right>
                 <ion-icon name="ios-arrow-dropright" color="primary">
                 </ion-icon>
             </ion-buttons>
-
         </ion-item>
     </ion-list>
-
-
 </ion-content>
