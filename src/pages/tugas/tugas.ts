@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,App,MenuController,NavParams} from 'ionic-angular';
+import { NavController,NavParams} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -19,8 +19,14 @@ import 'rxjs/add/operator/toPromise';
  	url ="http://pantausiswa.xyz/api/ambilsiswa/tugas";
  	datatugas :any;
  	key:any;
+ 	namamatpel:any;
+ 	fotoguru:any;
+ 	namaguru:any;
  	constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http,public storage:Storage) {
-
+ 		this.namamatpel = navParams.get("nama");
+ 		this.fotoguru = navParams.get("foto");
+ 		this.namaguru = navParams.get("name");
+ 		console.log(this.namaguru);
  		this.loadTugas();
 
  	}
@@ -34,16 +40,14 @@ import 'rxjs/add/operator/toPromise';
  			header.append('Accept','Application/json');
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
- 				this.datatugas = datas.tugas;
- 				this.key = Object.keys(this.datatugas);
- 				console.log(this.key);
- 				console.log(this.datatugas);
+ 				this.datatugas = datas[this.namamatpel];
+ 				
  			})
  		})
  	}
 
  	ionViewDidLoad() {
- 		console.log('ionViewDidLoad Tugas');
+ 		//console.log('ionViewDidLoad Tugas');
  	}
 
  }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,App,MenuController } from 'ionic-angular';
+import { NavController,App,MenuController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -13,8 +13,14 @@ export class Lihatabsensi {
 	url ="http://pantausiswa.xyz/api/ambilsiswa/absensi";
 	dataabsensi :any;
 	key:any;
-	matpel:any;
-	constructor(public navCtrl: NavController, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
+	namamatpel:any;
+	fotoguru:any;
+	namaguru:any;
+	constructor(public navCtrl: NavController,public navParams: NavParams, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
+		this.namamatpel = navParams.get("nama");
+		this.fotoguru = navParams.get("foto");
+		this.namaguru = navParams.get("name");
+		console.log(this.namaguru);
 		this.loadAbsensi();
 	}
 
@@ -29,10 +35,9 @@ export class Lihatabsensi {
 			header.append('Accept','Application/json');
 			header.append('Authorization', 'Bearer '+ this.token);
 			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
-				this.dataabsensi = datas;
-				this.key = Object.keys(this.dataabsensi);
-				console.log(this.key);
-				console.log(this.dataabsensi);
+				this.dataabsensi = datas[this.namamatpel];
+				
+
 			})
 		})
 	}

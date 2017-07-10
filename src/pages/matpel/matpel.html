@@ -9,12 +9,13 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor= "let data of key" (click)="keisimapel()">
+        <ion-item *ngFor= "let data of datamatpel" (click)="keisimapel(data)">
             <ion-avatar item-left>
-                <img src="http://pantausiswa.xyz/uploads/{{datamatpel[data].photo}}">
+                <img src="http://pantausiswa.xyz/uploads/{{data.photo}}">
             </ion-avatar>
-            <h2>{{datamatpel[data].nama}}</h2>
-            <p>{{datamatpel[data].name}}</p>
+            
+            <h2>{{data.nama}}</h2>
+            <h2>{{data.name}}</h2>
              <ion-buttons item-right>
                 <ion-icon name="ios-arrow-dropright" color="primary">
                 </ion-icon>

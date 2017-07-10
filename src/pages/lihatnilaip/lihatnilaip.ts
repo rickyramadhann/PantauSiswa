@@ -1,5 +1,8 @@
-import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController,App,MenuController,NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 /**
  * Generated class for the Lihatnilaip page.
@@ -7,25 +10,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
- @IonicPage()
  @Component({
  	selector: 'page-lihatnilaip',
  	templateUrl: 'lihatnilaip.html',
  })
+
  export class Lihatnilaip {
- 	data:Array<{kategori:string, matpel:string, guru: string, materi:string, nilai:number}>;
- 	constructor(public navCtrl: NavController, public navParams: NavParams) {
+ 	token:any;
+ 	url ="http://pantausiswa.xyz/api/ambilsiswa/nilaipengetahuan";
+ 	datanilaip :any;
+ 	key:any;
+ 	namamatpel:any;
+ 	fotoguru:any;
+ 	namaguru:any;
+ 	constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
+ 		this.namamatpel = navParams.get("nama");
+ 		this.fotoguru = navParams.get("foto");
+ 		this.namaguru = navParams.get("name");
+ 		console.log(this.namaguru);
+ 		this.loadNilaip();
+ 	}
 
- 		this.data=[
- 		{kategori:'Ulangan Harian', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', nilai:90},
- 		{kategori:'Tugas', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', nilai:60},
- 		{kategori:'Tugas', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor', nilai:70},
- 		{kategori:'Ulangan Harian', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', nilai:85},
- 		{kategori:'Tugas', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', nilai:90},
- 		{kategori:'Ulangan Harian', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh waktu', nilai:40}
- 		]
+ 	loadNilaip(){
+ 		this.storage.get('token').then(token=>{
+ 			this.token=token;
+ 			let header = new Headers();
+ 			header.append('Content-Type', 'application/json');
+ 			header.append('Accept','Application/json');
+ 			header.append('Authorization', 'Bearer '+ this.token);
+ 			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 				this.datanilaip = datas[this.namamatpel];
 
 
+ 			})
+ 		})
  	}
 
 

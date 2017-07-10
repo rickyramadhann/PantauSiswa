@@ -2,19 +2,24 @@
 
   <ion-navbar color="primary">
     <ion-title>lihat Absensi</ion-title>
-</ion-navbar>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
   <ion-list >
-     <ion-item *ngFor= "let data of key">
-      <h3>{{dataabsensi[data].matpel}}</h3>
-      <p>Tanggal: <span>{{dataabsensi[data].created_at |date: "yyyy/MM/dd"}}</span></p>
-      <p>Pukul: <span>{{dataabsensi[data].created_at |date: "shortTime"}}</span></p>
-      <ion-note item-right [ngStyle]="{'background-color': dataabsensi[data].keterangan === 'hadir' ? 'green' : dataabsensi[data].keterangan === 'sakit' ? 'orange': dataabsensi[data].keterangan === 'izin' ? 'blue': 'red'}">
-        {{dataabsensi[data].keterangan}}
+    <ion-list-header>
+      <ion-avatar item-left>
+        <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
+      </ion-avatar>
+      <p>Guru: <span>{{namaguru}}</span></p>
+    </ion-list-header>
+    <ion-item *ngFor= "let data of dataabsensi">
+      <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
+      <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
+      <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? 'green' : data.keterangan === 'sakit' ? 'orange': data.keterangan === 'izin' ? 'blue': 'red'}">
+        {{data.keterangan}}
       </ion-note>
     </ion-item>
   </ion-list>

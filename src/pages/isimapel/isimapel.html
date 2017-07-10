@@ -9,8 +9,34 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor= "let p of pages" (click)="openPage(p)">
-      {{p.title}}
+
+    <button ion-item (click)="keabsensi(data)">
+      Lihat Absensi
+      <ion-icon name="ios-arrow-dropright" color="primary" item-right>
+      </ion-icon>
+    </button>
+
+    <button ion-item (click)="kenilaip(data)">
+      Lihat Nilai Pengetahuan
+      <ion-icon name="ios-arrow-dropright" color="primary" item-right>
+      </ion-icon>
+    </button>
+
+    <button ion-item (click)="kenilaik(data)">
+      Lihat Nilai Keterampilan
+      <ion-icon name="ios-arrow-dropright" color="primary" item-right>
+      </ion-icon>
+    </button>
+
+
+    <button ion-item (click)="kenilais(data)">
+      Lihat Nilai Sikap
+      <ion-icon name="ios-arrow-dropright" color="primary" item-right>
+      </ion-icon>
+    </button>
+
+    <button ion-item (click)="ketugas(data)">
+      Lihat Tugas
       <ion-icon name="ios-arrow-dropright" color="primary" item-right>
       </ion-icon>
     </button>

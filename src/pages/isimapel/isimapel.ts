@@ -11,36 +11,69 @@ import { Tugas } from '../tugas/tugas';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
-@Component({
-  selector: 'page-isimapel',
-  templateUrl: 'isimapel.html',
-})
-export class Isimapel {
+ @IonicPage()
+ @Component({
+   selector: 'page-isimapel',
+   templateUrl: 'isimapel.html',
+ })
+ export class Isimapel {
 
-  pages:Array<{title: string, component:any}>;
+   public nama:any;
+   public name:any;
+   public foto:any;
+   constructor(public navCtrl: NavController, public navParams: NavParams,public menu:MenuController) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menu:MenuController) {
-    this.pages = [
-      {title:'Nilai Pengetahuan', component:Lihatnilaip},
-      {title:'Nilai Keterampilan', component:Lihatnilaik},
-      {title:'Nilai Sikap', component:Lihatnilais},
-      {title:'Absensi', component:Lihatabsensi},
-      {title:'Tugas', component:Tugas}
+     this.nama = this.navParams.get('nama');
+     this.name = this.navParams.get('name');
+     this.foto = this.navParams.get('photo')
+   }
 
-    ];
-  }
+   ketugas(){
+     this.navCtrl.push(Tugas,{
+       nama:this.nama,
+       name:this.name,
+       foto:this.foto
+     })
+   }
+   kenilaip(){
+     this.navCtrl.push(Lihatnilaip,{
+       nama:this.nama,
+       name:this.name,
+       foto:this.foto
+     })
+   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Isimapel');
-  }
+   kenilaik(){
+     this.navCtrl.push(Lihatnilaik,{
+       nama:this.nama,
+       name:this.name,
+       foto:this.foto
+     })
+   }
 
-  openPage(page){
-      this.navCtrl.push(page.component);
-  }
+   kenilais(){
+     this.navCtrl.push(Lihatnilais,{
+       nama:this.nama,
+       name:this.name,
+       foto:this.foto
+     })
+   }
 
-  ionViewDidEnter(){
-    this.menu.swipeEnable(false,'menu1');
-  }
+   keabsensi(){
+     this.navCtrl.push(Lihatabsensi,{
+       nama:this.nama,
+       name:this.name,
+       foto:this.foto
+     })
+   }
 
-}
+   ionViewDidLoad() {
+     console.log('ionViewDidLoad Isimapel');
+   }
+
+
+   ionViewDidEnter(){
+     this.menu.swipeEnable(false,'menu1');
+   }
+
+ }

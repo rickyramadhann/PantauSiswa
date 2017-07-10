@@ -11,14 +11,14 @@
     <ion-list>
         <ion-list-header>
             <ion-avatar item-left>
-                <img src="img/guru.jpg">
+                <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
             </ion-avatar>
-            <p>Guru: <span>Drs. Hasiolan</span></p>
+            <p>Guru: <span>{{namaguru}}</span></p>
         </ion-list-header>
-        <ion-item *ngFor= "let data of data">
+        <ion-item *ngFor= "let data of datanilais">
             <h2>{{data.kategori}}</h2>
-            <p>{{data.matpel}}</p>
-            <p>{{data.nilai}}
+            <p>{{data.nilai}}</p>
+            <p>{{data.keterangan}}
             </ion-item>
         </ion-list>
 

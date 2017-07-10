@@ -28,9 +28,6 @@
     <ion-slide>
       <ion-list>
        <ion-card>
-        <ion-card-header>
-          Line Chart
-        </ion-card-header>
         <ion-card-content>
           <canvas #lineCanvas></canvas>
         </ion-card-content>
@@ -44,13 +41,14 @@
           <h1>{{data.nilai}}</h1>
         </div>
       </ion-item>
+      <h2>Nilai Rata rata: <span>{{rata}}</span></h2>
     </ion-list>      
   </ion-slide>
 
   <ion-slide>
    <ion-list >
      <ion-item *ngFor= "let data of key">
-      <h3>{{dataabsensi[data].matpel}}</h3>
+      <h2>{{dataabsensi[data].nama}}</h2>
       <p>Tanggal: <span>{{dataabsensi[data].created_at |date: "yyyy/MM/dd"}}</span></p>
       <p>Pukul: <span>{{dataabsensi[data].created_at |date: "shortTime"}}</span></p>
       <ion-note item-right [ngStyle]="{'background-color': dataabsensi[data].keterangan === 'hadir' ? 'green' : dataabsensi[data].keterangan === 'sakit' ? 'orange': dataabsensi[data].keterangan === 'izin' ? 'blue': 'red'}">

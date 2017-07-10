@@ -28,6 +28,9 @@ import 'rxjs/add/operator/toPromise';
  	urlabsensi ="http://pantausiswa.xyz/api/ambilsiswa/absensi";
  	dataabsensi :any;
  	key:any;
+ 	total=0;
+ 	rata=0;
+
 
 
  	datatugas:Array<{matpel:string, guru: string, materi:string,keterangan:string, deadline:string}>;
@@ -53,7 +56,7 @@ import 'rxjs/add/operator/toPromise';
  		{kategori:'Tugas', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', nilai:90,waktu:'09.00'},
  		{kategori:'Ulangan Harian', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Tercipta oleh waktu', nilai:40,waktu:'09.00'}
  		]
- 		this.getdataabsensi();
+ 		//this.getdataabsensi();
  	}
 
 
@@ -66,11 +69,13 @@ import 'rxjs/add/operator/toPromise';
 
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad Notifikasi');
-
  		for(let i =0; i<this.datanilai.length;i++){
+ 			this.total+=this.datanilai[i].nilai;
  			this.nilaiku.push(this.datanilai[i].nilai);
- 			console.log(this.nilaiku);
+ 			//console.log(this.nilaiku);
  		}
+ 		this.rata = this.total/this.datanilai.length;
+ 		console.log(this.rata);
 
  		this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
@@ -109,20 +114,20 @@ import 'rxjs/add/operator/toPromise';
 
 
 
- 	getdataabsensi(){
- 		this.storage.get('token').then(token=>{
- 			this.token=token;
- 			let header = new Headers();
- 			header.append('Content-Type', 'application/json');
- 			header.append('Accept','Application/json');
- 			header.append('Authorization', 'Bearer '+ this.token);
- 			this.http.get(this.urlabsensi,{headers:header}).map(res=>res.json()).subscribe(datas=>{
- 				this.dataabsensi = datas;
- 				this.key = Object.keys(this.dataabsensi);
- 				console.log(this.key);
- 			})
- 		})
- 	}
+ 	// getdataabsensi(){
+ 	// 	this.storage.get('token').then(token=>{
+ 	// 		this.token=token;
+ 	// 		let header = new Headers();
+ 	// 		header.append('Content-Type', 'application/json');
+ 	// 		header.append('Accept','Application/json');
+ 	// 		header.append('Authorization', 'Bearer '+ this.token);
+ 	// 		this.http.get(this.urlabsensi,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 	// 			this.dataabsensi = datas.Matematika;
+ 	// 			this.key = Object.keys(this.dataabsensi);
+ 	// 			console.log(this.key);
+ 	// 		})
+ 	// 	})
+ 	// }
 
 
 

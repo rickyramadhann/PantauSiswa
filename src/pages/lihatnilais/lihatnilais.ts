@@ -1,38 +1,52 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { NavController,App,MenuController,NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 /**
  * Generated class for the Lihatnilais page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
-@Component({
-  selector: 'page-lihatnilais',
-  templateUrl: 'lihatnilais.html',
-})
-export class Lihatnilais {
-  data:Array<{kategori:string, matpel:string, guru: string, materi:string, nilai:string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+ @Component({
+ 	selector: 'page-lihatnilais',
+ 	templateUrl: 'lihatnilais.html',
+ })
+ export class Lihatnilais {
+ 	token:any;
+ 	url ="http://pantausiswa.xyz/api/ambilsiswa/nilaisikap";
+ 	datanilais :any;
+ 	key:any;
+ 	namamatpel:any;
+ 	fotoguru:any;
+ 	namaguru:any;
+ 	constructor(public navCtrl: NavController, public navParams: NavParams, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
 
-  	this.data=[
-			{kategori:'Tanggung jawab', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', 
-			nilai:'Dipanggil untuk membersihkan meja dan alat bahan yang sudah dipakai.Dilakukan pembinaan.'},
-			{kategori:'Jujur', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan Kuadrat', 
-			nilai:'Diberi apresiasi/ pujian atas kejujurannya. Diingatkan agar lain kali lebih berhati-hati'},
-			{kategori:'Gotong Royong', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'vektor', 
-			nilai:'Diberi apresiasi/ pujian atas kejujurannya. Diingatkan agar lain kali lebih berhati-hati'},
-			{kategori:'Percaya Diri', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Aljabar', 
-			nilai:'Diberi apresiasi/ pujian atas kejujurannya. Diingatkan agar lain kali lebih berhati-hati'},
-			{kategori:'Disiplin', matpel:'Matematika', guru: 'Drs. Soesanti', materi:'Persamaan antara kau dan aku', 
-			nilai:'Diberi apresiasi/ pujian atas kejujurannya. Diingatkan agar lain kali lebih berhati-hati'},
-			
-		]
-  }
+ 		this.namamatpel = navParams.get("nama");
+ 		this.fotoguru = navParams.get("foto");
+ 		this.namaguru = navParams.get("name");
+ 		console.log(this.namaguru);
+ 		this.loadNilais();
+ 	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Lihatnilais');
-  }
+ 	loadNilais(){
+ 		this.storage.get('token').then(token=>{
+ 			this.token=token;
+ 			let header = new Headers();
+ 			header.append('Content-Type', 'application/json');
+ 			header.append('Accept','Application/json');
+ 			header.append('Authorization', 'Bearer '+ this.token);
+ 			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 				this.datanilais = datas[this.namamatpel];
 
-}
+
+ 			})
+ 		})
+ 	}
+
+ 	ionViewDidLoad() {
+ 		console.log('ionViewDidLoad Lihatnilais');
+ 	}
+
+ }

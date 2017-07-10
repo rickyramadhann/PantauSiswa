@@ -19,10 +19,9 @@ import 'rxjs/add/operator/toPromise';
  export class Matpel {
 
    token:any;
-   url ="http://pantausiswa.xyz/api/ambilsiswa/datajadwal";
-   datamatpel:any[]=[];
-   key:any;
-   namamatpel:any[]=[];
+   url ="http://pantausiswa.xyz/api/ambilsiswa/matpel";
+   datamatpel:any;
+   kunci:any[]=[];
    constructor(public navCtrl: NavController, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
      this.loadMatpel();
    }
@@ -38,25 +37,34 @@ import 'rxjs/add/operator/toPromise';
        header.append('Accept','Application/json');
        header.append('Authorization', 'Bearer '+ this.token);
        this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
-         this.datamatpel = datas.matpel;
-         this.key = Object.keys(this.datamatpel);
-         console.log(this.key);
+         this.datamatpel = datas;
+         
+         // for(let i in this.datamatpel){
+         //   console.log(this.datamatpel[i].nama);
+         // }
+         // this.kunci = Object.keys(this.datamatpel);
 
-         for(let i =0; i<this.datamatpel.length;i++){
-           this.namamatpel.push(this.datamatpel[i].nama);
-           console.log(this.namamatpel);
-         }
-         this.storage.set("matpel", this.namamatpel);
-         console.log("data disimpan");
-
-        
+         
+         // for(let i in this.datamatpel){
+         //   //console.log(this.datamatpel[i]);
+         //   for(let j in this.datamatpel[i]){
+         //     console.log(this.datamatpel[i][j].materi);
+         //     console.log(this.datamatpel[i][j].keterangan);
+         //   }
+         // }    
        })
      })
    }
 
 
-   keisimapel(){
-     this.app.getRootNav().push(Isimapel);
+   
+
+
+
+
+   keisimapel(data){
+     console.log(data);
+     this.app.getRootNav().push(Isimapel,data);
 
    }
 
@@ -68,10 +76,6 @@ import 'rxjs/add/operator/toPromise';
 
    ionViewDidEnter(){
      this.menu.swipeEnable(true,'menu1');
-   }
-
-   filter(){
-
    }
 
  }

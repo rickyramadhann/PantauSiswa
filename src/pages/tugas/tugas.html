@@ -11,15 +11,14 @@
     <ion-list>
         <ion-list-header>
             <ion-avatar item-left>
-                <img src="img/guru.jpg">
+                <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
             </ion-avatar>
-            <p>Guru: <span>Drs. Hasiolan</span></p>
+            <p>Guru: <span>{{namaguru}}</span></p>
         </ion-list-header>
-        <ion-item *ngFor= "let data of key">
-            <p>{{datatugas[data].nama}}</p>
-            <p>Materi: <span>{{datatugas[data].materi}}</span></p>
-            <p>Keterangan: <span>{{datatugas[data].keterangan}}</span></p>
-            <p>Deadline: <span>{{datatugas[data].tanggal}}</span><span>{{datatugas[data].jam}}</span></p>
+        <ion-item *ngFor= "let data of datatugas">
+            <p>Materi: <span>{{data.materi}}</span></p>
+            <p>Keterangan: <span>{{data.keterangan}}</span></p>
+            <p>Deadline: <span>{{data.tanggal}} </span><span>{{data.jam}}</span></p>
             
         </ion-item>
     </ion-list>
