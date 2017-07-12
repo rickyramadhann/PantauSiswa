@@ -39,19 +39,7 @@ import 'rxjs/add/operator/toPromise';
        this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
          this.datamatpel = datas;
          
-         // for(let i in this.datamatpel){
-         //   console.log(this.datamatpel[i].nama);
-         // }
-         // this.kunci = Object.keys(this.datamatpel);
-
-         
-         // for(let i in this.datamatpel){
-         //   //console.log(this.datamatpel[i]);
-         //   for(let j in this.datamatpel[i]){
-         //     console.log(this.datamatpel[i][j].materi);
-         //     console.log(this.datamatpel[i][j].keterangan);
-         //   }
-         // }    
+       
        })
      })
    }
@@ -64,18 +52,12 @@ import 'rxjs/add/operator/toPromise';
 
    keisimapel(data){
      console.log(data);
-     this.app.getRootNav().push(Isimapel,data);
-
-   }
-
-
-   kenotifikasi(){
-     this.app.getRootNav().push(Notifikasi);
-
-   }
+     this.navCtrl.push(Isimapel,data);
+  }
+   
 
    ionViewDidEnter(){
-     this.menu.swipeEnable(true,'menu1');
+     this.menu.swipeEnable(false,'menu1');
    }
 
  }

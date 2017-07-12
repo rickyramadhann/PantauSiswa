@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -22,7 +22,7 @@ import 'rxjs/add/operator/toPromise';
    url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
    url2:any='http://pantausiswa.xyz/api/ambilsiswa/datakelas';
    key=[];
-   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:Http) {
+   constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:Http,public menu:MenuController) {
      this.check();
    }
 
@@ -31,6 +31,9 @@ import 'rxjs/add/operator/toPromise';
 
    ionViewDidLoad() {
      console.log('ionViewDidLoad Profil');
+   }
+   ionViewDidEnter(){
+     this.menu.swipeEnable(false,'menu1');
    }
 
    check(){

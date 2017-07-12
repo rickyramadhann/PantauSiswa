@@ -8,19 +8,22 @@
 
 
 <ion-content>
-    <ion-list>
-        <ion-list-header>
-            <ion-avatar item-left>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start>
                 <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
             </ion-avatar>
-            <p>Guru: <span>{{namaguru}}</span></p>
-        </ion-list-header>
-        <ion-item *ngFor= "let data of datanilais">
-            <h2>{{data.kategori}}</h2>
-            <p>{{data.nilai}}</p>
-            <p>{{data.keterangan}}
+            <h2>{{namamatpel}}</h2>
+            <p>{{namaguru}}</p>
+        </ion-item>
+    </ion-card>
+    <ion-list>
+        <ion-card  *ngFor= "let data of datanilais">
+            <ion-item>
+                <h2>{{data.kategori}}</h2>
+                <p>{{data.nilai}}</p>
+                <p>{{data.keterangan}}
             </ion-item>
-        </ion-list>
-
-
-    </ion-content>
+        </ion-card>
+    </ion-list>
+</ion-content>

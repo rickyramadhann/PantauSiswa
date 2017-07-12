@@ -27,32 +27,28 @@
     (ionSlideWillChange)="changeWillSlide($event)">
     <ion-slide>
       <ion-list>
-       <ion-card>
-        <ion-card-content>
-          <canvas #lineCanvas></canvas>
-        </ion-card-content>
-      </ion-card>
-      <ion-item *ngFor= "let data of datanilai">
-        <h2>{{data.kategori}}</h2>
-        <p>{{data.matpel}}</p>
-        <p>Materi: <span>{{data.materi}}</span></p>
-        <p>waktu: <span>{{data.waktu}}</span></p>
+      <ion-item *ngFor= "let data of notifnilaip">
+        <ion-avatar item-start>
+          <img src="http://pantausiswa.xyz/uploads/{{data.photoguru}}">
+        </ion-avatar>
+        <h2>{{data.namamatpel}}</h2>
+        <p>Kategori: {{data.kategori}}</p>
+        <p>waktu: <span>{{data.created_at |date:"shortTime"}}</span></p>
         <div class="nilai" item-right>
           <h1>{{data.nilai}}</h1>
         </div>
       </ion-item>
-      <h2>Nilai Rata rata: <span>{{rata}}</span></h2>
     </ion-list>      
   </ion-slide>
 
   <ion-slide>
    <ion-list >
-     <ion-item *ngFor= "let data of key">
-      <h2>{{dataabsensi[data].nama}}</h2>
-      <p>Tanggal: <span>{{dataabsensi[data].created_at |date: "yyyy/MM/dd"}}</span></p>
-      <p>Pukul: <span>{{dataabsensi[data].created_at |date: "shortTime"}}</span></p>
-      <ion-note item-right [ngStyle]="{'background-color': dataabsensi[data].keterangan === 'hadir' ? 'green' : dataabsensi[data].keterangan === 'sakit' ? 'orange': dataabsensi[data].keterangan === 'izin' ? 'blue': 'red'}">
-        {{dataabsensi[data].keterangan}}
+     <ion-item *ngFor= "let data of notifabsensi">
+      <h2>{{data.nama}}</h2>
+      <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
+      <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
+      <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? 'green' : data.keterangan === 'sakit' ? 'orange': data.keterangan === 'izin' ? 'blue': 'red'}">
+        {{data.keterangan}}
       </ion-note>
     </ion-item>
   </ion-list>
@@ -60,11 +56,11 @@
 
 <ion-slide>
   <ion-list> 
-    <ion-item *ngFor= "let data of datatugas">
-      <p>{{data.matpel}}</p>
+    <ion-item *ngFor= "let data of notiftugas">
+      <h2>{{data.nama}}</h2>
       <p>Materi: <span>{{data.materi}}</span></p>
       <p>Keterangan: <span>{{data.keterangan}}</span></p>
-      <p>Deadline: <span>{{data.deadline}}</span></p>
+      <p>Deadline: <span>{{data.tanggal}}</span> <span>{{data.jam}}</span></p>
     </ion-item>
   </ion-list>
 </ion-slide>

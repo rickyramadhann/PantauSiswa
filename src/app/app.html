@@ -3,6 +3,7 @@
 		<ion-toolbar color="primary">
 			<ion-title>Menu</ion-title>
 		</ion-toolbar>
+
 	</ion-header>
 
 	<ion-content>
@@ -13,8 +14,17 @@
 			<p>{{datasiswa.name}}</p>
 		</ion-item>
 		<ion-list>
-			<button menuClose ion-item *ngFor= "let p of pages" (click)="openPage(p)">
-				{{p.title}}
+			<button menuClose ion-item (click)="keprofil()">
+				Profil
+			</button>
+			<button menuClose ion-item (click)="kematpel()">
+				Mata Pelajaran
+			</button>
+			<button menuClose ion-item (click)="kejadwal()">
+				Jadwal Mata Pelajaran
+			</button>
+			<button menuClose ion-item (click)="keubahpassword()">
+				Ubah Password
 			</button>
 			<button menuClose ion-item (click)="logout()">
 				Logout

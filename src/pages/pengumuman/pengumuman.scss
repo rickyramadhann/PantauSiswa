@@ -7,4 +7,15 @@ page-pengumuman {
 		color:#fff !important;
 		padding: 10px;
 	}
+
+	#notifications-badge {
+            background-color: #f53d3d;
+            position: absolute;
+            top: -4px;
+            right: -5px;
+            border-radius: 20%;
+        }
+
+    .judul{text-align: center;
+    }
 }

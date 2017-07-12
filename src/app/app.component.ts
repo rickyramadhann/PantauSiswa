@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Platform, Nav} from 'ionic-angular';
+import { Platform, Nav, MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -10,6 +10,7 @@ import { Profil } from '../pages/profil/profil';
 import { Login } from '../pages/login/login';
 import { Matpel } from '../pages/matpel/matpel';
 import { Jadwal } from '../pages/jadwal/jadwal';
+import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -25,9 +26,8 @@ export class MyApp {
     url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
     key=[];
 
-    pages:Array<{title: string, component:any}>;
     constructor(public platform: Platform, private statusBar: StatusBar, 
-        public splashScreen: SplashScreen, public storage:Storage, public http:Http) {
+        public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
         this.platform.ready().then(() => {
@@ -39,13 +39,7 @@ export class MyApp {
         });
 
 
-        this.pages=[
-        {title: 'Beranda', component:TabsPage},
-        {title:'Profil', component:Profil},
-        {title:'Mata Pelajaran', component:Matpel},
-        {title:'Jadwal Mata Pelajaran', component:Jadwal}
-        ];
-
+    
     }
 
     
@@ -71,9 +65,19 @@ export class MyApp {
         })
     }
 
-    openPage(page){
+    keprofil(){
+        this.nav.push(Profil);
+    }
+    kematpel(){
+        this.nav.push(Matpel);
+    }
 
-        this.nav.setRoot(page.component);
+    kejadwal(){
+        this.nav.push(Jadwal);
+    }
+
+    keubahpassword(){
+        this.nav.push(Ubahpassword);
     }
 
     logout()

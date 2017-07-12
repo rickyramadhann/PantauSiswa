@@ -8,23 +8,33 @@
 
 
 <ion-content>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start>
+              <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
+          </ion-avatar>
+          <h2>{{namamatpel}}</h2>
+          <p>{{namaguru}}</p>
+      </ion-item>
+    </ion-card>
     <ion-list>
-        <ion-list-header>
-            <ion-avatar item-left>
-                <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
-            </ion-avatar>
-            <p>Guru: <span>{{namaguru}}</span></p>
-        </ion-list-header>
-
-
-    <ion-item *ngFor= "let data of datanilaip">
-        <h2>{{data.namamatpel}}</h2>
-        <p>{{data.kategori}}</p>
-        <div class="nilai" item-right>
-            <h1 [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}">{{data.nilai}}</h1>
-        </div>
-    </ion-item>
-</ion-list>
-
-
+        <ion-card>
+            <ion-card-content>
+                <canvas #lineCanvas></canvas>
+            </ion-card-content>
+        </ion-card>
+        <ion-card *ngFor= "let data of datanilaip">
+            <ion-item>
+                <h2>{{data.namamatpel}}</h2>
+                <p>Kategori : {{data.kategori}}</p>
+                <p>Tanggal : {{data.tanggal}}</p>
+                <p>Jam : {{data.jam}}</p>
+                <div class="nilai" item-right>
+                    <h1>{{data.nilai}}</h1>
+                </div>
+            </ion-item>
+        </ion-card>
+    </ion-list>
 </ion-content>
+
+<!-- [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}" -->

@@ -46,7 +46,7 @@ export class Jadwal {
 
  
   ionViewDidEnter(){
-  this.menu.swipeEnable(true,'menu1');
+  this.menu.swipeEnable(false,'menu1');
   }
 
 

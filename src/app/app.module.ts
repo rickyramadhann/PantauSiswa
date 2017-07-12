@@ -34,6 +34,8 @@ import { Notifikasi } from '../pages/notifikasi/notifikasi';
 import { Bacaberita } from '../pages/bacaberita/bacaberita';
 import { Tulispesan } from '../pages/tulispesan/tulispesan';
 import { Bacapengumuman } from '../pages/bacapengumuman/bacapengumuman';
+import { Bacacatatan } from '../pages/bacacatatan/bacacatatan';
+import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -65,7 +67,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     Moment,
     TruncatePipe,
-    Bacapengumuman
+    Bacapengumuman,
+    Bacacatatan,
+    Ubahpassword,
   ],
   imports: [
     BrowserModule,
@@ -94,8 +98,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Bacaberita,
     Tulispesan,
     TabsPage,
-    Bacapengumuman
-    
+    Bacapengumuman,
+    Bacacatatan,
+    Ubahpassword,
   ],
   providers: [
     StatusBar,

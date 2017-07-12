@@ -8,19 +8,24 @@
 
 
 <ion-content>
-  <ion-list >
-    <ion-list-header>
-      <ion-avatar item-left>
-        <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
-      </ion-avatar>
-      <p>Guru: <span>{{namaguru}}</span></p>
-    </ion-list-header>
-    <ion-item *ngFor= "let data of dataabsensi">
+  <ion-card>
+   <ion-item>
+    <ion-avatar item-start>
+      <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
+    </ion-avatar>
+    <h2>{{namamatpel}}</h2>
+    <p>{{namaguru}}</p>
+  </ion-item>
+</ion-card>
+<ion-list >
+  <ion-card *ngFor= "let data of dataabsensi">
+    <ion-item>
       <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
       <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
       <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? 'green' : data.keterangan === 'sakit' ? 'orange': data.keterangan === 'izin' ? 'blue': 'red'}">
         {{data.keterangan}}
       </ion-note>
     </ion-item>
-  </ion-list>
+  </ion-card>
+</ion-list>
 </ion-content>
