@@ -17,10 +17,22 @@ export class BeritaPage {
   url:any='http://pantausiswa.xyz/api/berita';
   page:number=2;
   key=[];
+  splash = true;
+  tabBar:any;
   constructor(public navCtrl: NavController,public app:App,
     public menu:MenuController, public http:Http, public alert:AlertController,
     public loader:LoadingController, public storage: Storage) {
+    this.tabBar = document.querySelector('.tabbar');
+  }
 
+
+  ionViewDidLoad(){
+    this.tabBar.style.display ="none";
+    setTimeout(()=>{
+      this.splash = false;
+      this.tabBar.style.display ="flex";
+    
+    },4000);
   }
 
 
