@@ -9,19 +9,21 @@
 
 <ion-content>
     <ion-list>
-        <ion-list-header>
-            <ion-avatar item-left>
-                <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
-            </ion-avatar>
-            <p>Guru: <span>{{namaguru}}</span></p>
-        </ion-list-header>
-        <ion-item *ngFor= "let data of datatugas">
-            <p>Materi: <span>{{data.materi}}</span></p>
-            <p>Keterangan: <span>{{data.keterangan}}</span></p>
-            <p>Deadline: <span>{{data.tanggal}} </span><span>{{data.jam}}</span></p>
-            
-        </ion-item>
+        <ion-card>
+            <ion-item>
+                <ion-avatar item-start>
+                  <img src="http://pantausiswa.xyz/uploads/{{fotoguru}}">
+              </ion-avatar>
+              <h2>{{namamatpel}}</h2>
+              <p>{{namaguru}}</p>
+          </ion-item>
+        </ion-card>
+        <ion-card  *ngFor= "let data of datatugas">
+            <ion-item>
+                <p>Materi: <span>{{data.materi}}</span></p>
+                <p>Keterangan: <span>{{data.keterangan}}</span></p>
+                <p>Deadline: <span>{{data.tanggal}} </span><span>{{data.jam}}</span></p> 
+            </ion-item>    
+        </ion-card>
     </ion-list>
-
-
 </ion-content>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,App,MenuController } from 'ionic-angular';
 import { Isimapel } from '../isimapel/isimapel';
-import { Notifikasi } from '../notifikasi/notifikasi';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';

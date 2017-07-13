@@ -1,6 +1,5 @@
 import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams,MenuController,Slides, Platform, LoadingController} from 'ionic-angular';
-import { Chart } from 'chart.js';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';

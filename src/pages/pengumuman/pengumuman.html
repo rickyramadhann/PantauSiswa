@@ -13,16 +13,17 @@
 
 <ion-content>
 	<ion-list>
-        <ion-item *ngFor="let data of key" (click)="kebacapengumuman(datapengumuman[data])">
-            <ion-avatar item-start>
-                <img src="img/megaphone.png">
-            </ion-avatar>
-            <h2>{{datapengumuman[data].title}}</h2>
-            <p>{{datapengumuman[data].content}}</p>
-            <ion-note item-right>
-                {{datapengumuman[data].created_at |date:"shortTime"}}
-            </ion-note>
-
-        </ion-item>
+        <ion-card *ngFor="let data of key" (click)="kebacapengumuman(datapengumuman[data])">
+            <ion-item >
+                <ion-avatar item-start>
+                    <img src="img/megaphone.png">
+                </ion-avatar>
+                <h2>{{datapengumuman[data].title}}</h2>
+                <p>{{datapengumuman[data].content}}</p>
+                <ion-note item-right>
+                    {{datapengumuman[data].created_at |date:"shortTime"}}
+                </ion-note>
+            </ion-item>
+        </ion-card>
     </ion-list>
 </ion-content>

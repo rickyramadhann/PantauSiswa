@@ -6,7 +6,7 @@
 		<ion-title>Pantau Siswa</ion-title>
 		<ion-buttons right>
 			<button ion-button icon-only (click)="kenotifikasi()"><ion-icon name="notifications">
-        <ion-badge id="notifications-badge" color="tombol">5</ion-badge></ion-icon></button>
+        		<ion-badge id="notifications-badge" color="tombol">5</ion-badge></ion-icon></button>
 		</ion-buttons>
 	</ion-navbar>
 </ion-header>
@@ -27,8 +27,8 @@
 				{{ data.title }}
 			</ion-card-title>
 			<p>{{data.created_at | moment}}</p>
-			<p>{{data.content | truncate : 100 }}</p>
-			<button ion-button padding block (click)="kebacaberita(data)" color="tombol">Baca Berita</button>
+			<p class="content-berita">{{data.content | truncate : 100 }}</p>
+			<button ion-button padding outline block (click)="kebacaberita(data)" color="atas">Baca Berita</button>
 		</ion-card-content>
 	</ion-card>
 

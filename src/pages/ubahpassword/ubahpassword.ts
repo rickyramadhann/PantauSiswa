@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,MenuController, LoadingController, AlertController} from 'ionic-angular';
-import {TabsPage} from '../tabs/tabs';
 import {Http,Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';

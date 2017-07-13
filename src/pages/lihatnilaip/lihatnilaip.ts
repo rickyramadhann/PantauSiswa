@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Chart } from 'chart.js';
+import * as moment from 'moment';
 
 
 /**
@@ -47,8 +48,12 @@ import { Chart } from 'chart.js';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datanilaip = datas[this.namamatpel];
+
  				let x =0;
  				for(let i =this.datanilaip.length-1; i>=0;i--){
+ 					
+ 					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).format('l');
+ 					//this.datanilaip[i].jam=moment(this.datanilaip[i].jam).format('h:mm:ss');
  					if(this.datanilaip[i].kategori == "uts" || this.datanilaip[i].kategori == "uas"){
 
  						console.log("gak masuk chart")

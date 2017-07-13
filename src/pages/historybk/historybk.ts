@@ -5,6 +5,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Notifikasi } from '../notifikasi/notifikasi';
 import { Bacacatatan } from '../bacacatatan/bacacatatan';
+import * as moment from 'moment';
 
 /**
  * Generated class for the Historybk page.
@@ -23,7 +24,8 @@ import { Bacacatatan } from '../bacacatatan/bacacatatan';
  	url:any='http://pantausiswa.xyz/api/ambilsiswa/catatanwali';
  	page:number=1;
  	key=[];
- 	
+ 	nama:any;
+ 	photo:any;
 
  	constructor(public navCtrl: NavController,public app:App,  public navParams: NavParams, public menu:MenuController, public storage:Storage,public http:Http) {
  		this.getcatatan();
@@ -39,8 +41,14 @@ import { Bacacatatan } from '../bacacatatan/bacacatatan';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datacatatan = datas;
- 				
- 			})
+ 				this.nama  = this.datacatatan[0].name;
+ 				this.photo = this.datacatatan[0].photo;
+
+ 				for(let i =this.datacatatan.length-1; i>=0;i--){
+ 					
+ 					this.datacatatan[i].tanggal=moment(this.datacatatan[i].tanggal).format('l');
+ 				}
+  			})
  		})
  	}
 
