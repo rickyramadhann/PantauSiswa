@@ -46,6 +46,7 @@ import 'rxjs/add/operator/toPromise';
          header.append('Authorization', 'Bearer '+ this.token);
          this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
            this.datasiswa = datas.data;
+           
          });
 
          this.http.get(this.url2, {headers:header}).map(res=>res.json()).subscribe(datas=>{

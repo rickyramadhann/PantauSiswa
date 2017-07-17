@@ -1,5 +1,7 @@
+declare var Pusher: any;
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Component,ViewChild } from '@angular/core';
-import { Platform, Nav, MenuController} from 'ionic-angular';
+import { Platform, Nav, MenuController,App} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -12,9 +14,9 @@ import { Matpel } from '../pages/matpel/matpel';
 import { Jadwal } from '../pages/jadwal/jadwal';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 import { TabsPage } from '../pages/tabs/tabs';
-import { PusherProvider } from '../providers/pusher-provider';
+//import { PusherProvider } from '../providers/pusher-provider';
 import { BackgroundMode } from '@ionic-native/background-mode';
-//import { LocalNotifications } from '@ionic-native/local-notifications'
+import { AppMinimize } from '@ionic-native/app-minimize';
 
 
 
@@ -30,9 +32,13 @@ export class MyApp {
     datasiswa = [];
     url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
     key=[];
+    private pusher: any;
+    status:any;
+    idsiswa:any;
 
-    constructor(public backgroundmode: BackgroundMode, public platform: Platform, private statusBar: StatusBar, 
-        public splashScreen: SplashScreen, private myService: PusherProvider, public storage:Storage, public http:Http,  public menu:MenuController) {
+
+    constructor(public minimize:AppMinimize, public app:App, public backgroundmode: BackgroundMode, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
+        public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
         this.platform.ready().then(() => {
@@ -44,28 +50,65 @@ export class MyApp {
                 silent:true,
                 resume:true
             });
-            this.backgroundmode.overrideBackButton();
-            this.backgroundmode.enable();
-
+            this.platform.registerBackButtonAction(() => {
+                let nav = this.app.getRootNav();
+                if(nav.canGoBack()){
+                    nav.pop();
+                }
+                else{
+                    this.minimize.minimize();
+                }
+            });
+            this.backgroundmode.enable(); 
+            this.storage.remove('idsiswa');
             this.check();
-            //console.log('asdfkjaslfkasjlfkjsdlkfj')
-            // console.log(this.myService);
-            // if(this.myService){
-                //     let alert = this.alert.create({
-                    //         title: 'Ada notifikasi',
-                    //         subTitle: 'coba cek',
-                    //         buttons: ['ok']
-                    //     });
-                    //     alert.present();
-                    // }
-
+            storage.get('id_siswa').then((val) => {
+                this.idsiswa =val;
+                console.log(this.idsiswa);
+                this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+                    cluster: 'mt1',
+                    encrypted: true
                 });
+                this.pusher.logToConsole = true;
+
+                var channel = this.pusher.subscribe('siswa.absensi.'+this.idsiswa);
+                channel.bind('App\\Events\\Notifabsensi',  (data) => {
+                    console.log(data.absensi.keterangan);
+                    this.status = data.absensi.keterangan;
+                    this.local.on('click', function(){
+                        console.log('asdfasdfasd')
+                    });
+                    this.local.schedule({
+                        title:'Notifikasi Absensi Coy',
+                        text: this.status
+                    })
+
+                }); 
+
+                console.log('siswa.nilai.'+this.idsiswa);
+                var channel2 = this.pusher.subscribe('siswa.nilai.'+this.idsiswa);
+                channel2.bind('App\\Events\\Notifnilai',  (data) => {
+                    console.log(data);
+                    this.status = data.nilai.nilai;
+                    this.local.on('click', function(){console.log('asdfasdfasd')});
+                    this.local.schedule({
+                        title:'Notifikasi Nilai Coy',
+                        text: this.status
+                    })
+
+                }); 
+            });
+
+
+
+
+        });
 
 
 
     }
 
-    
+
     check(){
         this.storage.get("token").then((token)=>{
             if(token){
@@ -76,8 +119,8 @@ export class MyApp {
                 header.append('Authorization', 'Bearer '+ this.token);
                 this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
                     this.datasiswa = datas.data;
-
-
+                    
+                    this.storage.set('id_siswa', datas.data.id);
                 })
                 this.rootPage = TabsPage;
 
@@ -109,7 +152,7 @@ export class MyApp {
         this.storage.remove('email');
         this.nav.setRoot(Login);
     }
-    
 
-    
+
+
 }

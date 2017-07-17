@@ -9,9 +9,10 @@ import { TruncatePipe } from 'angular2-truncate';
 
 //providers
 import { Loginservice }from '../providers/loginservice';
-import { PusherProvider }from '../providers/pusher-provider';
+//import { PusherProvider }from '../providers/pusher-provider';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { AppMinimize } from '@ionic-native/app-minimize';
+
 //pipes-
 import { Moment } from '../pipes/moment';
 
@@ -35,13 +36,13 @@ import { Lihatnilaik } from '../pages/lihatnilaik/lihatnilaik';
 import { Lihatnilais } from '../pages/lihatnilais/lihatnilais';
 import { Tugas } from '../pages/tugas/tugas';
 import { Lihatabsensi } from '../pages/lihatabsensi/lihatabsensi';
-import { Notifikasi } from '../pages/notifikasi/notifikasi';
 import { Bacaberita } from '../pages/bacaberita/bacaberita';
 import { Tulispesan } from '../pages/tulispesan/tulispesan';
 import { Bacapengumuman } from '../pages/bacapengumuman/bacapengumuman';
 import { Bacacatatan } from '../pages/bacacatatan/bacacatatan';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 
+import { Notifikasi } from '../pages/notifikasi/notifikasi';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -110,7 +111,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,LocalNotifications,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,PusherProvider,BackgroundMode,AppMinimize
+    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize
   ]
 })
 export class AppModule {}

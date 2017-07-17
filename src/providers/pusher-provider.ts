@@ -17,25 +17,27 @@ import { AlertController} from 'ionic-angular';
     status:any;
 
 
-  	constructor(public http: Http, public alert:AlertController, public local:LocalNotifications) {
-  		console.log('Hello PusherProvider Provider');
-  		this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-  			cluster: 'mt1',
-  			encrypted: true
-  		});
-  		this.pusher.logToConsole = true;
+    constructor(public http: Http, public alert:AlertController, public local:LocalNotifications) {
+      console.log('Hello PusherProvider Provider');
+      this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+        cluster: 'mt1',
+        encrypted: true
+      });
+      this.pusher.logToConsole = true;
 
-  		var channel = this.pusher.subscribe('siswa.absensi.1');
-  		channel.bind('App\\Events\\Notifabsensi',  (data) => {
-  			console.log(data.absensi.keterangan);
+      var channel = this.pusher.subscribe('siswa.absensi.1');
+      channel.bind('App\\Events\\Notifabsensi',  (data) => {
+        console.log(data.absensi.keterangan);
         this.status = data.absensi.keterangan;
-  			this.local.on('click', function(){console.log('asdfasdfasd')});
-  			this.local.schedule({
-  				title:'Notifikasi Absensi Coy',
-  				text: this.status
-  			})
+        this.local.on('click', function(){
+          console.log('asdfasdfasd')
+        });
+        this.local.schedule({
+          title:'Notifikasi Absensi Coy',
+          text: this.status
+        })
 
-  		}); 
+      }); 
 
       var channel2 = this.pusher.subscribe('siswa.nilai.1');
       channel2.bind('App\\Events\\Notifnilai',  (data) => {
@@ -49,6 +51,6 @@ import { AlertController} from 'ionic-angular';
 
       }); 
 
-  	}
+    }
 
   }
