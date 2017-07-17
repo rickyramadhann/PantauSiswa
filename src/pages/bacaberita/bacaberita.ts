@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
+import * as moment from 'moment';
 
 /**
  * Generated class for the Bacaberita page.
@@ -23,6 +24,8 @@ export class Bacaberita {
     this.content = navParams.get('content');
     this.image = navParams.get('image');
     this.created_at = navParams.get('created_at');
+
+    this.created_at = moment(this.created_at).locale('id').format('LLLL');
   }
 
   ionViewDidLoad() {

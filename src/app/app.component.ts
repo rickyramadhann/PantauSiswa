@@ -12,6 +12,11 @@ import { Matpel } from '../pages/matpel/matpel';
 import { Jadwal } from '../pages/jadwal/jadwal';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 import { TabsPage } from '../pages/tabs/tabs';
+import { PusherProvider } from '../providers/pusher-provider';
+import { BackgroundMode } from '@ionic-native/background-mode';
+//import { LocalNotifications } from '@ionic-native/local-notifications'
+
+
 
 @Component({
     templateUrl: 'app.html'
@@ -26,23 +31,35 @@ export class MyApp {
     url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
     key=[];
 
-    constructor(public platform: Platform, private statusBar: StatusBar, 
-        public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
+    constructor(public backgroundmode: BackgroundMode, public platform: Platform, private statusBar: StatusBar, 
+        public splashScreen: SplashScreen, private myService: PusherProvider, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
         this.platform.ready().then(() => {
             this.statusBar.overlaysWebView(true);
             this.statusBar.backgroundColorByHexString('#648aaf');
             this.splashScreen.hide();
-            this.check();
-            
-        });
+            this.backgroundmode.setDefaults({
+                hidden:true,
+                silent:true,
+                resume:true
+            });
+            this.backgroundmode.overrideBackButton();
+            this.backgroundmode.enable();
 
-        if (this.splashScreen) {
-            setTimeout(() => {
-                this.splashScreen.hide();
-            }, 100);
-        }
+            this.check();
+            //console.log('asdfkjaslfkasjlfkjsdlkfj')
+            // console.log(this.myService);
+            // if(this.myService){
+                //     let alert = this.alert.create({
+                    //         title: 'Ada notifikasi',
+                    //         subTitle: 'coba cek',
+                    //         buttons: ['ok']
+                    //     });
+                    //     alert.present();
+                    // }
+
+                });
 
 
 

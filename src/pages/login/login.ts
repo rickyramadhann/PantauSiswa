@@ -58,7 +58,7 @@ export class Login {
            console.log(response.json().token);
            //this.storage.set('email', this.user.email).then(()=> {console.log('Stored in localStorage '+ this.user.email)});
            console.log('email dari login ='+this.user.email);
-
+           
 
            this.navCtrl.setRoot(TabsPage);
            loader.dismiss();

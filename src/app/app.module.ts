@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
@@ -9,8 +9,13 @@ import { TruncatePipe } from 'angular2-truncate';
 
 //providers
 import { Loginservice }from '../providers/loginservice';
+import { PusherProvider }from '../providers/pusher-provider';
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { AppMinimize } from '@ionic-native/app-minimize';
 //pipes-
 import { Moment } from '../pipes/moment';
+
+import { LocalNotifications } from '@ionic-native/local-notifications'
 
 //tabs
 //import { PesanPage } from '../pages/pesan/pesan';
@@ -104,8 +109,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice
+    SplashScreen,LocalNotifications,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,PusherProvider,BackgroundMode,AppMinimize
   ]
 })
 export class AppModule {}

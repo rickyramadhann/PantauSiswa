@@ -5,7 +5,6 @@ import { Bacaberita } from '../bacaberita/bacaberita';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Storage } from '@ionic/storage';
-
 @Component({
   selector: 'page-berita',
   templateUrl: 'berita.html'
@@ -22,17 +21,10 @@ export class BeritaPage {
   constructor(public navCtrl: NavController,public app:App,
     public menu:MenuController, public http:Http, public alert:AlertController,
     public loader:LoadingController, public storage: Storage) {
-    this.tabBar = document.querySelector('.tabbar');
   }
 
 
   ionViewDidLoad(){
-    this.tabBar.style.display ="none";
-    setTimeout(()=>{
-      this.splash = false;
-      this.tabBar.style.display ="flex";
-    
-    },4000);
   }
 
 
