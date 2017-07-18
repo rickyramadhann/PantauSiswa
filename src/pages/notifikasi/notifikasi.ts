@@ -37,7 +37,7 @@ import 'rxjs/add/operator/toPromise';
  	
  	constructor(public navCtrl: NavController,public http:Http, public navParams: NavParams,
  		public menu:MenuController, public storage:Storage,public platform:Platform, public loading:LoadingController) {
- 	
+
  		this.ionViewDidLoad();
  		
  		
@@ -57,6 +57,14 @@ import 'rxjs/add/operator/toPromise';
  		this.getdatatugas();
  	}
 
+ 	doRefresh(refresher) {
+ 		console.log('Begin async operation', refresher);
+ 		this.ionViewDidLoad();
+ 		setTimeout(() => {
+ 			console.log('Async operation has ended');
+ 			refresher.complete();
+ 		}, 2000);
+ 	}
 
 
  	getdataabsensi(){

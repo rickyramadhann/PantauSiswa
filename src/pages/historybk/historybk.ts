@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController,App} from 'ionic-an
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Notifikasi } from '../notifikasi/notifikasi';
+//import { Notifikasi } from '../notifikasi/notifikasi';
 import { Bacacatatan } from '../bacacatatan/bacacatatan';
 import * as moment from 'moment';
 
@@ -48,8 +48,17 @@ import * as moment from 'moment';
  					
  					this.datacatatan[i].tanggal=moment(this.datacatatan[i].tanggal).format('l');
  				}
-  			})
+ 			})
  		})
+ 	}
+
+ 	doRefresh(refresher) {
+ 		console.log('Begin async operation', refresher);
+ 		this.getcatatan();
+ 		setTimeout(() => {
+ 			console.log('Async operation has ended');
+ 			refresher.complete();
+ 		}, 2000);
  	}
 
  	ionViewDidLoad() {
@@ -60,12 +69,12 @@ import * as moment from 'moment';
  		this.app.getRootNav().push(Bacacatatan,data);
  	}
 
- 	kenotifikasi(){
- 		this.app.getRootNav().push(Notifikasi);
+ 	// kenotifikasi(){
+ 		// 	this.app.getRootNav().push(Notifikasi);
+
+ 		// }
+ 		ionViewDidEnter(){
+ 			this.menu.swipeEnable(true,'menu1');
+ 		}
 
  	}
- 	ionViewDidEnter(){
- 		this.menu.swipeEnable(true,'menu1');
- 	}
-
- }

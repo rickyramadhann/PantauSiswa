@@ -15,9 +15,10 @@ import { Jadwal } from '../pages/jadwal/jadwal';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 import { TabsPage } from '../pages/tabs/tabs';
 //import { PusherProvider } from '../providers/pusher-provider';
-import { BackgroundMode } from '@ionic-native/background-mode';
+//import { BackgroundMode } from '@ionic-native/background-mode';
 import { AppMinimize } from '@ionic-native/app-minimize';
 
+import { Badge } from '@ionic-native/badge';
 
 
 @Component({
@@ -32,12 +33,12 @@ export class MyApp {
     datasiswa = [];
     url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
     key=[];
-    private pusher: any;
+    //private pusher: any;
     status:any;
-    idsiswa:any;
+    badge1:any;
+    ceknotif:boolean;
 
-
-    constructor(public minimize:AppMinimize, public app:App, public backgroundmode: BackgroundMode, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
+    constructor(public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
         public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
@@ -45,11 +46,11 @@ export class MyApp {
             this.statusBar.overlaysWebView(true);
             this.statusBar.backgroundColorByHexString('#648aaf');
             this.splashScreen.hide();
-            this.backgroundmode.setDefaults({
-                hidden:true,
-                silent:true,
-                resume:true
-            });
+            // this.backgroundmode.setDefaults({
+            //     hidden:true,
+            //     silent:true,
+            //     resume:true
+            // });
             this.platform.registerBackButtonAction(() => {
                 let nav = this.app.getRootNav();
                 if(nav.canGoBack()){
@@ -59,49 +60,10 @@ export class MyApp {
                     this.minimize.minimize();
                 }
             });
-            this.backgroundmode.enable(); 
-            this.storage.remove('idsiswa');
+          
+            //this.backgroundmode.enable(); 
             this.check();
-            storage.get('id_siswa').then((val) => {
-                this.idsiswa =val;
-                console.log(this.idsiswa);
-                this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                    cluster: 'mt1',
-                    encrypted: true
-                });
-                this.pusher.logToConsole = true;
-
-                var channel = this.pusher.subscribe('siswa.absensi.'+this.idsiswa);
-                channel.bind('App\\Events\\Notifabsensi',  (data) => {
-                    console.log(data.absensi.keterangan);
-                    this.status = data.absensi.keterangan;
-                    this.local.on('click', function(){
-                        console.log('asdfasdfasd')
-                    });
-                    this.local.schedule({
-                        title:'Notifikasi Absensi Coy',
-                        text: this.status
-                    })
-
-                }); 
-
-                console.log('siswa.nilai.'+this.idsiswa);
-                var channel2 = this.pusher.subscribe('siswa.nilai.'+this.idsiswa);
-                channel2.bind('App\\Events\\Notifnilai',  (data) => {
-                    console.log(data);
-                    this.status = data.nilai.nilai;
-                    this.local.on('click', function(){console.log('asdfasdfasd')});
-                    this.local.schedule({
-                        title:'Notifikasi Nilai Coy',
-                        text: this.status
-                    })
-
-                }); 
-            });
-
-
-
-
+           
         });
 
 
@@ -121,6 +83,10 @@ export class MyApp {
                     this.datasiswa = datas.data;
                     
                     this.storage.set('id_siswa', datas.data.id);
+                    this.storage.set('id_kelas', datas.data.id_kelas);
+                    this.storage.set('tujuan', datas.akses);
+                    this.storage.set('id_ortu', datas.dataortu);
+
                 })
                 this.rootPage = TabsPage;
 

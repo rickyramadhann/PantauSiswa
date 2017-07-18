@@ -17,6 +17,9 @@ import { AppMinimize } from '@ionic-native/app-minimize';
 import { Moment } from '../pipes/moment';
 
 import { LocalNotifications } from '@ionic-native/local-notifications'
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { Badge } from '@ionic-native/badge';
+
 
 //tabs
 //import { PesanPage } from '../pages/pesan/pesan';
@@ -110,8 +113,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
-    SplashScreen,LocalNotifications,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize
+    SplashScreen,LocalNotifications,PhonegapLocalNotification,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize,Badge
   ]
 })
 export class AppModule {}

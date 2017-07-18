@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,MenuController,App,LoadingController,AlertController } from 'ionic-angular';
-import { Notifikasi } from '../notifikasi/notifikasi';
+//import { Notifikasi } from '../notifikasi/notifikasi';
 import { Bacaberita } from '../bacaberita/bacaberita';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -62,10 +62,10 @@ export class BeritaPage {
     });
   }
 
-  kenotifikasi(){
-    this.app.getRootNav().push(Notifikasi);
+  // kenotifikasi(){
+  //   this.app.getRootNav().push(Notifikasi);
 
-  }
+  // }
 
   kebacaberita(data){
     console.log(data);

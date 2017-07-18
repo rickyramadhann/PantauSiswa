@@ -19,7 +19,7 @@ page-notifikasi {
 	}
 
 	.slide {
-		background: #58b1cc;
+		background: #fff;
 		width: calc(100% / #{$num-of-notif});
 		height: 4px;
 		position: absolute;
@@ -28,13 +28,24 @@ page-notifikasi {
 		transition: left 0.3s ease-out;
 	}
 
-	 ion-note{
+	ion-note{
 		color: #fff !important;
 		padding: 5px;
 		width: 80px;
 		text-align: center;
 		font-size: 16px !important;
 	}
+
+	.segment-md-primary .segment-button {
+		color: #000;
+	}
+
+	.segment-md-primary .segment-button.segment-activated {
+		border-color: #80a6cb;
+		color: #fff;
+		opacity: 1;
+	}
+
 
 
 }
