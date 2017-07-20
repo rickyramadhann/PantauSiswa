@@ -31,49 +31,48 @@
   (ionSlideWillChange)="changeWillSlide($event)">
   <ion-slide>
     <ion-list>
-      <ion-card *ngFor= "let data of notifnilaip">
+      <ion-card *ngFor= "let data of notifnilai">
         <ion-item>
           <ion-avatar item-start>
             <img src="http://pantausiswa.xyz/uploads/{{data.photoguru}}">
           </ion-avatar>
           <h2>{{data.namamatpel}}</h2>
+          <p>Nilai: {{data.nilai}}</p>
           <p>Kategori: {{data.kategori}}</p>
-          <p>waktu: <span>{{data.created_at |date:"shortTime"}}</span></p>
-          <div class="nilai" item-right>
-            <h1>{{data.nilai}}</h1>
-          </div>
-        </ion-item>
-      </ion-card>
-    </ion-list>      
-  </ion-slide>
+          <p><span>Tanggal:  {{data.tanggal}}</span></p>
 
-  <ion-slide>
-    <ion-list >
-      <ion-card *ngFor= "let data of notifabsensi">
-        <ion-item >
-          <h2>{{data.nama}}</h2>
-          <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
-          <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
-          <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? '#12a386' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#268bc0': '#f75f5a'}">
-            {{data.keterangan}}
-          </ion-note>
-        </ion-item>
-      </ion-card>
-    </ion-list>
-  </ion-slide>
+      </ion-item>
+    </ion-card>
+  </ion-list>      
+</ion-slide>
 
-  <ion-slide>
-    <ion-list>
-      <ion-card *ngFor= "let data of notiftugas">
-        <ion-item>
-          <h2>{{data.nama}}</h2>
-          <p>Materi: <span>{{data.materi}}</span></p>
-          <p>Keterangan: <span>{{data.keterangan}}</span></p>
-          <p>Deadline: <span>{{data.tanggal}}</span> <span>{{data.jam}}</span></p>
-        </ion-item>
-      </ion-card>
-    </ion-list>
-  </ion-slide>
+<ion-slide>
+  <ion-list >
+    <ion-card *ngFor= "let data of notifabsensi">
+      <ion-item >
+        <h2>{{data.nama}}</h2>
+        <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
+        <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
+        <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? '#12a386' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#268bc0': '#f75f5a'}">
+          {{data.keterangan}}
+        </ion-note>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-slide>
+
+<ion-slide>
+  <ion-list>
+    <ion-card *ngFor= "let data of notiftugas">
+      <ion-item>
+        <h2>{{data.nama}}</h2>
+        <p>Materi: <span>{{data.materi}}</span></p>
+        <p>Keterangan: <span>{{data.keterangan}}</span></p>
+        <p>Deadline: <span>{{data.tanggal}}</span> <span>{{data.jam}}</span></p>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-slide>
 </ion-slides>
 </div>
 </ion-content>

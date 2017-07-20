@@ -26,10 +26,10 @@ import 'rxjs/add/operator/toPromise';
  	token:any;
  	urlnotifabsensi ="http://pantausiswa.xyz/api/ambilsiswa/notifabsensi";
  	urlnotiftugas ="http://pantausiswa.xyz/api/ambilsiswa/notiftugas";
- 	urlnotifnilaip ="http://pantausiswa.xyz/api/ambilsiswa/notifnilaipengetahuan";
+ 	urlnotifnilai ="http://pantausiswa.xyz/api/ambilsiswa/notifnilai";
  	notifabsensi :any;
  	notiftugas :any;
- 	notifnilaip :any;
+ 	notifnilai :any;
  	key:any;
  	
 
@@ -52,7 +52,7 @@ import 'rxjs/add/operator/toPromise';
  	}
 
  	ionViewDidLoad() {
- 		this.getdatanilaip();
+ 		this.getdatanilai();
  		this.getdataabsensi();
  		this.getdatatugas();
  	}
@@ -81,15 +81,15 @@ import 'rxjs/add/operator/toPromise';
  		})
  	}
 
- 	getdatanilaip(){
+ 	getdatanilai(){
  		this.storage.get('token').then(token=>{
  			this.token=token;
  			let header = new Headers();
  			header.append('Content-Type', 'application/json');
  			header.append('Accept','Application/json');
  			header.append('Authorization', 'Bearer '+ this.token);
- 			this.http.get(this.urlnotifnilaip,{headers:header}).map(res=>res.json()).subscribe(datas=>{
- 				this.notifnilaip = datas;
+ 			this.http.get(this.urlnotifnilai,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 				this.notifnilai = datas;
  				
  			})
  		})

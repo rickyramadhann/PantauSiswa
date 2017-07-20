@@ -1,8 +1,6 @@
 <ion-content padding>
- 
-	<ion-row class="login-logo">
-		<ion-col><img src="img/logo.png" /></ion-col>
-	</ion-row>
+
+	<img src="img/psiswa.JPEG" />
 
 	<ion-row class="login-form">
 		<ion-col>
@@ -14,17 +12,15 @@
 
 				<ion-item>
 					<ion-label><ion-icon name="lock"></ion-icon></ion-label>
-					<ion-input [(ngModel)]="user.password" placeholder="password" type="password"></ion-input>
+					<ion-input [(ngModel)]="user.password" placeholder="Kata sandi" type="{{type}}"></ion-input>
 				</ion-item>
+				
+				<div *ngIf="!showPass" class="pull-left show-pass" (click)="showPassword()">Tampilkan kata sandi</div>
+
+				<div *ngIf="showPass" class="pull-left show-pass" (click)="showPassword()">Sembunyikan Kata sandi</div>
 			</ion-list>
 			<button ion-button (click)="login()" primary class="login-button">Login</button>
 		</ion-col>
 	</ion-row>
 
-	<ion-row>
-		<ion-col>
-			<button (click)="launchSignup()" class="create-account">Lupa Password</button>
-		</ion-col>
-	</ion-row>
- 
 </ion-content>

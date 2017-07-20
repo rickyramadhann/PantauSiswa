@@ -102,7 +102,7 @@ export class BeritaPage {
       }, error=> {
         let alert = this.alert.create({
           title: 'Error',
-          subTitle: 'Server Error',
+          subTitle: 'Tidak Ada Koneksi Internet',
           buttons: ['OK']
         });
         alert.present();

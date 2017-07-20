@@ -21,6 +21,9 @@ import { Storage } from '@ionic/storage';
  		password: '',
 
  	};
+ 	public type= "password";
+
+ 	public showPass = false;
  	token:any;
  	url="http://pantausiswa.xyz/api/ubahpassword";
  	constructor(public navCtrl: NavController,
@@ -82,6 +85,18 @@ import { Storage } from '@ionic/storage';
 
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad Ubahpassword');
+ 	}
+
+
+ 	showPassword()
+ 	{
+ 		this.showPass = !this.showPass;
+ 		if (this.showPass){
+ 			this.type = "text";
+ 		}
+ 		else {
+ 			this.type = "password";
+ 		}
  	}
 
  }
