@@ -43,47 +43,46 @@ export class MyApp {
     constructor(public events: Events,public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
         public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
-        this.namasiswa = "not logged in";
-        this.photoside = "not logged in"
-        events.subscribe('username:changed', username=>{
-            if(username !== undefined && username !== ""){
-                this.namasiswa = username;
+        this.storage.get("token").then((token)=>{
 
-            }
-        })
+            this.platform.ready().then(() => {
+                this.namasiswa = "not logged in";
+                this.photoside = "not logged in"
+                events.subscribe('username:changed', username=>{
+                    if(username !== undefined && username !== ""){
+                        this.namasiswa = username;
 
-        events.subscribe('photo:changed', photo=>{
-            if(photo !==undefined && photo !==""){
-                this.photoside = photo;
-            }
-        })
-
-
-
-        this.platform.ready().then(() => {
-            this.statusBar.overlaysWebView(true);
-            this.statusBar.backgroundColorByHexString('#02756a');
-            this.splashScreen.hide();
-            // this.backgroundmode.setDefaults({
-                //     hidden:true,
-                //     silent:true,
-                //     resume:true
-                // });
-                this.platform.registerBackButtonAction(() => {
-                    let nav = this.app.getRootNav();
-                    if(nav.canGoBack()){
-                        nav.pop();
                     }
-                    else{
-                        this.minimize.minimize();
+                })
+
+                events.subscribe('photo:changed', photo=>{
+                    if(photo !==undefined && photo !==""){
+                        this.photoside = photo;
                     }
+                })
+
+
+
+                this.statusBar.overlaysWebView(true);
+                this.statusBar.backgroundColorByHexString('#02756a');
+                this.splashScreen.hide();
+                // this.backgroundmode.setDefaults({
+                    //     hidden:true,
+                    //     silent:true,
+                    //     resume:true
+                    // });
+                    this.platform.registerBackButtonAction(() => {
+                        let nav = this.app.getRootNav();
+                        if(nav.canGoBack()){
+                            nav.pop();
+                        }
+                        else{
+                            this.minimize.minimize();
+                        }
+                    });
+                    this.check();
                 });
-
-                //this.backgroundmode.enable(); 
-                this.check();
-
-
-            });
+        })
 
     }
 
@@ -97,7 +96,8 @@ export class MyApp {
                 header.append('Authorization', 'Bearer '+ this.token);
                 this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
                     this.datasiswa = datas.data;
-                    
+                    this.namasiswa = datas.data.name;
+                    this.photoside = datas.data.photo;
                     this.storage.set('id_siswa', datas.data.id);
                     this.storage.set('id_kelas', datas.data.id_kelas);
                     this.storage.set('tujuan', datas.akses);
