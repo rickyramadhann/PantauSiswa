@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams,MenuController,Slides, Platform, Lo
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import * as moment from 'moment';
+
 
 
 /**
@@ -39,8 +41,6 @@ import 'rxjs/add/operator/toPromise';
  		public menu:MenuController, public storage:Storage,public platform:Platform, public loading:LoadingController) {
 
  		this.ionViewDidLoad();
- 		
- 		
  	}
 
 
@@ -76,6 +76,10 @@ import 'rxjs/add/operator/toPromise';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotifabsensi,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.notifabsensi = datas;
+ 				console.log(this.notifabsensi[0].created_at)
+ 				// for(let i =this.notifabsensi.length-1; i>=0;i--){
+ 				// 	this.notifabsensi[i].created_at=moment(this.notifabsensi[i].created_at).format('l');
+ 				// }
  				
  			})
  		})
@@ -89,8 +93,11 @@ import 'rxjs/add/operator/toPromise';
  			header.append('Accept','Application/json');
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotifnilai,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+ 				console.log(datas);
  				this.notifnilai = datas;
- 				
+ 				for(let i =this.notifnilai.length-1; i>=0;i--){
+ 					this.notifnilai[i].tanggal=moment(this.notifnilai[i].tanggal).format('l');
+ 				}
  			})
  		})
  	}
@@ -104,6 +111,10 @@ import 'rxjs/add/operator/toPromise';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotiftugas,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.notiftugas = datas;
+
+ 				for(let i =this.notiftugas.length-1; i>=0;i--){
+ 					this.notiftugas[i].tanggal=moment(this.notiftugas[i].tanggal).format('l');
+ 				}
  				
  			})
  		})

@@ -8,13 +8,13 @@
 	</ion-header>
 
 	<ion-content>
-		<ion-item class="headernav">
-			<div class="circular--landscape" item-center>
-				<img src="http://pantausiswa.xyz/uploads/{{datasiswa.photo}}" />
-			</div>
-			<p>{{datasiswa.name}}</p>
-		</ion-item>
 		<ion-list>
+			<ion-item class="headernav">
+				<div class="circular--landscape" item-center>
+					<img src="http://pantausiswa.xyz/uploads/{{photoside}}" />
+				</div>
+				<p>{{namasiswa}}</p>
+			</ion-item>
 			<button menuClose ion-item (click)="keprofil()">
 				Profil
 			</button>

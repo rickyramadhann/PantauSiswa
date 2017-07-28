@@ -18,11 +18,15 @@
         </ion-item>
     </ion-card>
     <ion-list>
-        <ion-card  *ngFor= "let data of datanilais">
+        <ion-card (click)="kebacanilais(data)"  *ngFor= "let data of datanilais">
             <ion-item>
                 <h2>{{data.kategori}}</h2>
                 <p>{{data.nilai}}</p>
-                <p>{{data.keterangan}}
+                <p>{{data.keterangan}}</p>
+                <ion-buttons item-right>
+                    <ion-icon name="ios-arrow-dropright" color="primary">
+                    </ion-icon>
+                </ion-buttons>
             </ion-item>
         </ion-card>
     </ion-list>

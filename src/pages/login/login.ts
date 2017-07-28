@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,
-  MenuController, LoadingController, AlertController} from 'ionic-angular';
+  MenuController, LoadingController, AlertController, Events} from 'ionic-angular';
   import {TabsPage} from '../tabs/tabs';
-  import {Http} from '@angular/http';
+  import {Http, Headers} from '@angular/http';
   import 'rxjs/add/operator/toPromise';
   import { Storage } from '@ionic/storage';
 
@@ -23,17 +23,19 @@ import { NavController, NavParams,
      password: '',
 
    };
-
-   
    public type= "password";
-
    public showPass = false;
-
+   url:any='http://pantausiswa.xyz/api/ambilsiswa/datasiswa';
+   token:any;
+   datasiswa:any;
+   photoside:any;
+   namaside:any;
    constructor(public navCtrl: NavController,
      public navParams: NavParams, public menu:MenuController,
      public http:Http, public loading: LoadingController,
-     public alert:AlertController, public storage: Storage
+     public alert:AlertController, public storage: Storage, public events: Events
      ) {
+
    }
 
 
@@ -60,12 +62,25 @@ import { NavController, NavParams,
            this.storage.remove('email');
            this.storage.set('token', response.json().token) ;
            this.storage.set('email', this.user.email);
-           console.log(response.json().token);
-           //this.storage.set('email', this.user.email).then(()=> {console.log('Stored in localStorage '+ this.user.email)});
-           console.log('email dari login ='+this.user.email);
-           
 
-           this.navCtrl.setRoot(TabsPage);
+           this.token = response.json().token;
+           console.log(this.token)
+           let header = new Headers();
+           header.append('Content-Type', 'application/json');
+           header.append('Accept','Application/json');
+           header.append('Authorization', 'Bearer '+ this.token);
+           this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+             console.log(datas);
+             this.namaside = datas.data.name;
+             this.photoside = datas.data.photo;
+             this.events.publish('username:changed', this.namaside);
+             this.events.publish('photo:changed', this.photoside);
+             this.masuk({
+               name:this.namaside,
+               photo:this.photoside
+             })
+             this.navCtrl.setRoot(TabsPage)
+           });
            loader.dismiss();
          },error=> {
            let alert = this.alert.create({
@@ -80,6 +95,9 @@ import { NavController, NavParams,
      }
    }
 
+   masuk(data){
+     console.log('tes')
+   }
 
    ionViewDidEnter(){
      this.menu.swipeEnable(false,'menu1');
@@ -95,6 +113,7 @@ import { NavController, NavParams,
        this.type = "password";
      }
    }
+
 
 
    ionViewDidLoad() {

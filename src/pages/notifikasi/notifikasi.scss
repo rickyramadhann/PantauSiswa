@@ -18,6 +18,20 @@ page-notifikasi {
 		@include notif;
 	}
 
+	[item-end] {
+		margin: -43px 8px 9px 0 !important;
+		color:#666;
+	}
+
+	.dateabs{
+		font-size: 14px !important;
+		margin: -35px -80px 20px 0 !important;	
+	}
+	.tg{
+		margin: -74px 8px 9px 0 !important;
+		color: #666;	
+	}
+
 	.slide {
 		background: #fff;
 		width: calc(100% / #{$num-of-notif});
@@ -28,7 +42,7 @@ page-notifikasi {
 		transition: left 0.3s ease-out;
 	}
 
-	ion-note{
+	.statusabs{
 		color: #fff !important;
 		padding: 5px;
 		width: 80px;

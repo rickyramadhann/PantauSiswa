@@ -3,6 +3,8 @@ import { NavController,App,MenuController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Bacanilais } from '../bacanilais/bacanilais';
+
 /**
  * Generated class for the Lihatnilais page.
  *
@@ -43,6 +45,12 @@ import 'rxjs/add/operator/toPromise';
 
  			})
  		})
+ 	}
+
+ 	kebacanilais(data){
+ 		console.log(data);
+ 		this.navCtrl.push(Bacanilais, data);
+
  	}
 
  	ionViewDidLoad() {

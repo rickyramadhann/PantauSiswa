@@ -20,9 +20,9 @@
 <ion-list >
   <ion-card *ngFor= "let data of dataabsensi">
     <ion-item>
-      <p>Tanggal: <span>{{data.created_at |date: "yyyy/MM/dd"}}</span></p>
+      <p>Tanggal: <span>{{data.created_at |date: "dd/MM/yyyy"}}</span></p>
       <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
-      <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? '#12a386' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#268bc0': '#f75f5a'}">
+      <ion-note item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ? '#268bc0' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#12a386': '#f75f5a'}">
         {{data.keterangan}}
       </ion-note>
     </ion-item>

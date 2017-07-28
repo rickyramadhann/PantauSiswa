@@ -1,7 +1,7 @@
 declare var Pusher: any;
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Component,ViewChild } from '@angular/core';
-import { Platform, Nav, MenuController,App} from 'ionic-angular';
+import { Platform, Nav, MenuController,App, Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -37,9 +37,27 @@ export class MyApp {
     status:any;
     badge1:any;
     ceknotif:boolean;
+    photoside:any;
+    namasiswa:any;
 
-    constructor(public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
+    constructor(public events: Events,public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
         public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
+
+        this.namasiswa = "not logged in";
+        this.photoside = "not logged in"
+        events.subscribe('username:changed', username=>{
+            if(username !== undefined && username !== ""){
+                this.namasiswa = username;
+
+            }
+        })
+
+        events.subscribe('photo:changed', photo=>{
+            if(photo !==undefined && photo !==""){
+                this.photoside = photo;
+            }
+        })
+
 
 
         this.platform.ready().then(() => {
@@ -47,29 +65,27 @@ export class MyApp {
             this.statusBar.backgroundColorByHexString('#02756a');
             this.splashScreen.hide();
             // this.backgroundmode.setDefaults({
-            //     hidden:true,
-            //     silent:true,
-            //     resume:true
-            // });
-            this.platform.registerBackButtonAction(() => {
-                let nav = this.app.getRootNav();
-                if(nav.canGoBack()){
-                    nav.pop();
-                }
-                else{
-                    this.minimize.minimize();
-                }
+                //     hidden:true,
+                //     silent:true,
+                //     resume:true
+                // });
+                this.platform.registerBackButtonAction(() => {
+                    let nav = this.app.getRootNav();
+                    if(nav.canGoBack()){
+                        nav.pop();
+                    }
+                    else{
+                        this.minimize.minimize();
+                    }
+                });
+
+                //this.backgroundmode.enable(); 
+                this.check();
+
+
             });
-          
-            //this.backgroundmode.enable(); 
-            this.check();
-           
-        });
-
-
 
     }
-
 
     check(){
         this.storage.get("token").then((token)=>{
@@ -116,6 +132,13 @@ export class MyApp {
     {
         this.storage.remove('token');
         this.storage.remove('email');
+        this.storage.remove('id_guru');
+        this.storage.remove('id_siswa');
+        this.storage.remove('id_kelas');
+        this.storage.remove('id_ortu');
+        this.storage.remove('matpek');
+        this.storage.remove('tujuan');
+
         this.nav.setRoot(Login);
     }
 

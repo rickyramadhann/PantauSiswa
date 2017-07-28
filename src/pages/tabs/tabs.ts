@@ -11,6 +11,7 @@ import { AlertController} from 'ionic-angular';
 import { Notifikasi } from '../notifikasi/notifikasi';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
     templateUrl: 'tabs.html'
@@ -31,66 +32,29 @@ export class TabsPage {
     idkelas:any;
     tujuan:any;
     bpengumuman:any;
-    blaporan:any;
     bcatatan:any;
-    constructor(private platform: Platform,public navCtrl: NavController, public navParams: NavParams, public menu:MenuController,public badge:Badge,public storage:Storage,public local:LocalNotifications,public alert:AlertController,public background:BackgroundMode,public app:App,private localNotification: PhonegapLocalNotification) {
-        this.background.disable();
-        this.platform.ready().then(() =>{
-            this.ionViewDidLoad();
+    photoside:any;
+    constructor(public audio:NativeAudio,private platform: Platform,public navCtrl: NavController, public navParams: NavParams, public menu:MenuController,public badge:Badge,public storage:Storage,public local:LocalNotifications,public alert:AlertController,public background:BackgroundMode,public app:App,private localNotification: PhonegapLocalNotification) {  
+        this.platform.ready().then(()=>{
+            this.audio.preloadSimple('audio', 'assets/audio/notif.mp3');
+        })
 
-        });
     }
 
     ionViewDidLoad(){
-        //Siswa channel
+        //     //Siswa channel
         this.storage.get('id_siswa').then((val) => {
             this.idsiswa =val;
-            console.log(this.idsiswa);
+            //console.log(this.idsiswa);
             this.pusher = new Pusher('708f5e5f201b46b1ac82', {
                 cluster: 'mt1',
                 encrypted: true
             });
             this.pusher.logToConsole = true;
-
-            var channel = this.pusher.subscribe('siswa.absensi.'+this.idsiswa);
-            channel.bind('App\\Events\\Notifabsensi',  (data) => {
-                console.log(data);
-                this.status = data.absensi.keterangan;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.blaporan='N';
-                    if (permission === 'granted') {
-                        // Create the notification
-                        this.localNotification.create('Notifikasi Absensi', {
-                            tag: 'Notifikasi',
-                            body: this.status,
-
-                        });
-
-                    }
-                });               
-            });
-
-            var channel2 = this.pusher.subscribe('siswa.nilai.'+this.idsiswa);
-            channel2.bind('App\\Events\\Notifnilai',  (data) => {
-
-                console.log(data.nilai.nilai);
-                this.status = data.nilai.nilai;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.blaporan='N';
-                    if (permission === 'granted') {
-                        this.localNotification.create('Notifikasi Nilai', {
-                            tag: 'Notifikasi',
-                            body: this.status
-                        });
-
-                    }
-                });               
-            });
-
             var channel3 = this.pusher.subscribe('siswa.history.'+this.idsiswa);
             channel3.bind('App\\Events\\Notifhistory',  (data) => {
 
-                console.log(data);
+                //  console.log(data);
                 this.status = data.history.peristiwa;
                 this.localNotification.requestPermission().then((permission) => {
                     this.bcatatan='N';
@@ -101,7 +65,10 @@ export class TabsPage {
                         });
 
                     }
-                });               
+                });  
+                this.audio.play('audio', ()=>{
+                    console.log('audio play')
+                });             
             });                
         });
 
@@ -109,52 +76,18 @@ export class TabsPage {
         //Ortu Channel
         this.storage.get('id_ortu').then((val) => {
             this.idortu =val;
-            console.log(this.idortu);
+            //console.log(this.idortu);
             this.pusher = new Pusher('708f5e5f201b46b1ac82', {
                 cluster: 'mt1',
                 encrypted: true
             });
             this.pusher.logToConsole = true;
 
-            var channelortu1 = this.pusher.subscribe('ortu.absensi.'+this.idortu);
-            channelortu1.bind('App\\Events\\Notifabsensi',  (data) => {
-                console.log(data);
-                this.status = data.absensi.keterangan;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.blaporan='N';
-                    if (permission === 'granted') {
-                        // Create the notification
-                        this.localNotification.create('Notifikasi Absensi', {
-                            tag: 'Notifikasi',
-                            body: this.status,
-
-                        });
-
-                    }
-                });               
-            });
-
-            var channelortu2 = this.pusher.subscribe('ortu.nilai.'+this.idortu);
-            channelortu2.bind('App\\Events\\Notifnilai',  (data) => {
-
-                console.log(data.nilai.nilai);
-                this.status = data.nilai.nilai;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.blaporan='N';
-                    if (permission === 'granted') {
-                        this.localNotification.create('Notifikasi Nilai', {
-                            tag: 'Notifikasi',
-                            body: this.status
-                        });
-
-                    }
-                });               
-            });
 
             var channelortu3 = this.pusher.subscribe('ortu.history.'+this.idortu);
             channelortu3.bind('App\\Events\\Notifhistory',  (data) => {
 
-                console.log(data);
+                //  console.log(data);
                 this.status = data.history.peristiwa;
                 this.localNotification.requestPermission().then((permission) => {
                     this.bcatatan='N';
@@ -165,41 +98,17 @@ export class TabsPage {
                         });
 
                     }
-                });               
+                });        
+                this.audio.play('audio', ()=>{
+                    console.log('audio play')
+                });       
             });                        
         });
 
 
-        //Kelas Channel
-        this.storage.get('id_kelas').then((val) => {
-            this.idkelas = val;
-            console.log(this.idkelas);
-            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                cluster: 'mt1',
-                encrypted: true
-            });
-            this.pusher.logToConsole = true;
 
-            var channel3 = this.pusher.subscribe('tugas.'+this.idkelas);
-            channel3.bind('App\\Events\\Notiftugas',  (data) => {
-                console.log(data.tugas.materi)
-                this.status = data.tugas.materi;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.blaporan='N';
-                    if (permission === 'granted') {
-                        // Create the notification
-                        this.localNotification.create('Notifikasi Tugas', {
-                            tag: 'Notifikasi Tugas',
-                            body: this.status,
 
-                        });
-
-                    }
-                });               
-            });
-        });
-
-         //Pengumuman Channel
+        //Pengumuman Channel
         this.storage.get('tujuan').then((val) => {
             this.tujuan = val;
             this.pusher = new Pusher('708f5e5f201b46b1ac82', {
@@ -222,7 +131,10 @@ export class TabsPage {
                         });
 
                     }
-                });               
+                });   
+                this.audio.play('audio', ()=>{
+                    console.log('audio play')
+                });            
             });
         });
 
@@ -233,11 +145,8 @@ export class TabsPage {
         this.menu.swipeEnable(true,'menu1');
     }
     deletebintang(){
-        if(this.blaporan=='N'){
 
-            this.blaporan = '';
-        }
-        else if(this.bpengumuman == 'N')
+        if(this.bpengumuman == 'N')
         {
             this.bpengumuman = '';
         }

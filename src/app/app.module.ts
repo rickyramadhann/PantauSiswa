@@ -43,6 +43,7 @@ import { Bacaberita } from '../pages/bacaberita/bacaberita';
 import { Tulispesan } from '../pages/tulispesan/tulispesan';
 import { Bacapengumuman } from '../pages/bacapengumuman/bacapengumuman';
 import { Bacacatatan } from '../pages/bacacatatan/bacacatatan';
+import { Bacanilais } from '../pages/bacanilais/bacanilais';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 
 import { Notifikasi } from '../pages/notifikasi/notifikasi';
@@ -50,6 +51,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 
 
@@ -79,6 +81,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Bacapengumuman,
     Bacacatatan,
     Ubahpassword,
+    Bacanilais,
   ],
   imports: [
     BrowserModule,
@@ -110,10 +113,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Bacapengumuman,
     Bacacatatan,
     Ubahpassword,
+    Bacanilais,
   ],
   providers: [
     StatusBar,
-    SplashScreen,LocalNotifications,PhonegapLocalNotification,
+    SplashScreen,LocalNotifications,PhonegapLocalNotification,NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize,Badge
   ]
 })

@@ -3,6 +3,7 @@ import { NavController,NavParams} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import * as moment from 'moment';
 
 /**
  * Generated class for the Tugas page.
@@ -41,6 +42,9 @@ import 'rxjs/add/operator/toPromise';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datatugas = datas[this.namamatpel];
+ 				for(let i =this.datatugas.length-1; i>=0;i--){
+ 					this.datatugas[i].tanggal=moment(this.datatugas[i].tanggal).format('l');
+ 				}
  				
  			})
  		})
