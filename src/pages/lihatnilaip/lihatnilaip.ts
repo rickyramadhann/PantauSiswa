@@ -51,20 +51,24 @@ import * as moment from 'moment';
 
  				let x =0;
  				for(let i =this.datanilaip.length-1; i>=0;i--){
+
  					
  					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).format('l');
  					//this.datanilaip[i].jam=moment(this.datanilaip[i].jam).format('h:mm:ss');
  					if(this.datanilaip[i].kategori == "uts" || this.datanilaip[i].kategori == "uas"){
 
- 						console.log("gak masuk chart")
+ 						//console.log("gak masuk chart")
  					}
+ 					
  					else{
  						x = x+1;
  						this.labelpertemuan.push("PH-" + x);
- 						console.log(this.labelpertemuan);
+ 						//console.log(this.labelpertemuan);
  						this.nilaiku.push(this.datanilaip[i].nilai);	
  					}
- 					console.log(this.nilaiku);
+ 					//console.log(this.nilaiku);
+
+ 					
  				}
  				this.callChart();
  				

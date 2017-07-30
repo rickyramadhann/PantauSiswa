@@ -43,7 +43,7 @@
           <h2>{{data.namamatpel}}</h2>
           <p>Nilai: {{data.nilai}}</p>
           <p>Kategori: {{data.kategori}}</p>
-          <p><span>Tanggal:  {{data.tanggal}}</span></p>
+          <p><span>Tanggal:  {{data.tanggal |date: "dd/MM/yyyy"}}</span></p>
           
           <ion-note  class="cr" item-end>
             {{data.created_at | moment}}
@@ -79,7 +79,7 @@
           <h2>{{data.nama}}</h2>
           <p>Materi: <span>{{data.materi}}</span></p>
           <p>Keterangan: <span>{{data.keterangan}}</span></p>
-          <p>Deadline: {{data.tanggal}}</p>
+          <p>Deadline: {{data.tanggal|date: "dd/MM/yyyy"}}</p>
           <p>Jam: {{data.jam}}</p>
           <ion-note  class="tg" item-end>
             {{data.created_at | moment}}

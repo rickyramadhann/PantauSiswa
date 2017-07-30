@@ -28,6 +28,7 @@ export class TabsPage {
     private pusher: any;
     status:any;
     idsiswa:any;
+    token:any;
     idortu:any;
     idkelas:any;
     tujuan:any;
@@ -42,103 +43,123 @@ export class TabsPage {
     }
 
     ionViewDidLoad(){
-        //     //Siswa channel
-        this.storage.get('id_siswa').then((val) => {
-            this.idsiswa =val;
-            //console.log(this.idsiswa);
-            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                cluster: 'mt1',
-                encrypted: true
-            });
-            this.pusher.logToConsole = true;
-            var channel3 = this.pusher.subscribe('siswa.history.'+this.idsiswa);
-            channel3.bind('App\\Events\\Notifhistory',  (data) => {
 
-                //  console.log(data);
-                this.status = data.history.peristiwa;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.bcatatan='N';
-                    if (permission === 'granted') {
-                        this.localNotification.create('Notifikasi Catatan', {
-                            tag: 'Catatan Wali Kelas',
-                            body: this.status
+        this.storage.get("token").then((t)=>{
+            this.token= t;
+            if(this.token){
+                this.storage.get("tujuan").then((tujuan)=>{
+                    this.tujuan = tujuan;
+                    if(this.tujuan ==="siswa"){
+                        //     //Siswa channel
+                        this.storage.get('id_siswa').then((val) => {
+                            this.idsiswa =val;
+                            //console.log(this.idsiswa);
+                            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+                                cluster: 'mt1',
+                                encrypted: true
+                            });
+                            this.pusher.logToConsole = true;
+
+                            var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
+                            channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
+                                this.status = data.pengumuman.title;
+                                this.localNotification.requestPermission().then((permission) => {
+                                    this.bpengumuman='N';
+                                    if (permission === 'granted') {
+                                        // Create the notification
+                                        this.localNotification.create('Notifikasi Pengumuman', {
+                                            tag: 'Notifikasi Pengumuman',
+                                            body: this.status,
+
+                                        });
+
+                                    }
+                                });   
+                                this.audio.play('audio', ()=>{
+                                    console.log('audio play')
+                                });            
+                            });
+
+
+                            var channel3 = this.pusher.subscribe('siswa.history.'+this.idsiswa);
+                            channel3.bind('App\\Events\\Notifhistory',  (data) => {
+
+                                //  console.log(data);
+                                this.status = data.history.peristiwa;
+                                this.localNotification.requestPermission().then((permission) => {
+                                    this.bcatatan='N';
+                                    if (permission === 'granted') {
+                                        this.localNotification.create('Notifikasi Catatan', {
+                                            tag: 'Catatan Wali Kelas',
+                                            body: this.status
+                                        });
+
+                                    }
+                                });  
+                                this.audio.play('audio', ()=>{
+                                    console.log('audio play')
+                                });             
+                            });                
                         });
-
                     }
-                });  
-                this.audio.play('audio', ()=>{
-                    console.log('audio play')
-                });             
-            });                
-        });
+                    else if(this.tujuan ==="walimurid"){
+                        //Ortu Channel
+                        this.storage.get('id_ortu').then((val) => {
+                            this.idortu =val;
+                            //console.log(this.idortu);
+                            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+                                cluster: 'mt1',
+                                encrypted: true
+                            });
+                            this.pusher.logToConsole = true;
 
 
-        //Ortu Channel
-        this.storage.get('id_ortu').then((val) => {
-            this.idortu =val;
-            //console.log(this.idortu);
-            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                cluster: 'mt1',
-                encrypted: true
-            });
-            this.pusher.logToConsole = true;
+                            var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
+                            channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
+                                this.status = data.pengumuman.title;
+                                this.localNotification.requestPermission().then((permission) => {
+                                    this.bpengumuman='N';
+                                    if (permission === 'granted') {
+                                        // Create the notification
+                                        this.localNotification.create('Notifikasi Pengumuman', {
+                                            tag: 'Notifikasi Pengumuman',
+                                            body: this.status,
 
+                                        });
 
-            var channelortu3 = this.pusher.subscribe('ortu.history.'+this.idortu);
-            channelortu3.bind('App\\Events\\Notifhistory',  (data) => {
+                                    }
+                                });   
+                                this.audio.play('audio', ()=>{
+                                    console.log('audio play')
+                                });            
+                            });
 
-                //  console.log(data);
-                this.status = data.history.peristiwa;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.bcatatan='N';
-                    if (permission === 'granted') {
-                        this.localNotification.create('Notifikasi Catatan', {
-                            tag: 'Catatan Wali Kelas',
-                            body: this.status
+                            var channelortu3 = this.pusher.subscribe('ortu.history.'+this.idortu);
+                            channelortu3.bind('App\\Events\\Notifhistory',  (data) => {
+
+                                //  console.log(data);
+                                this.status = data.history.peristiwa;
+                                this.localNotification.requestPermission().then((permission) => {
+                                    this.bcatatan='N';
+                                    if (permission === 'granted') {
+                                        this.localNotification.create('Notifikasi Catatan', {
+                                            tag: 'Catatan Wali Kelas',
+                                            body: this.status
+                                        });
+
+                                    }
+                                });        
+                                this.audio.play('audio', ()=>{
+                                    console.log('audio play')
+                                });       
+                            });                        
                         });
-
                     }
-                });        
-                this.audio.play('audio', ()=>{
-                    console.log('audio play')
-                });       
-            });                        
-        });
-
-
-
-
-        //Pengumuman Channel
-        this.storage.get('tujuan').then((val) => {
-            this.tujuan = val;
-            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                cluster: 'mt1',
-                encrypted: true
-            });
-            this.pusher.logToConsole = true;
-
-            var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
-            channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
-                this.status = data.pengumuman.title;
-                this.localNotification.requestPermission().then((permission) => {
-                    this.bpengumuman='N';
-                    if (permission === 'granted') {
-                        // Create the notification
-                        this.localNotification.create('Notifikasi Pengumuman', {
-                            tag: 'Notifikasi Pengumuman',
-                            body: this.status,
-
-                        });
-
-                    }
-                });   
-                this.audio.play('audio', ()=>{
-                    console.log('audio play')
-                });            
-            });
-        });
-
+                })
+            }
+        })
     }
+
 
 
     ionViewDidEnter(){

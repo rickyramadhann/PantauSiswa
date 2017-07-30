@@ -39,50 +39,73 @@ export class MyApp {
     ceknotif:boolean;
     photoside:any;
     namasiswa:any;
+    idsiswa:any;
+    idortu:any;
+    idkelas:any;
+    tujuan:any;
 
     constructor(public events: Events,public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
         public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
-        this.storage.get("token").then((token)=>{
 
-            this.platform.ready().then(() => {
-                this.namasiswa = "not logged in";
-                this.photoside = "not logged in"
+        this.platform.ready().then(() => {
+            this.statusBar.overlaysWebView(true);
+            this.statusBar.backgroundColorByHexString('#02756a');
+            this.splashScreen.hide();
+            // this.backgroundmode.setDefaults({
+                //     hidden:true,
+                //     silent:true,
+                //     resume:true
+                // });
+                this.platform.registerBackButtonAction(() => {
+                    let nav = this.app.getRootNav();
+                    if(nav.canGoBack()){
+                        nav.pop();
+                    }
+                    else{
+                        this.minimize.minimize();
+                    }
+                });
+                this.check();
                 events.subscribe('username:changed', username=>{
                     if(username !== undefined && username !== ""){
                         this.namasiswa = username;
-
+                        this.storage.set('namasiswa', this.namasiswa);
                     }
                 })
-
                 events.subscribe('photo:changed', photo=>{
                     if(photo !==undefined && photo !==""){
                         this.photoside = photo;
                     }
                 })
+                events.subscribe('idsiswa:changed', idsiswa=>{
+                    if(idsiswa !==undefined && idsiswa !==""){
+                        this.idsiswa = idsiswa;
+                        this.storage.set('id_siswa', this.idsiswa);
+                    }
+                })
+                events.subscribe('idortu:changed', idortu=>{
+                    if(idortu !==undefined && idortu !==""){
+                        this.idortu = idortu;
+                        this.storage.set('id_ortu', this.idortu);
 
+                    }
+                })
+                events.subscribe('idkelas:changed', idkelas=>{
+                    if(idkelas !==undefined && idkelas !==""){
+                        this.idkelas = idkelas;
+                        this.storage.set('id_kelas', this.idkelas);
+                    }
+                })
+                events.subscribe('tujuan:changed', tujuan=>{
+                    if(tujuan !==undefined && tujuan !==""){
+                        this.tujuan = tujuan;
+                        this.storage.set('tujuan', this.tujuan);
+                    }
+                })
 
-
-                this.statusBar.overlaysWebView(true);
-                this.statusBar.backgroundColorByHexString('#02756a');
-                this.splashScreen.hide();
-                // this.backgroundmode.setDefaults({
-                    //     hidden:true,
-                    //     silent:true,
-                    //     resume:true
-                    // });
-                    this.platform.registerBackButtonAction(() => {
-                        let nav = this.app.getRootNav();
-                        if(nav.canGoBack()){
-                            nav.pop();
-                        }
-                        else{
-                            this.minimize.minimize();
-                        }
-                    });
-                    this.check();
-                });
-        })
+            });
+        
 
     }
 
@@ -98,10 +121,10 @@ export class MyApp {
                     this.datasiswa = datas.data;
                     this.namasiswa = datas.data.name;
                     this.photoside = datas.data.photo;
-                    this.storage.set('id_siswa', datas.data.id);
-                    this.storage.set('id_kelas', datas.data.id_kelas);
-                    this.storage.set('tujuan', datas.akses);
-                    this.storage.set('id_ortu', datas.dataortu);
+                    this.idsiswa   = datas.data.id;
+                    this.idortu    = datas.dataortu;
+                    this.idkelas   = datas.data.id_kelas;
+                    this.tujuan    = datas.akses;
 
                 })
                 this.rootPage = TabsPage;
@@ -138,6 +161,7 @@ export class MyApp {
         this.storage.remove('id_ortu');
         this.storage.remove('matpek');
         this.storage.remove('tujuan');
+        this.storage.remove('photosamping');
 
         this.nav.setRoot(Login);
     }

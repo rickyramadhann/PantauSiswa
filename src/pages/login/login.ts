@@ -30,6 +30,10 @@ import { NavController, NavParams,
    datasiswa:any;
    photoside:any;
    namaside:any;
+   id_kelas:any;
+   id_ortu:any;
+   id_siswa:any;
+   tujuan:any;
    constructor(public navCtrl: NavController,
      public navParams: NavParams, public menu:MenuController,
      public http:Http, public loading: LoadingController,
@@ -73,11 +77,23 @@ import { NavController, NavParams,
              console.log(datas);
              this.namaside = datas.data.name;
              this.photoside = datas.data.photo;
+             this.id_siswa = datas.data.id;
+             this.id_kelas = datas.data.id_kelas;
+             this.id_ortu = datas.dataortu;
+             this.tujuan = datas.akses;
              this.events.publish('username:changed', this.namaside);
              this.events.publish('photo:changed', this.photoside);
+             this.events.publish('idsiswa:changed', this.id_siswa);
+             this.events.publish('idortu:changed', this.id_ortu);
+             this.events.publish('idkelas:changed', this.id_kelas);
+             this.events.publish('tujuan:changed', this.tujuan);
              this.masuk({
                name:this.namaside,
-               photo:this.photoside
+               photo:this.photoside,
+               idsiswa:this.id_siswa,
+               idortu:this.id_ortu,
+               idkelas:this.id_kelas,
+               tujuan:this.tujuan
              })
              this.navCtrl.setRoot(TabsPage)
            });
