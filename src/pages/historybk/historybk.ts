@@ -44,10 +44,11 @@ import * as moment from 'moment';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datacatatan = datas;
- 				
+ 				console.log(this.datacatatan);
  				for(let i =this.datacatatan.length-1; i>=0;i--){
  					
- 					this.datacatatan[i].tanggal=moment(this.datacatatan[i].tanggal).format('l');
+ 					this.datacatatan[i].tanggal=moment(this.datacatatan[i].tanggal).locale('id').format('LL');
+ 					this.datacatatan[i].jam=moment(this.datacatatan[i].jam, "HH:mm:ss").locale('id').format('hh:mm');
  				}
  			})
  		})

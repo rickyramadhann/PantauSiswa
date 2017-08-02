@@ -61,42 +61,50 @@ import { NavController, NavParams,
        loader.present().then(()=>{
          this.http.post('http://pantausiswa.xyz/api/login',this.user)
          .toPromise().then((response)=>{
+           if(response){
 
+             this.storage.remove('email');
+             this.storage.set('token', response.json().token) ;
+             this.storage.set('email', this.user.email);
 
-           this.storage.remove('email');
-           this.storage.set('token', response.json().token) ;
-           this.storage.set('email', this.user.email);
-
-           this.token = response.json().token;
-           console.log(this.token)
-           let header = new Headers();
-           header.append('Content-Type', 'application/json');
-           header.append('Accept','Application/json');
-           header.append('Authorization', 'Bearer '+ this.token);
-           this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
-             console.log(datas);
-             this.namaside = datas.data.name;
-             this.photoside = datas.data.photo;
-             this.id_siswa = datas.data.id;
-             this.id_kelas = datas.data.id_kelas;
-             this.id_ortu = datas.dataortu;
-             this.tujuan = datas.akses;
-             this.events.publish('username:changed', this.namaside);
-             this.events.publish('photo:changed', this.photoside);
-             this.events.publish('idsiswa:changed', this.id_siswa);
-             this.events.publish('idortu:changed', this.id_ortu);
-             this.events.publish('idkelas:changed', this.id_kelas);
-             this.events.publish('tujuan:changed', this.tujuan);
-             this.masuk({
-               name:this.namaside,
-               photo:this.photoside,
-               idsiswa:this.id_siswa,
-               idortu:this.id_ortu,
-               idkelas:this.id_kelas,
-               tujuan:this.tujuan
+             this.token = response.json().token;
+             console.log(this.token)
+             let header = new Headers();
+             header.append('Content-Type', 'application/json');
+             header.append('Accept','Application/json');
+             header.append('Authorization', 'Bearer '+ this.token);
+             this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
+               console.log(datas);
+               this.namaside = datas.data.name;
+               this.photoside = datas.data.photo;
+               this.id_siswa = datas.data.id;
+               this.id_kelas = datas.data.id_kelas;
+               this.id_ortu = datas.dataortu;
+               this.tujuan = datas.akses;
+               this.events.publish('username:changed', this.namaside);
+               this.events.publish('photo:changed', this.photoside);
+               this.events.publish('idsiswa:changed', this.id_siswa);
+               this.events.publish('idortu:changed', this.id_ortu);
+               this.events.publish('idkelas:changed', this.id_kelas);
+               this.events.publish('tujuan:changed', this.tujuan);
+               this.masuk({
+                 name:this.namaside,
+                 photo:this.photoside,
+                 idsiswa:this.id_siswa,
+                 idortu:this.id_ortu,
+                 idkelas:this.id_kelas,
+                 tujuan:this.tujuan               
+               })
+               this.navCtrl.setRoot(TabsPage)
+             });
+           }
+           else{
+             let alert = this.alert.create({
+               title: "Oppps",
+               subTitle: 'email atau kata sandi tidak sesuai'
              })
-             this.navCtrl.setRoot(TabsPage)
-           });
+             alert.present();
+           }
            loader.dismiss();
          },error=> {
            let alert = this.alert.create({

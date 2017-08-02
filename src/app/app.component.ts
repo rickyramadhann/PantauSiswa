@@ -76,6 +76,7 @@ export class MyApp {
                 events.subscribe('photo:changed', photo=>{
                     if(photo !==undefined && photo !==""){
                         this.photoside = photo;
+                        this.storage.set('fotosiswa', this.photoside);
                     }
                 })
                 events.subscribe('idsiswa:changed', idsiswa=>{
@@ -125,6 +126,7 @@ export class MyApp {
                     this.idortu    = datas.dataortu;
                     this.idkelas   = datas.data.id_kelas;
                     this.tujuan    = datas.akses;
+                    console.log(datas);
 
                 })
                 this.rootPage = TabsPage;
@@ -161,7 +163,9 @@ export class MyApp {
         this.storage.remove('id_ortu');
         this.storage.remove('matpek');
         this.storage.remove('tujuan');
+        this.storage.remove('namasiswa');
         this.storage.remove('photosamping');
+        this.storage.remove('fotosiswa');
 
         this.nav.setRoot(Login);
     }

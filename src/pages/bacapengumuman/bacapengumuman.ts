@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
+import * as moment from 'moment';
 
 /**
  * Generated class for the Bacapengumuman page.
@@ -21,7 +22,7 @@ export class Bacapengumuman {
     this.title = navParams.get('title');
     this.content = navParams.get('content');
     this.created_at = navParams.get('created_at');
-   
+    this.created_at = moment(this.created_at).locale('id').format('LLLL');
   }
 
   ionViewDidLoad() {

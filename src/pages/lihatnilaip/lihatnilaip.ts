@@ -54,8 +54,8 @@ import * as moment from 'moment';
 
  					
  					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).format('l');
- 					//this.datanilaip[i].jam=moment(this.datanilaip[i].jam).format('h:mm:ss');
- 					if(this.datanilaip[i].kategori == "uts" || this.datanilaip[i].kategori == "uas"){
+ 					this.datanilaip[i].jam=moment(this.datanilaip[i].jam,"HH:mm:ss").format('hh:mm');
+ 					if(this.datanilaip[i].kategori == "uas"){
 
  						//console.log("gak masuk chart")
  					}

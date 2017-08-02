@@ -41,6 +41,7 @@ import { Bacanilais } from '../bacanilais/bacanilais';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datanilais = datas[this.namamatpel];
+ 				
 
 
  			})

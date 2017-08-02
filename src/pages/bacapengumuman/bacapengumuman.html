@@ -3,8 +3,16 @@
 		<ion-title>Baca Pengumuman</ion-title>
 	</ion-navbar>
 </ion-header>
-<ion-content padding>
-	<h2>{{title}}</h2>
-	<p>{{created_at}}</p>
-	<p>{{content}}</p>	
+<ion-content>
+	<ion-card>
+		<ion-item>
+			<ion-avatar item-start>
+				<img src="img/megaphone.png">
+			</ion-avatar>
+			<h2>{{title}}</h2>
+			<p>{{created_at}} WIB.</p>
+		</ion-item>	
+	</ion-card>
+	<p padding>{{content}}</p>
+	
 </ion-content>

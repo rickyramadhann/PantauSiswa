@@ -63,7 +63,7 @@
           </p>
           <h2>{{data.nama}}</h2>
           <p>Tanggal: <span>{{data.created_at |date: "dd/MM/yyyy"}}</span></p>
-          <p>Pukul: <span>{{data.created_at |date: "shortTime"}}</span></p>
+          <p>Pukul: <span>{{data.created_at | date:"mediumTime"}}</span></p>
           <ion-note class="statusabs" item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ?  '#268bc0' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#12a386': '#f75f5a'}">
             {{data.keterangan}}
           </ion-note>
@@ -80,7 +80,7 @@
           <p>Materi: <span>{{data.materi}}</span></p>
           <p>Keterangan: <span>{{data.keterangan}}</span></p>
           <p>Deadline: {{data.tanggal|date: "dd/MM/yyyy"}}</p>
-          <p>Jam: {{data.jam}}</p>
+          <p>Jam: {{data.jam}} WIB.</p>
           <ion-note  class="tg" item-end>
             {{data.created_at | moment}}
           </ion-note>

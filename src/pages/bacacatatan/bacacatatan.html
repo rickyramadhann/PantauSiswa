@@ -7,10 +7,22 @@
 </ion-header>
 
 
-<ion-content padding>
-	<p>Tanggal: {{tanggal}}</p>
-	<p>Jam: {{jam}}</p>
-	<p>Peristiwa: {{peristiwa}}</p>
+<ion-content>
+	<ion-card>
+		<ion-item>
+			<ion-avatar item-start>
+				<img src= "http://pantausiswa.xyz/uploads/{{fotosiswa}}">
+			</ion-avatar>
+			<p>{{namasiswa}}</p>
+		</ion-item>
+	</ion-card>
+	<ion-card padding>
+		<p>Tanggal: {{tanggal}}</p>
+		<p>Jam: {{jam}} WIB.</p>
+		<p>Peristiwa: {{peristiwa}}</p>
+		
+	</ion-card>
+
 </ion-content>
 
 <!-- [ngStyle]="{'color': data.nilai>=70? 'green' : 'red'}" -->

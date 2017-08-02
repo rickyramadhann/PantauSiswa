@@ -33,7 +33,7 @@ import * as moment from 'moment';
  	notiftugas :any;
  	notifnilai :any;
  	key:any;
- 	
+ 	jam:any;
 
 
  	
@@ -76,7 +76,11 @@ import * as moment from 'moment';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotifabsensi,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.notifabsensi = datas;
- 				console.log(this.notifabsensi[0].created_at)
+ 				console.log(datas);
+ 				// for(let i=this.notifabsensi.length-1;i>=0;i--){
+ 				// 	this.notifabsensi[i].created_at = moment(this.notifabsensi[i].created_at, "HH:mm:ss").locale('id').format('h:mm');
+ 				// }
+ 				//console.log(this.notifabsensi[0].created_at)
  				// for(let i =this.notifabsensi.length-1; i>=0;i--){
  				// 	this.notifabsensi[i].created_at=moment(this.notifabsensi[i].created_at).format('l');
  				// }
@@ -114,6 +118,7 @@ import * as moment from 'moment';
 
  				for(let i =this.notiftugas.length-1; i>=0;i--){
  					this.notiftugas[i].tanggal=moment(this.notiftugas[i].tanggal).format('l');
+ 					this.notiftugas[i].jam=moment(this.notiftugas[i].jam, "HH:mm:ss").format('hh:mm');
  				}
  				
  			})

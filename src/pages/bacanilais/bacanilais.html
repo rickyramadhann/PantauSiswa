@@ -3,10 +3,20 @@
 		<ion-title>Nilai Sikap</ion-title>
 	</ion-navbar>
 </ion-header>
-<ion-content padding>
-	
-
-	<h2>Kategori: {{kategori}}</h2>
-	<p>Nilai: {{nilai}}</p>
-	<p>Keterangan: {{keterangan}}</p>	
+<ion-content>
+	<ion-card>
+		<ion-item>
+			<ion-avatar item-start>
+				<img src="http://pantausiswa.xyz/uploads/{{fotosiswa}}">
+			</ion-avatar>
+			<p>{{namasiswa}}</p>
+		</ion-item>
+	</ion-card>
+	<ion-card padding>
+		<h2 style="font-weight: bold;">Kategori: {{kategori}}</h2>
+		<p>{{created_at}}</p>
+		<p>Nilai: {{nilai}}</p>
+		<p>Deskripsi: {{keterangan}}</p>	
+		
+	</ion-card>
 </ion-content>
