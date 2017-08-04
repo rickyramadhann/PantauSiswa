@@ -52,6 +52,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Autostart } from '@ionic-native/autostart';
 
 
 
@@ -117,7 +118,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
   ],
   providers: [
     StatusBar,
-    SplashScreen,LocalNotifications,PhonegapLocalNotification,NativeAudio,
+    SplashScreen,LocalNotifications,PhonegapLocalNotification,NativeAudio,Autostart,
     {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize,Badge
   ]
 })

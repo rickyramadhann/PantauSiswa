@@ -93,7 +93,7 @@ export class TabsPage {
                                             tag: 'Catatan Wali Kelas',
                                             body: this.status
                                         });
-
+                                        console.log("kok jalan?")
                                     }
                                 });  
                                 this.audio.play('audio', ()=>{
@@ -114,11 +114,12 @@ export class TabsPage {
                             this.pusher.logToConsole = true;
 
 
-                            var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
-                            channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
+                            var channeltujuanortu = this.pusher.subscribe('pengumuman.'+this.tujuan);
+                            channeltujuanortu.bind('App\\Events\\Notifpengumuman',  (data) => {
                                 this.status = data.pengumuman.title;
                                 this.localNotification.requestPermission().then((permission) => {
                                     this.bpengumuman='N';
+
                                     if (permission === 'granted') {
                                         // Create the notification
                                         this.localNotification.create('Notifikasi Pengumuman', {

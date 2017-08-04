@@ -24,6 +24,7 @@ import * as moment from 'moment';
    url2:any='http://pantausiswa.xyz/api/ambilsiswa/datakelas';
    key=[];
    tgl_lahir:any;
+   email:any;
    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage,public http:Http,public menu:MenuController) {
      this.check();
    }
@@ -49,7 +50,10 @@ import * as moment from 'moment';
          this.http.get(this.url, {headers:header}).map(res=>res.json()).subscribe(datas=>{
            console.log(datas.data.tgl_lahir);
            this.datasiswa = datas.data;
-           this.tgl_lahir= moment(datas.data.tgl_lahir).format('l');
+           this.storage.get('email').then((v)=>{
+             this.email = v;
+           })
+           this.tgl_lahir= moment(datas.data.tgl_lahir).locale('id').format('l');
 
            
          });

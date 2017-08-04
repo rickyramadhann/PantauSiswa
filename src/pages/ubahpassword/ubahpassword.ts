@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,MenuController, LoadingController, AlertController} from 'ionic-angular';
+import { NavController, NavParams,MenuController, LoadingController, AlertController, ToastController} from 'ionic-angular';
 import {Http,Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -29,7 +29,7 @@ import { Storage } from '@ionic/storage';
  	constructor(public navCtrl: NavController,
  		public navParams: NavParams, public menu:MenuController,
  		public http:Http, public loading: LoadingController,
- 		public alert:AlertController, public storage: Storage
+ 		public alert:AlertController, public storage: Storage, public toast: ToastController
  		) {
  	}
 

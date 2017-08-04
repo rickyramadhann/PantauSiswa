@@ -53,22 +53,20 @@ import * as moment from 'moment';
  				for(let i =this.datanilaip.length-1; i>=0;i--){
 
  					
- 					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).format('l');
+ 					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).locale('id').format('l');
  					this.datanilaip[i].jam=moment(this.datanilaip[i].jam,"HH:mm:ss").format('hh:mm');
  					if(this.datanilaip[i].kategori == "uas"){
 
- 						//console.log("gak masuk chart")
+ 						console.log("gak masuk chart")
  					}
  					
  					else{
  						x = x+1;
- 						this.labelpertemuan.push("PH-" + x);
+ 						this.labelpertemuan.push("P-" + x);
  						//console.log(this.labelpertemuan);
  						this.nilaiku.push(this.datanilaip[i].nilai);	
  					}
- 					//console.log(this.nilaiku);
-
- 					
+ 					//console.log(this.nilaiku);	
  				}
  				this.callChart();
  				
@@ -88,7 +86,7 @@ import * as moment from 'moment';
  				labels: this.labelpertemuan,
  				datasets: [
  				{
- 					label: "Grafik Penilaian Harian",
+ 					label: "Grafik Penilaian Pengetahuan",
  					fill: false,
  					lineTension: 0.1,
  					backgroundColor: "rgba(75,192,192,0.4)",

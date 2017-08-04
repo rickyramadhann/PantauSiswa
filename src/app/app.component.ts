@@ -15,10 +15,9 @@ import { Jadwal } from '../pages/jadwal/jadwal';
 import { Ubahpassword } from '../pages/ubahpassword/ubahpassword';
 import { TabsPage } from '../pages/tabs/tabs';
 //import { PusherProvider } from '../providers/pusher-provider';
-//import { BackgroundMode } from '@ionic-native/background-mode';
+import { BackgroundMode } from '@ionic-native/background-mode';
 import { AppMinimize } from '@ionic-native/app-minimize';
-
-import { Badge } from '@ionic-native/badge';
+import { Autostart } from '@ionic-native/autostart';
 
 
 @Component({
@@ -44,70 +43,80 @@ export class MyApp {
     idkelas:any;
     tujuan:any;
 
-    constructor(public events: Events,public badge:Badge,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,
-        public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
+    constructor(public events: Events,public backgroundmode:BackgroundMode,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,private autostart: Autostart,public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
         this.platform.ready().then(() => {
             this.statusBar.overlaysWebView(true);
             this.statusBar.backgroundColorByHexString('#02756a');
-            this.splashScreen.hide();
-            // this.backgroundmode.setDefaults({
-                //     hidden:true,
-                //     silent:true,
-                //     resume:true
-                // });
-                this.platform.registerBackButtonAction(() => {
-                    let nav = this.app.getRootNav();
-                    if(nav.canGoBack()){
-                        nav.pop();
-                    }
-                    else{
-                        this.minimize.minimize();
-                    }
-                });
-                this.check();
-                events.subscribe('username:changed', username=>{
-                    if(username !== undefined && username !== ""){
-                        this.namasiswa = username;
-                        this.storage.set('namasiswa', this.namasiswa);
-                    }
-                })
-                events.subscribe('photo:changed', photo=>{
-                    if(photo !==undefined && photo !==""){
-                        this.photoside = photo;
-                        this.storage.set('fotosiswa', this.photoside);
-                    }
-                })
-                events.subscribe('idsiswa:changed', idsiswa=>{
-                    if(idsiswa !==undefined && idsiswa !==""){
-                        this.idsiswa = idsiswa;
-                        this.storage.set('id_siswa', this.idsiswa);
-                    }
-                })
-                events.subscribe('idortu:changed', idortu=>{
-                    if(idortu !==undefined && idortu !==""){
-                        this.idortu = idortu;
-                        this.storage.set('id_ortu', this.idortu);
-
-                    }
-                })
-                events.subscribe('idkelas:changed', idkelas=>{
-                    if(idkelas !==undefined && idkelas !==""){
-                        this.idkelas = idkelas;
-                        this.storage.set('id_kelas', this.idkelas);
-                    }
-                })
-                events.subscribe('tujuan:changed', tujuan=>{
-                    if(tujuan !==undefined && tujuan !==""){
-                        this.tujuan = tujuan;
-                        this.storage.set('tujuan', this.tujuan);
-                    }
-                })
-
+            this.hidesplash();
+            //this.splashScreen.hide();
+            this.backgroundmode.setDefaults({
+                hidden:true,
+                resume:true,
+                silent:true
             });
+            this.backgroundmode.enable();
+            this.platform.registerBackButtonAction(() => {
+                let nav = this.app.getRootNav();
+                if(nav.canGoBack()){
+                    nav.pop();
+                }
+                else{
+                    this.minimize.minimize();
+                }
+            });
+            this.check();
+            events.subscribe('username:changed', username=>{
+                if(username !== undefined && username !== ""){
+                    this.namasiswa = username;
+                    this.storage.set('namasiswa', this.namasiswa);
+                }
+            })
+            events.subscribe('photo:changed', photo=>{
+                if(photo !==undefined && photo !==""){
+                    this.photoside = photo;
+                    this.storage.set('fotosiswa', this.photoside);
+                }
+            })
+            events.subscribe('idsiswa:changed', idsiswa=>{
+                if(idsiswa !==undefined && idsiswa !==""){
+                    this.idsiswa = idsiswa;
+                    this.storage.set('id_siswa', this.idsiswa);
+                }
+            })
+            events.subscribe('idortu:changed', idortu=>{
+                if(idortu !==undefined && idortu !==""){
+                    this.idortu = idortu;
+                    this.storage.set('id_ortu', this.idortu);
+
+                }
+            })
+            events.subscribe('idkelas:changed', idkelas=>{
+                if(idkelas !==undefined && idkelas !==""){
+                    this.idkelas = idkelas;
+                    this.storage.set('id_kelas', this.idkelas);
+                }
+            })
+            events.subscribe('tujuan:changed', tujuan=>{
+                if(tujuan !==undefined && tujuan !==""){
+                    this.tujuan = tujuan;
+                    this.storage.set('tujuan', this.tujuan);
+                }
+            })
+
+        });
         
 
+    }
+
+    hidesplash()
+    {
+        if(SplashScreen){
+            setTimeout(()=>{
+                this.splashScreen.hide();
+            },100);
+        }
     }
 
     check(){

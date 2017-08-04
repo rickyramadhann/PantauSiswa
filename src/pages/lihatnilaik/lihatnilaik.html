@@ -18,10 +18,17 @@
         </ion-item>
     </ion-card>
     <ion-list>
+        <ion-card>
+            <ion-card-content>
+                <canvas #lineCanvas></canvas>
+            </ion-card-content>
+        </ion-card>
         <ion-card *ngFor= "let data of datanilaik">
             <ion-item>
                 <h2>{{data.namamatpel}}</h2>
                 <p>{{data.kategori}}</p>
+                <p>Tanggal : {{data.tanggal}}</p>
+                <p>Jam : {{data.jam}} WIB.</p>
                 <div class="nilai" item-right>
                     <h1>{{data.nilai}}</h1>
                 </div>

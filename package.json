@@ -22,6 +22,7 @@
         "@angular/platform-browser": "4.1.0",
         "@angular/platform-browser-dynamic": "4.1.0",
         "@ionic-native/app-minimize": "^4.0.1",
+        "@ionic-native/autostart": "^4.1.0",
         "@ionic-native/background-mode": "^4.0.1",
         "@ionic-native/badge": "^4.0.1",
         "@ionic-native/core": "3.7.0",
@@ -40,6 +41,7 @@
         "cordova-plugin-app-event": "file://node_modules\\cordova-plugin-app-event",
         "cordova-plugin-app-preferences": "^0.99.3",
         "cordova-plugin-appminimize": "^1.0.0",
+        "cordova-plugin-autostart": "^2.0.1",
         "cordova-plugin-background-mode": "^0.7.2",
         "cordova-plugin-badge": "^0.8.1",
         "cordova-plugin-console": "^1.0.5",
@@ -92,7 +94,8 @@
             "cordova-plugin-badge": {},
             "phonegap-plugin-local-notification": {},
             "de.appplant.cordova.plugin.local-notification": {},
-            "cordova-plugin-nativeaudio": {}
+            "cordova-plugin-nativeaudio": {},
+            "cordova-plugin-autostart": {}
         },
         "platforms": [
             "android"
