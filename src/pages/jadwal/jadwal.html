@@ -21,14 +21,14 @@
         </ion-item>
     </ion-list>
     <ion-list>
-        <ion-card *ngFor= "let data of key">
+        <ion-card *ngFor= "let data of key; let i = index ">
             <ion-item *ngIf="(hari ==''|| hari ==datajadwal[data].hari )">
                 <ion-avatar item-left>
                     <img src="http://pantausiswa.xyz/uploads/{{datajadwal[data].guru.photo}}">
                 </ion-avatar>
                 <h2>{{datajadwal[data].matpel.nama}}</h2>
                 <p>{{datajadwal[data].guru.name}}</p>
-                <p>{{datajadwal[data].awal}} - {{datajadwal[data].akhir}} WIB</p>
+                <p>Pukul: {{awal}} - {{akhir}} WIB</p>
             </ion-item>
         </ion-card>
     </ion-list>

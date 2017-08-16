@@ -24,8 +24,10 @@
   <preference name="SplashScreenDelay" value="6000"/>
   <preference name="loadUrlTimeoutValue" value="60000"/>
   <preference name="KeepRunning" value="true"/>
+  <preference name="InAppBrowserStorageEnabled" value="false" />
   <platform name="android">
     <allow-intent href="market:*"/>
+    
     <icon src="resources\android\icon\drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources\android\icon\drawable-mdpi-icon.png" density="mdpi"/>
     <icon src="resources\android\icon\drawable-hdpi-icon.png" density="hdpi"/>

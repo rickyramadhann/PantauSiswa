@@ -1,7 +1,7 @@
 declare var Pusher: any;
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Component,ViewChild } from '@angular/core';
-import { Platform, Nav, MenuController,App, Events} from 'ionic-angular';
+import { Platform, Nav, MenuController,App, Events,LoadingController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -18,7 +18,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { Autostart } from '@ionic-native/autostart';
-
+import { CacheService } from "ionic-cache";
 
 @Component({
     templateUrl: 'app.html'
@@ -43,7 +43,7 @@ export class MyApp {
     idkelas:any;
     tujuan:any;
 
-    constructor(public events: Events,public backgroundmode:BackgroundMode,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,private autostart: Autostart,public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
+    constructor(public loading: LoadingController,public cache:CacheService, public events: Events,public backgroundmode:BackgroundMode,public minimize:AppMinimize, public app:App, public platform: Platform, private statusBar: StatusBar, public local:LocalNotifications,private autostart: Autostart,public splashScreen: SplashScreen, public storage:Storage, public http:Http,  public menu:MenuController) {
 
 
         this.platform.ready().then(() => {
@@ -66,7 +66,14 @@ export class MyApp {
                     this.minimize.minimize();
                 }
             });
-            this.check();
+            events.subscribe('token:changed', token=>{
+                if(token !==undefined && token !==""){
+                    this.token = token;
+                    this.storage.set('token', this.token);
+
+                }
+            })
+            this.ionViewDidEnter()
             events.subscribe('username:changed', username=>{
                 if(username !== undefined && username !== ""){
                     this.namasiswa = username;
@@ -105,6 +112,7 @@ export class MyApp {
                 }
             })
 
+
         });
         
 
@@ -119,10 +127,11 @@ export class MyApp {
         }
     }
 
-    check(){
+    ionViewDidEnter(){
         this.storage.get("token").then((token)=>{
             if(token){
                 this.token=token;
+                console.log(this.token)
                 let header = new Headers();
                 header.append('Content-Type', 'application/json');
                 header.append('Accept','Application/json');
@@ -141,7 +150,7 @@ export class MyApp {
                 this.rootPage = TabsPage;
 
             }
-            else{                
+            else{
                 this.rootPage = Login;
             }
         })
@@ -164,19 +173,23 @@ export class MyApp {
 
     logout()
     {
-        this.storage.remove('token');
-        this.storage.remove('email');
-        this.storage.remove('id_guru');
-        this.storage.remove('id_siswa');
-        this.storage.remove('id_kelas');
-        this.storage.remove('id_ortu');
-        this.storage.remove('matpek');
-        this.storage.remove('tujuan');
-        this.storage.remove('namasiswa');
-        this.storage.remove('photosamping');
-        this.storage.remove('fotosiswa');
+        let loader = this.loading.create({
+            content: 'Mohon tunggu..!!',
+            //duration: 1000
+        });
+        loader.present().then(()=>{
 
-        this.nav.setRoot(Login);
+           
+                this.storage.clear();
+                this.cache.clearAll();
+           
+                this.app.getRootNav().setRoot(Login);
+                setTimeout(window.location.reload.bind(window.location), 250);
+                
+           
+        })
+        loader.dismiss();
+
     }
 
 

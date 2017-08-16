@@ -52,8 +52,20 @@ import * as moment from 'moment';
  				let x =0;
  				for(let i =this.datanilaip.length-1; i>=0;i--){
 
+ 					if(this.datanilaip[i].kategori ==='testertulis'){
+ 						this.datanilaip[i].kategori ='tes tertulis';
+ 					}
+
+ 					else if(this.datanilaip[i].kategori ==='teslisan'){
+ 						this.datanilaip[i].kategori ='tes lisan';
+ 					}
+
+
+ 					else if(this.datanilaip[i].kategori ==='uas'){
+ 						this.datanilaip[i].kategori ='penilaian akhir';
+ 					}
  					
- 					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).locale('id').format('l');
+ 					this.datanilaip[i].tanggal=moment(this.datanilaip[i].tanggal).locale('id').format('LL');
  					this.datanilaip[i].jam=moment(this.datanilaip[i].jam,"HH:mm:ss").format('hh:mm');
  					if(this.datanilaip[i].kategori == "uas"){
 
@@ -102,7 +114,7 @@ import * as moment from 'moment';
  					pointHoverBackgroundColor: "rgba(75,192,192,1)",
  					pointHoverBorderColor: "rgba(220,220,220,1)",
  					pointHoverBorderWidth: 2,
- 					pointRadius: 1,
+ 					pointRadius: 4,
  					pointHitRadius: 20,
  					data: this.nilaiku,
  					spanGaps: false,

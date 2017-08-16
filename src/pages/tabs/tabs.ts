@@ -1,6 +1,6 @@
 declare var Pusher: any;
 import { Component } from '@angular/core';
-import { NavController, NavParams,MenuController,Platform,App} from 'ionic-angular';
+import { NavController, NavParams,MenuController,Platform,App,Events} from 'ionic-angular';
 import { BeritaPage } from '../berita/berita';
 import { Pengumuman } from '../pengumuman/pengumuman';
 import { Historybk } from '../historybk/historybk';
@@ -35,8 +35,10 @@ export class TabsPage {
     bpengumuman:any;
     bcatatan:any;
     photoside:any;
-    constructor(public audio:NativeAudio,private platform: Platform,public navCtrl: NavController, public navParams: NavParams, public menu:MenuController,public badge:Badge,public storage:Storage,public local:LocalNotifications,public alert:AlertController,public background:BackgroundMode,public app:App,private localNotification: PhonegapLocalNotification) {  
+    namasiswa:any;
+    constructor(public events:Events, public audio:NativeAudio,private platform: Platform,public navCtrl: NavController, public navParams: NavParams, public menu:MenuController,public badge:Badge,public storage:Storage,public local:LocalNotifications,public alert:AlertController,public background:BackgroundMode,public app:App,private localNotification: PhonegapLocalNotification) {  
         this.platform.ready().then(()=>{
+
             this.audio.preloadSimple('audio', 'assets/audio/notif.mp3');
         })
 
@@ -44,137 +46,141 @@ export class TabsPage {
 
     ionViewDidLoad(){
 
-        this.storage.get("token").then((t)=>{
-            this.token= t;
-            if(this.token){
-                this.storage.get("tujuan").then((tujuan)=>{
-                    this.tujuan = tujuan;
-                    if(this.tujuan ==="siswa"){
-                        //     //Siswa channel
-                        this.storage.get('id_siswa').then((val) => {
-                            this.idsiswa =val;
-                            //console.log(this.idsiswa);
-                            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                                cluster: 'mt1',
-                                encrypted: true
-                            });
-                            this.pusher.logToConsole = true;
-
-                            var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
-                            channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
-                                this.status = data.pengumuman.title;
-                                this.localNotification.requestPermission().then((permission) => {
-                                    this.bpengumuman='N';
-                                    if (permission === 'granted') {
-                                        // Create the notification
-                                        this.localNotification.create('Notifikasi Pengumuman', {
-                                            tag: 'Notifikasi Pengumuman',
-                                            body: this.status,
-
-                                        });
-
-                                    }
-                                });   
-                                this.audio.play('audio', ()=>{
-                                    console.log('audio play')
-                                });            
-                            });
 
 
-                            var channel3 = this.pusher.subscribe('siswa.history.'+this.idsiswa);
-                            channel3.bind('App\\Events\\Notifhistory',  (data) => {
+        this.storage.get("tujuan").then((tujuan)=>{
+            this.tujuan = tujuan;
+            if(this.tujuan ==="siswa"){
+                //     //Siswa channel
 
-                                //  console.log(data);
-                                this.status = data.history.peristiwa;
-                                this.localNotification.requestPermission().then((permission) => {
-                                    this.bcatatan='N';
-                                    if (permission === 'granted') {
-                                        this.localNotification.create('Notifikasi Catatan', {
-                                            tag: 'Catatan Wali Kelas',
-                                            body: this.status
-                                        });
-                                        console.log("kok jalan?")
-                                    }
-                                });  
-                                this.audio.play('audio', ()=>{
-                                    console.log('audio play')
-                                });             
-                            });                
-                        });
-                    }
-                    else if(this.tujuan ==="walimurid"){
-                        //Ortu Channel
-                        this.storage.get('id_ortu').then((val) => {
-                            this.idortu =val;
-                            //console.log(this.idortu);
-                            this.pusher = new Pusher('708f5e5f201b46b1ac82', {
-                                cluster: 'mt1',
-                                encrypted: true
-                            });
-                            this.pusher.logToConsole = true;
+                //console.log('siswa');
+                this.storage.get('id_siswa').then((val) => {
+                    this.idsiswa =val;
+                    //console.log(this.idsiswa);
+                    this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+                        cluster: 'mt1',
+                        encrypted: true
+                    });
+                    this.pusher.logToConsole = true;
+
+                    var channeltujuan = this.pusher.subscribe('pengumuman.'+this.tujuan);
+                    channeltujuan.bind('App\\Events\\Notifpengumuman',  (data) => {
+                        this.status = data.pengumuman.title;
+                        console.log(this.tujuan);
+                        this.localNotification.requestPermission().then((permission) => {
+                            this.bpengumuman='N';
+                            if (permission === 'granted') {
+                                // Create the notification
+                                this.localNotification.create('Notifikasi Pengumuman', {
+                                    tag: 'Notifikasi Pengumuman',
+                                    body: this.status,
+
+                                });
+
+                            }
+                        });   
+                        this.audio.play('audio', ()=>{
+                            console.log('audio play')
+                        });            
+                    });
 
 
-                            var channeltujuanortu = this.pusher.subscribe('pengumuman.'+this.tujuan);
-                            channeltujuanortu.bind('App\\Events\\Notifpengumuman',  (data) => {
-                                this.status = data.pengumuman.title;
-                                this.localNotification.requestPermission().then((permission) => {
-                                    this.bpengumuman='N';
+                    var channel3 = this.pusher.subscribe('siswa.history.'+this.idsiswa);
+                    channel3.bind('App\\Events\\Notifhistory',  (data) => {
 
-                                    if (permission === 'granted') {
-                                        // Create the notification
-                                        this.localNotification.create('Notifikasi Pengumuman', {
-                                            tag: 'Notifikasi Pengumuman',
-                                            body: this.status,
+                        //  console.log(data);
+                        this.status = data.history.peristiwa;
+                        this.localNotification.requestPermission().then((permission) => {
+                            this.bcatatan='N';
+                            if (permission === 'granted') {
+                                this.localNotification.create('Notifikasi Catatan', {
+                                    tag: 'Catatan Wali Kelas',
+                                    body: this.status
+                                });
+                                console.log("kok jalan?")
+                            }
+                        });  
+                        this.audio.play('audio', ()=>{
+                            console.log('audio play')
+                        });             
+                    });                
+                });
+            }
+            else if(this.tujuan ==="walimurid"){
 
-                                        });
+                console.log('wali');
+                this.storage.get('id_ortu').then((val) => {
+                    this.idortu =val;
+                    //console.log(this.idortu);
+                    this.pusher = new Pusher('708f5e5f201b46b1ac82', {
+                        cluster: 'mt1',
+                        encrypted: true
+                    });
+                    this.pusher.logToConsole = true;
 
-                                    }
-                                });   
-                                this.audio.play('audio', ()=>{
-                                    console.log('audio play')
-                                });            
-                            });
 
-                            var channelortu3 = this.pusher.subscribe('ortu.history.'+this.idortu);
-                            channelortu3.bind('App\\Events\\Notifhistory',  (data) => {
+                    var channeltujuanortu = this.pusher.subscribe('pengumumanortu.'+this.tujuan);
+                    channeltujuanortu.bind('App\\Events\\Notifpengumumanortu',  (data) => {
+                        this.status = data.pengumuman.title;
+                        console.log(this.tujuan);
+                        this.localNotification.requestPermission().then((permission) => {
+                            this.bpengumuman='N';
 
-                                //  console.log(data);
-                                this.status = data.history.peristiwa;
-                                this.localNotification.requestPermission().then((permission) => {
-                                    this.bcatatan='N';
-                                    if (permission === 'granted') {
-                                        this.localNotification.create('Notifikasi Catatan', {
-                                            tag: 'Catatan Wali Kelas',
-                                            body: this.status
-                                        });
+                            if (permission === 'granted') {
+                                // Create the notification
+                                this.localNotification.create('Notifikasi Pengumuman', {
+                                    tag: 'Notifikasi Pengumuman',
+                                    body: this.status,
 
-                                    }
-                                });        
-                                this.audio.play('audio', ()=>{
-                                    console.log('audio play')
-                                });       
-                            });                        
-                        });
-                    }
-                })
+                                });
+
+                            }
+                        });   
+                        this.audio.play('audio', ()=>{
+                            console.log('audio play')
+                        });            
+                    });
+
+                    var channelortu3 = this.pusher.subscribe('ortu.history.'+this.idortu);
+                    channelortu3.bind('App\\Events\\Notifhistory',  (data) => {
+
+                        //  console.log(data);
+                        this.status = data.history.peristiwa;
+                        this.localNotification.requestPermission().then((permission) => {
+                            this.bcatatan='N';
+                            if (permission === 'granted') {
+                                this.localNotification.create('Notifikasi Catatan', {
+                                    tag: 'Catatan Wali Kelas',
+                                    body: this.status
+                                });
+
+                            }
+                        });        
+                        this.audio.play('audio', ()=>{
+                            console.log('audio play')
+                        });       
+                    });                        
+                });
             }
         })
     }
 
 
 
-    ionViewDidEnter(){
-        this.menu.swipeEnable(true,'menu1');
-    }
-    deletebintang(){
+ionViewDidEnter(){
+    this.menu.swipeEnable(true,'menu1');
+}
+deletebintang(){
 
-        if(this.bpengumuman == 'N')
-        {
-            this.bpengumuman = '';
-        }
-        else if (this.bcatatan == 'N'){
-            this.bcatatan = '';
-        }
+    if(this.bpengumuman == 'N')
+    {
+        this.bpengumuman = '';
     }
+    else if (this.bcatatan == 'N'){
+        this.bcatatan = '';
+    }
+}
+
+
 
 }

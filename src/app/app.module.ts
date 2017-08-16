@@ -53,6 +53,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Autostart } from '@ionic-native/autostart';
+import { CacheModule,CacheService } from "ionic-cache";
+
 
 
 
@@ -117,8 +119,8 @@ import { Autostart } from '@ionic-native/autostart';
     Bacanilais,
   ],
   providers: [
-    StatusBar,
-    SplashScreen,LocalNotifications,PhonegapLocalNotification,NativeAudio,Autostart,
+    StatusBar,CacheService,
+    SplashScreen,LocalNotifications,PhonegapLocalNotification,NativeAudio,Autostart,CacheModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},Loginservice,BackgroundMode,AppMinimize,Badge
   ]
 })

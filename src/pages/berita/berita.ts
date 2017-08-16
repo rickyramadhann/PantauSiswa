@@ -167,6 +167,7 @@ export class BeritaPage {
         })
         this.storage.get("id_kelas").then((kelas)=>{
           this.idkelas =kelas;
+          console.log(this.idkelas)
           this.pusher = new Pusher('708f5e5f201b46b1ac82', {
             cluster: 'mt1',
             encrypted: true
@@ -175,6 +176,7 @@ export class BeritaPage {
           var channeltugas = this.pusher.subscribe('tugas.'+this.idkelas);
           channeltugas.bind('App\\Events\\Notiftugas',  (data) => {
             this.status = data.tugas.materi;
+            console.log(this.status);
             this.blaporan='N';
             this.localNotification.requestPermission().then((permission) => {
               this.blaporan='N';

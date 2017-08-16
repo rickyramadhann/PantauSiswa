@@ -20,9 +20,10 @@
         </ion-card>
         <ion-card  *ngFor= "let data of datatugas">
             <ion-item>
-                <p>Materi: <span>{{data.materi}}</span></p>
+                <h2>Materi: <span>{{data.materi}}</span></h2>
                 <p>Keterangan: <span>{{data.keterangan}}</span></p>
-                <p>Deadline: <span>{{data.tanggal}} </span><span>{{data.jam}}</span></p> 
+                <p>Deadline tanggal: <span>{{data.tanggal}} </span></p>
+                <p>Deadline Jam: <span>{{data.jam}} WIB.</span></p> 
             </ion-item>    
         </ion-card>
     </ion-list>

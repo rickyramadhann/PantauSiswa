@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component,NgZone} from '@angular/core';
 import { NavController, NavParams,
   MenuController, LoadingController, AlertController, Events} from 'ionic-angular';
   import {TabsPage} from '../tabs/tabs';
   import {Http, Headers} from '@angular/http';
   import 'rxjs/add/operator/toPromise';
   import { Storage } from '@ionic/storage';
+  import { CacheService } from "ionic-cache";
+
 
 /**
  * Generated class for the Login page.
@@ -34,11 +36,14 @@ import { NavController, NavParams,
    id_ortu:any;
    id_siswa:any;
    tujuan:any;
-   constructor(public navCtrl: NavController,
+   constructor(public zone:NgZone, public cache:CacheService, public navCtrl: NavController,
      public navParams: NavParams, public menu:MenuController,
      public http:Http, public loading: LoadingController,
      public alert:AlertController, public storage: Storage, public events: Events
      ) {
+     this.storage.remove('token');
+     this.storage.clear();
+
 
    }
 
@@ -64,10 +69,12 @@ import { NavController, NavParams,
            if(response){
 
              this.storage.remove('email');
+             this.storage.remove('token');
              this.storage.set('token', response.json().token) ;
              this.storage.set('email', this.user.email);
 
              this.token = response.json().token;
+             this.events.publish('token:changed', this.token);
              console.log(this.token)
              let header = new Headers();
              header.append('Content-Type', 'application/json');
@@ -95,7 +102,12 @@ import { NavController, NavParams,
                  idkelas:this.id_kelas,
                  tujuan:this.tujuan               
                })
-               this.navCtrl.setRoot(TabsPage)
+               this.zone.run(()=>{  
+                 this.events.publish('login');
+
+                 this.navCtrl.setRoot(TabsPage)
+                 this.navCtrl.popToRoot();
+               })
              });
            }
            else{
@@ -139,9 +151,13 @@ import { NavController, NavParams,
    }
 
 
+   ngOnInit(){
+     this.events.subscribe('reload',()=>{
 
-   ionViewDidLoad() {
+       this.cache.clearAll();
+       this.storage.clear();
+     })
 
-   }
+   }   
 
  }

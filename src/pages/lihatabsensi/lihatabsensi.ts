@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Chart } from 'chart.js';
-//import * as moment from 'moment'
+import * as moment from 'moment'
 
 @Component({
 	selector: 'page-lihatabsensi',
@@ -30,6 +30,12 @@ export class Lihatabsensi {
 	tizin=0;
 	tsakit=0;
 	t:any[]=[];
+	bulan:any[]=[];
+	absjam:any[]=[];
+	absbulan:any[]=[];
+	public bbulan:any;
+	bulanc: string ="Agustus";
+	
 	constructor(public navCtrl: NavController,public navParams: NavParams, public http:Http, public app:App, public menu:MenuController, public storage : Storage) {
 		this.namamatpel = navParams.get("nama");
 		this.fotoguru = navParams.get("foto");
@@ -50,8 +56,15 @@ export class Lihatabsensi {
 			header.append('Accept','Application/json');
 			header.append('Authorization', 'Bearer '+ this.token);
 			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
+				console.log(datas);
 				this.dataabsensi = datas[this.namamatpel];
 				for(let i =0; i<this.dataabsensi.length;i++){
+					this.absjam[i]=moment(this.dataabsensi[i].created_at).locale('id').format('LT');
+					this.absbulan[i]=moment(this.dataabsensi[i].created_at).locale('id').format('LL');
+
+					this.bulan.push(moment(this.dataabsensi[i].created_at).locale('id').format('MMMM'));
+					this.bbulan = this.bulan[i];
+					
 					if(this.dataabsensi[i].keterangan === "hadir"){
 						this.hadir= this.hadir +1;
 					}
@@ -69,12 +82,12 @@ export class Lihatabsensi {
 				this.tsakit=this.sakit;
 				this.tizin=this.izin;
 				this.talpa=this.alpha;
-				this.t.push(this.thadir);
+
+				this.t.push(this.hadir);
 				this.t.push(this.tsakit);
 				this.t.push(this.tizin);
 				this.t.push(this.talpa);
 				this.callchart();
-				console.log(this.thadir); 	
 
 			})
 		})
@@ -103,6 +116,23 @@ export class Lihatabsensi {
 					"#f75f5a"
 					]
 				}]
+			},
+			options:{
+				tooltips: {
+					callbacks: {
+						label: function(tooltipItem, data) {
+							var allData = data.datasets[tooltipItem.datasetIndex].data;
+							var tooltipLabel = data.labels[tooltipItem.index];
+							var tooltipData = allData[tooltipItem.index];
+							var total = 0;
+							for (var i in allData) {
+								total += allData[i];
+							}
+							var tooltipPercentage = Math.round((tooltipData / total) * 100);
+							return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+						}
+					}
+				}
 			}
 
 		});

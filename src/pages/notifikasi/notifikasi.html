@@ -34,7 +34,7 @@
   (ionSlideWillChange)="changeWillSlide($event)">
   <ion-slide>
     <ion-list>
-      <ion-card *ngFor= "let data of notifnilai">
+      <ion-card *ngFor= "let data of notifnilai; let i=index ">
         <ion-item>
          <!--  <ion-avatar item-start>
             <img src="http://pantausiswa.xyz/uploads/{{data.photoguru}}">
@@ -43,7 +43,7 @@
           <h2>{{data.namamatpel}}</h2>
           <p>Nilai: {{data.nilai}}</p>
           <p>Kategori: {{data.kategori}}</p>
-          <p><span>Tanggal:  {{data.tanggal |date: "dd/MM/yyyy"}}</span></p>
+          <p><span>Tanggal: {{abstanggal[i]}}</span></p>
           
           <ion-note  class="cr" item-end>
             {{data.created_at | moment}}
@@ -54,16 +54,18 @@
     </ion-list>      
   </ion-slide>
 
+  
   <ion-slide>
     <ion-list >
-      <ion-card *ngFor= "let data of notifabsensi">
+      <ion-card *ngFor= "let data of notifabsensi; let i=index ">
+       
         <ion-item >
           <p  class="dateabs" item-end>
             {{data.created_at | moment}}
           </p>
           <h2>{{data.nama}}</h2>
-          <p>Tanggal: <span>{{data.created_at |date: "dd/MM/yyyy"}}</span></p>
-          <p>Pukul: <span>{{data.created_at | date:"mediumTime"}}</span></p>
+          <p>Tanggal: <span>{{abstanggal[i]}}</span></p>
+          <p>Pukul: <span>{{absjam[i]}} WIB.</span></p>
           <ion-note class="statusabs" item-right [ngStyle]="{'background-color': data.keterangan === 'hadir' ?  '#268bc0' : data.keterangan === 'sakit' ? '#e9ad1c': data.keterangan === 'izin' ? '#12a386': '#f75f5a'}">
             {{data.keterangan}}
           </ion-note>
@@ -74,12 +76,12 @@
 
   <ion-slide>
     <ion-list>
-      <ion-card *ngFor= "let data of notiftugas">
+      <ion-card *ngFor= "let data of notiftugas; let i=index ">
         <ion-item>
           <h2>{{data.nama}}</h2>
           <p>Materi: <span>{{data.materi}}</span></p>
           <p>Keterangan: <span>{{data.keterangan}}</span></p>
-          <p>Deadline: {{data.tanggal|date: "dd/MM/yyyy"}}</p>
+          <p>Deadline: {{abstanggal[i]}}</p>
           <p>Jam: {{data.jam}} WIB.</p>
           <ion-note  class="tg" item-end>
             {{data.created_at | moment}}

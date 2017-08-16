@@ -48,7 +48,7 @@ import * as moment from 'moment'
  				this.datanilaik = datas[this.namamatpel];
  				let x=0;
  				for(let i =this.datanilaik.length-1; i>=0;i--){
- 					this.datanilaik[i].tanggal=moment(this.datanilaik[i].tanggal).locale('id').format('l');
+ 					this.datanilaik[i].tanggal=moment(this.datanilaik[i].tanggal).locale('id').format('LL');
  					this.datanilaik[i].jam=moment(this.datanilaik[i].jam,"HH:mm:ss").format('hh:mm');
  					x = x+1;
  					this.labelpertemuan.push("P-" + x);
@@ -88,7 +88,7 @@ import * as moment from 'moment'
  					pointHoverBackgroundColor: "rgba(75,192,192,1)",
  					pointHoverBorderColor: "rgba(220,220,220,1)",
  					pointHoverBorderWidth: 2,
- 					pointRadius: 1,
+ 					pointRadius: 4,
  					pointHitRadius: 20,
  					data: this.nilaiku,
  					spanGaps: false,

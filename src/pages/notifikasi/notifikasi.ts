@@ -34,7 +34,9 @@ import * as moment from 'moment';
  	notifnilai :any;
  	key:any;
  	jam:any;
-
+ 	absjam:any[]=[]
+ 	abstanggal:any[]=[]
+ 	jamm:any;
 
  	
  	constructor(public navCtrl: NavController,public http:Http, public navParams: NavParams,
@@ -76,14 +78,13 @@ import * as moment from 'moment';
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotifabsensi,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.notifabsensi = datas;
- 				console.log(datas);
- 				// for(let i=this.notifabsensi.length-1;i>=0;i--){
- 				// 	this.notifabsensi[i].created_at = moment(this.notifabsensi[i].created_at, "HH:mm:ss").locale('id').format('h:mm');
- 				// }
- 				//console.log(this.notifabsensi[0].created_at)
- 				// for(let i =this.notifabsensi.length-1; i>=0;i--){
- 				// 	this.notifabsensi[i].created_at=moment(this.notifabsensi[i].created_at).format('l');
- 				// }
+ 				
+ 				for (let i=0;i<this.notifabsensi.length;i++){
+ 					this.absjam[i]=moment(this.notifabsensi[i].created_at).locale('id').format('LT');
+ 					this.abstanggal[i]=moment(this.notifabsensi[i].created_at).locale('id').format('LL');
+ 					
+ 				}
+
  				
  			})
  		})
@@ -97,10 +98,25 @@ import * as moment from 'moment';
  			header.append('Accept','Application/json');
  			header.append('Authorization', 'Bearer '+ this.token);
  			this.http.get(this.urlnotifnilai,{headers:header}).map(res=>res.json()).subscribe(datas=>{
- 				console.log(datas);
+ 				//console.log(datas);
  				this.notifnilai = datas;
  				for(let i =this.notifnilai.length-1; i>=0;i--){
- 					this.notifnilai[i].tanggal=moment(this.notifnilai[i].tanggal).format('l');
+ 					if(this.notifnilai[i].kategori ==='testertulis'){
+ 						this.notifnilai[i].kategori ='tes tertulis';
+ 					}
+
+ 					else if(this.notifnilai[i].kategori ==='teslisan'){
+ 						this.notifnilai[i].kategori ='tes lisan';
+ 					}
+
+
+ 					else if(this.notifnilai[i].kategori ==='uas'){
+ 						this.notifnilai[i].kategori ='penilaian akhir';
+ 					}
+
+ 					this.notifnilai[i].tanggal=moment(this.notifnilai[i].tanggal).format('LL');
+ 					this.abstanggal[i]=moment(this.notifnilai[i].created_at).locale('id').format('LL');
+ 					
  				}
  			})
  		})
@@ -117,7 +133,7 @@ import * as moment from 'moment';
  				this.notiftugas = datas;
 
  				for(let i =this.notiftugas.length-1; i>=0;i--){
- 					this.notiftugas[i].tanggal=moment(this.notiftugas[i].tanggal).format('l');
+ 					this.abstanggal[i]=moment(this.notiftugas[i].created_at).locale('id').format('LL');
  					this.notiftugas[i].jam=moment(this.notiftugas[i].jam, "HH:mm:ss").format('hh:mm');
  				}
  				

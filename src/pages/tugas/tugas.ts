@@ -43,7 +43,8 @@ import * as moment from 'moment';
  			this.http.get(this.url,{headers:header}).map(res=>res.json()).subscribe(datas=>{
  				this.datatugas = datas[this.namamatpel];
  				for(let i =this.datatugas.length-1; i>=0;i--){
- 					this.datatugas[i].tanggal=moment(this.datatugas[i].tanggal).format('l');
+ 					this.datatugas[i].tanggal=moment(this.datatugas[i].tanggal).locale('id').format('LL');
+ 					this.datatugas[i].jam=moment(this.datatugas[i].jam, "HH:mm:ss").format('hh:mm');
  				}
  				
  			})
